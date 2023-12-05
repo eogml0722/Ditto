@@ -11,7 +11,6 @@ public class MainController {
 
     @GetMapping(value = "/")
     public String goMain(){
-        System.out.println("asdsad");
-        return "main/main.html";
+        return "main/main";
     }
 }
