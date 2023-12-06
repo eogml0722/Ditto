@@ -1,14 +1,8 @@
 package com.ditto.dto;
 
-import com.ditto.constant.ItemCategory;
-import com.ditto.constant.ItemSellStatus;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Lob;
 import java.time.LocalDateTime;
 
 @Getter @Setter
