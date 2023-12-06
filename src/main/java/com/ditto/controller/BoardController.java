@@ -3,14 +3,15 @@ package com.ditto.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.management.ValueExp;
 
 @Controller
 @RequiredArgsConstructor
-public class MainController {
+public class BoardController {
 
-    @GetMapping(value = "/")
-    public String goMain(){
-        return "/main/main";
+    @GetMapping(value = "/board")
+    public String goBoard(){
+        return "menu";
     }
 }
