@@ -1,5 +1,7 @@
 package com.ditto.dto;
 
+import com.ditto.constant.ItemCategory;
+import com.ditto.constant.ItemSellStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,8 +14,8 @@ public class ItemDTO {
     private String itemDetail;
     private int price;
 
-    private String itemSellStatus; //물품 상태
-    private String itemCategory; //물품 종류
+    private ItemSellStatus itemSellStatus; //물품 상태
+    private ItemCategory itemCategory; //물품 종류
 
     private LocalDateTime regTime; //등록 시간
     private LocalDateTime updateTime; //수정 시간
