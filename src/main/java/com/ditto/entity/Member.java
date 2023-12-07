@@ -14,16 +14,19 @@ public class Member extends BaseEntity{
 
     @Id
     @Column(name = "member_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(nullable = false)
+    private String password;
 
     @Column(nullable = false)
     private String name;
 
-    private String email;
+    private int phoneNum;
 
-    private String password;
     private String address;
+
+    private String email;
 
     @Enumerated(EnumType.STRING)
     private Role role;
