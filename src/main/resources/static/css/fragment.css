@@ -1,0 +1,116 @@
+@charset "UTF-8";
+
+/* 전체설정 */
+
+*{
+	margin:0;
+	padding:0;
+}
+
+ul, ol{
+	list-style:none;
+}
+
+img{
+	vertical-align: top;
+	border:0;
+}
+
+a{
+	text-decoration:none;
+	color:black;
+}
+
+/* 머리 */
+
+#head{
+	width: 100%;
+	height:70px;
+	margin:0 auto;
+	position: fixed;
+	top:0;
+	background-color:white;
+	z-index:2;
+	text-align: center;
+}
+
+#headbox{
+	max-width: 1280px;
+	margin:0 auto;
+	display: flex;
+	align-items: center;
+	justify-content:center;
+}
+
+.logo{
+	width:140px;
+	height:70px;
+	cursor:pointer;
+}
+
+#headmenu{
+	width:280px;
+}
+
+#headmenu > ul {
+	display: flex;
+}
+
+#headmenu > ul > a > li {
+	width:70px;
+}
+
+#headbtn{
+	width:80px;
+	height:70px;
+	display:flex;
+}
+
+.btn{
+	margin-top:15px;
+	width:40px;
+	height:40px;
+	cursor:pointer
+}
+
+#foot{
+	width: 100%;
+	margin:0 auto;
+	background-color:white;
+	z-index:2;
+	text-align: center;
+}
+
+#footbox1{
+	display:flex;
+	max-width: 1280px;
+	min-width: 510px;
+	margin:0 auto;
+	justify-content:center;
+}
+
+.footbtn{
+	display:flex;
+}
+
+.centerbtn{
+	width:120px;
+	height:40px;
+	margin-top:15px;
+}
+
+#foot a{
+	color:gray;
+}
+
+.QNAbtn{
+	margin-top:10px;
+	width:70px;
+	height:50px;
+}
+
+#footbox2{
+	text-align:center;
+	margin:0 auto;
+	font-size:12px;
+}

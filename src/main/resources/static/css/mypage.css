@@ -1,0 +1,144 @@
+@charset "UTF-8";
+
+#wrap{
+	width:100%;
+}
+
+h4 {
+	color:rgb(128,128,128);
+	font-size:14px;
+	padding:10px 0;
+}
+
+/*몸통*/
+#contents{
+	width:1280px;
+	background-color:aquamarine;
+	margin:0 auto;
+	padding-bottom: 20px;
+}
+
+#MyPage{
+	display:flex;
+}
+
+#leftPage > h1{
+	margin-bottom:15px;
+	cursor:pointer;
+}
+
+#leftPageMenu > h2{
+	margin-bottom: 10px;
+}
+
+#leftPage{
+	margin-right:100px;
+}
+
+#leftPageMenu{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.chgbtn{
+	border:2px solid black;
+	background-color: white;
+	width:140px;
+	height:30px;
+	margin-bottom:5px;
+	cursor:pointer;
+}
+
+.helpbtn{
+	border:none;
+	border-radius: 30px;
+	background-color:aqua;
+	width:140px;
+	height:50px;
+	margin-bottom:5px;
+}
+
+#rightPage{
+	margin-top:35px;
+}
+
+#rightPageMenu{
+	display:block;
+	position:relative;
+}
+
+.profileimg{
+	width:50px;
+	height:50px;
+	border-radius: 50%;
+}
+
+#box1, #box2, #box3{
+	display:flex;
+}
+
+.box2-1{
+	width:100px;
+	height:75px;
+	border : 1px solid black;
+	text-align: center;
+	margin-left: 1px;
+	padding-top:25px;
+}
+
+table {
+	border-collapse: collapse;
+}
+td, th {
+	border: 1px solid black;
+	padding: 8px;
+	width:100px;
+}
+
+#rightPageMenu1{
+	display: none;
+}
+
+#rightPageMenu1 h2, #rightPageMenu2 h2,#rightPageMenu3 h2,
+#rightPageMenu4 h2, #rightPageMenu5 h2 {
+	border-bottom:1px solid black;
+	padding:0 0 20px 0;
+}
+
+.menu2Input {
+	display:block;
+	width:320px;
+	height:40px;
+	box-sizing:border-box;
+	border:1px solid #d5d5d5;
+	padding-left:10px;
+}
+.menu2InputNum, select{
+	width: 105px;
+	height: 45px;
+	box-sizing:border-box;
+	border:1px solid #d5d5d5;
+}
+.rightbtn{
+	margin-top:20px;
+	margin-right:10px;
+	width: 150px;
+	height: 50px;
+}
+
+#rightPageMenu2{
+	display: none;
+}
+
+#rightPageMenu3{
+	display: none;
+}
+
+#rightPageMenu4{
+	display: none;
+}
+
+#rightPageMenu5{
+	display: none;
+}

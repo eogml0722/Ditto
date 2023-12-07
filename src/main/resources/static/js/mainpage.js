@@ -1,62 +1,22 @@
-/* 탑버튼 기능 */
+/* 탑버튼 클릭시 맨위로, 사이트를 일정이하로 스크롤 하면 탑버튼이 켜짐 */
 function topFunction(){
 	window.scrollTo(0,0);
 }
 
 window.onscroll=function(){scrollFunction()};
 function scrollFunction(){
-	if(document.body.scrollTop > 110 ||
-	document.documentElement.scrollTop > 110){
+	if(document.body.scrollTop > 200 ||
+	document.documentElement.scrollTop > 200){
 		document.getElementById("topbtn").style.display="block";
 		}
 		else{document.getElementById("topbtn").style.display="none";
 	}
 }
 
-/* 수동 자동 슬라이드 분석필요... */
+/* 새로고침시 맨위로 */
+history.scrollRestoration = "manual"
 
-var slideIndex = 1;
-	showSlides(slideIndex);
-
-function plusSlides(n){
-	showSlides(slideIndex += n);
-}
-
-function currentSlide(n){
-	showSlides(slideIndex = n);
-}
-
-function showSlides(n){
-	var i;
-	var slides = document.getElementsByClassName("slides");
-	var dots = document.getElementsByClassName("slidedot");
-
-if (n > slides.length){
-	slideIndex = 1;
-}
-
-if (n < 1) {
-	slideIndex = slides.length;
-}
-
-for (i = 0; i < slides.length; i++) {
-	slides[i].style.display = "none";
-}
-
-for (i = 0; i < dots.length; i++) {
-	dots[i].classList.remove("active");
-}
-
-slides[slideIndex - 1].style.display = "block";
-dots[slideIndex - 1].classList.add("active");
-
-	var slidetime = 7000;
-	setTimeout(function(){
-		showSlides(slideIndex +=1);
-	}, slidetime);
-}
-
-/* 팝업창! */
+/* 팝업창 키기 */
 function showPopup(){
 	document.getElementById("popup").style.display = "block";
 }
@@ -68,53 +28,74 @@ window.onload = function() {
 	showPopup();
 }
 
-/*로그인 모달 기능*/
+/* content1 bx슬라이드 설정, 마진조정*/
 
-var open = () => { //open했을때 클래스네임 hidden을 지운다. (css에 hiddne을 display:none;으로 적용시켜놓음)
-	document.querySelector(".modal").classList.remove("hidden");
-}
+$(document).ready(function(){
+	$('.bxslider').bxSlider({
+		mode: 'horizontal',// 가로 방향 수평 슬라이드
+		auto: true,        // 자동 실행 여부
+		speed: 500,        // 이동 속도를 설정
+		pager: false,      // 현재 위치 페이징 표시 여부 설정
+		moveSlides: 1,     // 슬라이드 이동시 개수
+		minSlides: 4,      // 최소 노출 개수
+		maxSlides: 4,      // 최대 노출 개수
+		slideMargin: 0,    // 슬라이드간의 간격
+		autoHover: true,   // 마우스 호버시 정지 여부
+		controls: true,    // 이전 다음 버튼 노출 여부
+		pager: true,       // 슬라이드 밑 버튼 노출 여부
+	});
+});
 
-var close = () => { //close했을때 클레스네임 hidden을 추가한다. 
-	document.querySelector(".modal").classList.add("hidden");
-}
+$(document).ready(function(){
+	$('.bxslider2').bxSlider({
+		mode: 'horizontal',// 가로 방향 수평 슬라이드
+		auto: true,        // 자동 실행 여부
+		speed: 500,        // 이동 속도를 설정
+		pager: false,      // 현재 위치 페이징 표시 여부 설정
+		moveSlides: 1,     // 슬라이드 이동시 개수
+		minSlides: 4,      // 최소 노출 개수
+		maxSlides: 4,      // 최대 노출 개수
+		slideMargin: 0,    // 슬라이드간의 간격
+		autoHover: true,   // 마우스 호버시 정지 여부
+		controls: true,    // 이전 다음 버튼 노출 여부
+		pager: false,       // 슬라이드 밑 버튼 노출 여부
+	});
+});
 
-document.querySelector(".headbtn1").addEventListener("click", open);
-document.querySelector("#closebtn4").addEventListener("click", close);
 
-/*이용약관*/
+$(document).ready(function(){
+    $('.bx-wrapper').css('margin-bottom', '0px');
+});
 
-function selectAll(selectAll) {
-	var checkboxes = document.getElementsByName("agreements");
-	checkboxes.forEach((checkbox) => {
-		checkbox.checked = selectAll.checked;
-	})
-}
+var swiper = new Swiper(".mySwiper1", {
+	slidesPerView: 3,
+	spaceBetween: 30,
+	navigation: {
+		nextEl: ".swiper-button-next",
+		prevEl: ".swiper-button-prev"
+    },
+	pagination: {
+		el: ".swiper-pagination",
+		clickable: true,
+	},
+});
 
-//필수약관동의 유효성검사
+/* 테스트용 */
 
-function CheckForm(Tos){
-	var termOfService = document.frmTos.termOfService.checked;
-	var privacy = document.frmTos.privacy.checked;
+function chgslide1() {
+    document.getElementById("content2rightbox1").style.display = "block";
+	document.getElementById("content2rightbox2").style.display = "none";
+	document.getElementById("content2rightbox3").style.display = "none";
+};
 
-	if(!termOfService){
-		alert("필수약관에 동의해 주세요.");
-		return false;
-	}
-	if(!privacy){
-		alert("필수약관에 동의해 주세요");
-		return false;
-	}
-}
+function chgslide2() {
+	document.getElementById("content2rightbox1").style.display = "none";
+	document.getElementById("content2rightbox2").style.display = "block";
+	document.getElementById("content2rightbox3").style.display = "none";
+};
 
-//모달팝업창 열기,닫기
-
-var open = () => {  //open일때 클래스네임 'hidden2'를 지운다.
-	document.querySelector(".modal2").classList.remove("hidden2");
-}
-
-var close = () => { //close일때 클래스네임 'hidden2'를 추가한다.
-	document.querySelector(".modal2").classList.add("hidden2");
-}
-
-document.querySelector(".headbtn2").addEventListener("click", open); //열기버튼 클릭했을때
-document.querySelector("#closebtn2").addEventListener("click", close); //닫기버튼 클릭했을때
+function chgslide3() {
+    document.getElementById("content2rightbox1").style.display = "none";
+    document.getElementById("content2rightbox2").style.display = "none";
+    document.getElementById("content2rightbox3").style.display = "block";
+};
