@@ -30,7 +30,7 @@ public class SecurityConfig {
 
         http.authorizeRequests()
                 .mvcMatchers("/").permitAll()
-                .mvcMatchers("/css/**", "/js/**", "/img/**", "/extras/**").permitAll()
+                .mvcMatchers("/css/**", "/js/**", "/members/**", "/img/**", "/extras/**").permitAll()
                 .anyRequest().authenticated();
 
         http.exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint());

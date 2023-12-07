@@ -1,0 +1,270 @@
+@charset "UTF-8";
+#joinform {
+	width: 1280px;
+	margin: 0 auto;
+
+}
+
+.with-border {
+	font-size: 30px;
+	color: #222222;
+}
+
+.main1 {
+	padding-left: 120px;
+	padding-right: 120px;
+}
+
+.with-border {
+	border-bottom: 1px solid #222;
+	padding-bottom: 30px;
+	padding-top: 60px;
+	margin-bottom: 40px;
+	line-height: 30px;
+}
+
+#required {
+	color: red;
+}
+
+#idMsg {
+	color: #ff5029;
+	display: block;
+	margin-left: 140px;
+	margin-top: 12px;
+}
+
+/*실험용!*/
+#testpw {
+	color: #ff5029;
+	display: block;
+	margin-left: 140px;
+	margin-top: 12px;
+}
+
+#mobile1{
+	white-space:nowrap;
+}
+
+#mobileMsg {
+	color: #ff5029;
+	display: block;
+	margin-left: 140px;
+	margin-top: 12px;
+}
+
+#nameMsg{
+	color: #ff5029;
+	display: block;
+	margin-left: 140px;
+	margin-top: 12px;
+}
+
+#pwConfirmMsg {
+	color: #ff5029;
+	display: block;
+	margin-left: 140px;
+	margin-top: 12px;
+}
+
+.inputTypeText {
+	width: 350px;
+	height: 50px;
+	margin-left: 140px;
+	padding: 12px 15px;
+	box-sizing: border-box;
+	font-size: 17px;
+}
+
+.main1 dl dt {
+	position: absolute;
+	line-height: 95px;
+	color: #222;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.main1 dl {
+	border-bottom: 1px solid #ddd;
+}
+
+.main1 dd {
+	padding-bottom: 30px;
+	/*선과선사이의높이*/
+	padding-top: 25px;
+}
+
+
+#tooltip {
+	display: none;
+	/*평소에안보여야하니까 none으로*/
+	position: absolute;
+	/*공중에 띄어져있으니까 absolute*/
+	white-space:nowrap;
+	left: 495px;
+	top: 15px;
+	border: 1px solid black;
+	padding: 30px 30px 30px 30px;
+	/*위 오른쪽 아래 왼쪽*/
+	background-color: white;
+	color: #ff5029;
+	height:180px;
+}
+
+#tooltip:after {
+	/*툴팁 삼각형 디자인 만들기*/
+
+	display: block;
+	content: "";
+	width: 0px;
+	height: 0px;
+	border-right: 18px solid #666666;
+	border-top: 9px solid transparent;
+	border-bottom: 9px solid transparent;
+	margin-top: -209px;
+    margin-left: -48px;
+}
+
+#passwd{
+	position:relative;
+}
+
+#passwd:hover+.eTooltip {
+
+	display: block;
+
+}
+
+.btnClose {
+	/*툴팁창 끄는 모션*/
+	position: absolute;
+    left: 75px;
+    bottom: 15px;
+    transform: translate(270px, -200px);
+
+}
+
+.help{
+	padding-top:10px;
+}
+
+select {
+
+	width: 105px;
+
+	height: 45px;
+
+	margin-left: 140px;
+
+	font-size: 17px;
+
+}
+
+.mb {
+
+	width: 105px;
+	height: 45px;
+	margin-top: 10px;
+	font-size: 17px;
+}
+
+#zipcode {
+	width: 105px;
+	height: 48px;
+	margin-left: 140px;
+	padding: 12px 15px;
+	box-sizing: border-box;
+	font-size: 17px;
+}
+
+#address {
+	margin-top: 10px;
+}
+
+#detailaddress {
+	margin-top: 10px;
+}
+
+#post {
+	background: transparent;
+	border: 1px solid #222;
+	border-radius: 2px;
+	padding: 5px;
+	margin-left: 10px;
+}
+
+.button {
+	width: 250px;
+	height: 50px;
+	display: inline-block;
+	border: 1px solid #222222;
+	text-decoration: none;
+	border-radius: 2px;
+	line-height: 50px;
+	text-align: center;
+	font-size: 20px;
+	font-family: 'Noto Sans KR', sans-serif;
+	color: #222222;
+	font-weight: bold;
+}
+
+.button:hover {
+	text-decoration: none;
+	border-color: #ff5029;
+	color: #ff5029;
+}
+
+.button.primary {
+	background-color: #222;
+	color: #fff;
+	height: 52px;
+}
+
+.button.primary:hover {
+	background-color: #ff5029;
+}
+
+.buttons-wrap {
+	margin-top: 40px;
+	margin-bottom: 70px;
+	text-align: center;
+	white-space:nowrap;
+}
+
+#pwMsg {
+	position: absolute;
+	left: 260px;
+	top: 350px;
+}
+
+#emailMsg {
+	color: #ff5029;
+	display: block;
+	margin-left: 140px;
+	margin-top: 12px;
+}
+
+#eye {
+	position: absolute;
+	transform: translateX(460px);
+	top: 15px;
+	color: #7a797e;
+	z-index:2;
+}
+
+#eyes {
+	position: absolute;
+    transform: translateX(460px);
+    top: 15px;
+    color: #7a797e;
+}
+
+.help li {
+
+	list-style: none;
+}
+
+#eyefocus {
+	position: relative;
+}
