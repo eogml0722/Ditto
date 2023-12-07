@@ -7,7 +7,7 @@
             <div id="headbox">
                 <div id="headlogo">
                     <a href="/">
-                        <img src="../img/logo.png" class="logo">
+                        <img src="../../static/img/logo.png" class="logo">
                     </a>
                 </div>
 
@@ -22,13 +22,13 @@
                 </div>
 
                 <div class="headbtn" sec:authorize="isAnonymous()">
-                    <img src="../img/login.png" class="btn" id="loginbtn" >
-                    <img src="../img/signup.png" class="btn" id="signupbtn">
+                    <img src="../../static/img/login.png" class="btn" id="loginbtn" >
+                    <img src="../../static/img/signup.png" class="btn" id="signupbtn">
                 </div>
 
                 <div class="headbtn" sec:authorize="isAuthenticated()">
-                    <a href="/members/logout"><img src="../img/login.png" class="btn" id="logoutbtn"></a>
-                    <img src="../img/signup.png" class="btn" id="mypage">
+                    <a href="/members/logout"><img src="../../static/img/login.png" class="btn" id="logoutbtn"></a>
+                    <img src="../../static/img/signup.png" class="btn" id="mypage">
                 </div>
 
             </div><!--headbox-->

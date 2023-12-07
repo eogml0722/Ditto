@@ -14,13 +14,13 @@
 
 <body>
 
-    <!-- th:replace="[파일 경로 :: 조각 이름]" -->
-    <div th:replace="fragments/header::header"></div>
+<!-- th:replace="[파일 경로 :: 조각 이름]" -->
+<div th:replace="fragments/header::header"></div>
 
-    <div layout:fragment="content" class="content"></div>
+<div layout:fragment="content" class="content"></div>
 
-    <div th:replace="fragments/footer::footer"></div>
-    <script type="text/javascript" src="/js/fragment.js"></script>
+<div th:replace="fragments/footer::footer"></div>
+<script type="text/javascript" src="/js/fragment.js"></script>
 </body>
 
 </html>
