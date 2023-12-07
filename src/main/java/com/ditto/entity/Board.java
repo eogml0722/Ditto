@@ -1,6 +1,7 @@
 package com.ditto.entity;
 
 
+import com.ditto.constant.BoardCategory;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -26,6 +27,10 @@ public class Board extends BaseEntity {
 
     //조회수
     private String viewCount;
+
+    //게시판 분류
+    private BoardCategory boardCategory;
+
 
     @OneToMany(mappedBy = "board")
     //이미지 업로드시 사용
