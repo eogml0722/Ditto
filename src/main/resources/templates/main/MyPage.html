@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block layout:fragment="css">
+    <link th:href="@{/css/mypage.css}" rel="stylesheet">
+</th:block>
+
+<div layout:fragment="content">
+    <!--몸통-->
+    <div id="contents">
+        <div id="MyPage">
+            <div id="leftPage">
+                <h1 id="shoWrightPage">마이페이지</h1>
+                <div id = "leftPageMenu">
+                    <h2>나의정보</h2>
+                    <button class="chgbtn" onclick="showRightPageMenu1()">개인정보수정</button>
+                    <button class="chgbtn" onclick="showRightPageMenu2()">비밀번호변경</button>
+                    <button class="chgbtn" onclick="showRightPageMenu3()">회원탈퇴</button>
+                    <h2>주문내역</h2>
+                    <button class="chgbtn" onclick="showRightPageMenu4()">주문내역</button>
+                    <button class="chgbtn" onclick="showRightPageMenu5()">문의내역</button>
+                </div>
+                <button class="helpbtn">도움이 필요하신가요?</button>
+            </div>
+            <div id="rightPage"><!--기본페이지-->
+                <div id="rightPageMenu">
+                    <div id = "pageMenuBox1">
+                        <div id = "box1">
+                            <img src="img/1.png" class="profileimg">
+                            <div>
+                                <p>안녕하세요 OOO님!</p>
+                                <p>OOO님의 멤버십은 실버입니다!</p>
+                            </div>
+                        </div>
+                        <div id = "box2">
+                            <div class = "box2-1">
+                                <span>주문</span>
+                                <p>p</p>
+                            </div>
+                            <div class = "box2-1">배송</div>
+                            <div class = "box2-1">후기</div>
+                            <div class = "box2-1">문의</div>
+                        </div>
+                        <div>
+                            <div id="box3">
+                                <h2>최근 주문내역</h2>
+                                <button>+</button>
+                                <span>더보기</span>
+                            </div>
+                            <table>
+                                <tr>
+                                    <td>주문번호</td>
+                                    <td>제품명</td>
+                                    <td>구매일자</td>
+                                    <td>가격</td>
+                                    <td>상세보기</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--쿠폰 -->
+                    </div>
+
+                </div>
+                <div id="rightPageMenu1">
+                    <h2>개인정보수정</h2>
+
+                    <h4>아이디(아이디는 바꿀 수 없습니다)</h4>
+                    <input value="아이디" class = menu2Input readonly >
+
+                    <h4>이름</h4>
+                    <input value=" " class = menu2Input>
+
+                    <h4>휴대전화</h4>
+                    <select>
+                        <option>010</option>
+                        <option>001</option>
+                        <option>100</option>
+                    </select>
+                    <input value=" " class = menu2InputNum>
+                    <input value=" " class = menu2InputNum>
+                    <h4>주소</h4>
+
+                    <h4>이메일</h4>
+                    <input value=" " class = menu2Input>
+                    <button class="rightbtn">수정</button><button class="rightbtn">취소</button>
+                </div>
+                <div id="rightPageMenu2">
+                    <h2>비밀번호 변경</h2>
+                    <h4>현재 비밀번호를 입력해주세요</h4>
+                    <input type ="password" value="" class = menu2Input>
+                    <h4>새로운 비밀번호 입력해주세요</h4>
+                    <input type ="password" value="" class = menu2Input>
+                    <h4>새로운 비밀번호 재입력해주세요</h4>
+                    <input type ="password" value="" class = menu2Input>
+                    <input type="button" class="rightbtn" value = "비밀번호 변경"></input>
+                </div>
+                <div id="rightPageMenu3">
+                    <h2>회원탈퇴</h2>
+                    <h4>확인을 위해 비밀번호를 입력해주세요</h4>
+                    <input type="text" class = menu2Input id="unregister_pswdchk">
+                    <button id = unregisterbtn class="rightbtn">탈퇴하기</button>
+                </div>
+                <div id="rightPageMenu4">
+                    <h2>주문내역</h2>
+                    <div>
+                        <button>1주</button>
+                        <button>1개월</button>
+                        <button>3개월</button>
+                        <button>6개월</button>
+
+                        <input type = "date" class = "sday">
+                        <input type = "date" class = "eday">
+                    </div>
+                    <div>
+                        <table>
+                            <tr>
+                                <td>주문번호</td>
+                                <td>사진</td>
+                                <td>제품명</td>
+                                <td>구매일자</td>
+                                <td>가격</td>
+                                <td>상태</td>
+                            </tr>
+                            <tr>
+                                <td>1351532</td>
+                                <td><img src="#"></td>
+                                <td>A 외 2개</td>
+                                <td>2023-10-08</td>
+                                <td>56000원</td>
+                                <td>배송중</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="rightPageMenu5">
+                    <h2>문의내역</h2>
+                    <label>
+                        <input type="checkbox">
+                        답변대기 제외하기
+                    </label>
+                    <table>
+                        <tr>
+                            <td>문의한 제목</td>
+                            <td>문의 유형</td>
+                            <td>상태</td>
+                        </tr>
+                        <tr>
+                            <td>사과주스는 안파나요 ㅠㅠ</td>
+                            <td>주문/결제</td>
+                            <td>답변 완료</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div><!--contents-->
+    <th:block layout:fragment="script">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/mypage.js"></script>
+    </th:block>
+</div>
