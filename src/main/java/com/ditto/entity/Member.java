@@ -12,7 +12,6 @@ import javax.persistence.*;
 @Getter @Setter @ToString
 public class Member extends BaseEntity{
 
-
     @Id
     @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,9 +27,6 @@ public class Member extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
-
-
-
-
+    
+    //엔티티 생성 메서드 추가할 것
 }
