@@ -7,8 +7,9 @@
 <th:block layout:fragment="css">
     <link th:href="@{/css/signUp.css}" rel="stylesheet">
 </th:block>
+<div layout:fragment="content">
 
-<form id="joinForm" name="joinForm">
+<form id="joinForm" name="joinForm" action="/members/new" method="get">
 
     <div class="main1">
         <h2 class="with-border">회원 가입</h2>
@@ -121,3 +122,4 @@
         <button onclick="topFunction()" id="topbtn" title="gototop">Top</button>
     </div>
 </form>
+</div>
