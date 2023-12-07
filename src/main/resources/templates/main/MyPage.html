@@ -71,45 +71,51 @@
                     </div>
 
                 </div>
-                <div id="rightPageMenu1">
-                    <h2>개인정보수정</h2>
+                <form action="updateMember" method="post" ><!--th:object="${memberFormDTO}"-->
+                    <div id="rightPageMenu1">
+                        <h2>개인정보수정</h2>
 
-                    <h4>아이디(아이디는 바꿀 수 없습니다)</h4>
-                    <input value="아이디" class = menu2Input readonly >
+                        <h4>아이디(아이디는 바꿀 수 없습니다)</h4>
+                        <input type="email" th:field="*{email}" class="menu2Input" placeholder="아이디를 입력해주세요" readonly>
 
-                    <h4>이름</h4>
-                    <input value=" " class = menu2Input>
+                        <h4>이름</h4>
+                        <input type="text" th:field="*{name}" class="menu2Input" placeholder="이름을 입력해주세요">
 
-                    <h4>휴대전화</h4>
-                    <select>
-                        <option>010</option>
-                        <option>001</option>
-                        <option>100</option>
-                    </select>
-                    <input value=" " class = menu2InputNum>
-                    <input value=" " class = menu2InputNum>
-                    <h4>주소</h4>
+                        <h4>휴대전화</h4>
+                        <select>
+                            <option>010</option>
+                            <option>001</option>
+                            <option>100</option>
+                        </select>
+                        <input value=" " class = menu2InputNum>
+                        <input value=" " class = menu2InputNum>
+                        <h4>주소</h4>
 
-                    <h4>이메일</h4>
-                    <input value=" " class = menu2Input>
-                    <button class="rightbtn">수정</button><button class="rightbtn">취소</button>
-                </div>
-                <div id="rightPageMenu2">
-                    <h2>비밀번호 변경</h2>
-                    <h4>현재 비밀번호를 입력해주세요</h4>
-                    <input type ="password" value="" class = menu2Input>
-                    <h4>새로운 비밀번호 입력해주세요</h4>
-                    <input type ="password" value="" class = menu2Input>
-                    <h4>새로운 비밀번호 재입력해주세요</h4>
-                    <input type ="password" value="" class = menu2Input>
-                    <input type="button" class="rightbtn" value = "비밀번호 변경"></input>
-                </div>
-                <div id="rightPageMenu3">
-                    <h2>회원탈퇴</h2>
-                    <h4>확인을 위해 비밀번호를 입력해주세요</h4>
-                    <input type="text" class = menu2Input id="unregister_pswdchk">
-                    <button id = unregisterbtn class="rightbtn">탈퇴하기</button>
-                </div>
+                        <h4>이메일</h4>
+                        <input value=" " class = menu2Input>
+                        <button class="rightbtn">수정</button><button class="rightbtn">취소</button>
+                    </div>
+                </form>
+                <form action="updatePassword" method="post">
+                    <div id="rightPageMenu2">
+                        <h2>비밀번호 변경</h2>
+                        <h4>현재 비밀번호를 입력해주세요</h4>
+                        <input type ="password" value="" class = menu2Input>
+                        <h4>새로운 비밀번호 입력해주세요</h4>
+                        <input type ="password" value="" class = menu2Input>
+                        <h4>새로운 비밀번호 재입력해주세요</h4>
+                        <input type ="password" value="" class = menu2Input>
+                        <input type="button" class="rightbtn" value = "비밀번호 변경"></input>
+                    </div>
+                </form>
+                <form action="deleteMember" method="post">
+                    <div id="rightPageMenu3">
+                        <h2>회원탈퇴</h2>
+                        <h4>확인을 위해 비밀번호를 입력해주세요</h4>
+                        <input type="text" class = menu2Input id="unregister_pswdchk">
+                        <button id = unregisterbtn class="rightbtn">탈퇴하기</button>
+                    </div>
+                </form>
                 <div id="rightPageMenu4">
                     <h2>주문내역</h2>
                     <div>
