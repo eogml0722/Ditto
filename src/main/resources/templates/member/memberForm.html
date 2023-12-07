@@ -9,25 +9,25 @@
 </th:block>
 <div layout:fragment="content">
 
-<form id="joinForm" name="joinForm" action="/members/new" method="get">
+<form id="joinForm" name="joinForm" action="/members/new" role="form" method="post" th:object="${memberFormDTO}">
 
     <div class="main1">
         <h2 class="with-border">회원 가입</h2>
         <dl class="">
-            <dt>아이디<span id="required">*</span></dt>
+            <dt th:for="memberId">아이디<span id="required">*</span></dt>
             <dd>
-                <input id="member_id" name="member_id" class="inputTypeText" placeholder="ID" value="" type="text"
+                <input th:field="*{memberId}" id="member_id" name="member_id" class="inputTypeText" placeholder="ID" value="" type="text"
                        maxlength="16">
                 <span id="idMsg" class="message error"></span>
             </dd>
         </dl>
 
         <dl>
-            <dt>비밀번호<span id="required">*</span></dt>
+            <dt th:for="password">비밀번호<span id="required">*</span></dt>
             <dd>
                 <div id="eyefocus">
                     <i class="fa fa-eye" aria-hidden="true" id=eye onclick="toggle()"></i>
-                    <input id="passwd" name="passwd" class="inputTypeText" value="" type="password"
+                    <input th:field="*{password}" id="passwd" name="passwd" class="inputTypeText" value="" type="password"
                            placeholder="PASSWORD" maxlength="16">
 
                     <div id="tooltip">
@@ -67,9 +67,9 @@
         </dl>
 
         <dl>
-            <dt id="nameTitel">이름<span id="required">*</span></dt>
+            <dt id="nameTitle" th:for="name">이름<span id="required">*</span></dt>
             <dd>
-                <input id="name" name="name" class="inputTypeText" maxlength="20"> <!--최대문자수30-->
+                <input th:field="*{name}" id="name" name="name" class="inputTypeText" maxlength="20"> <!--최대문자수30-->
                 <!-- 실험용 -->
                 <span id="nameMsg"></span>
             </dd>
@@ -87,9 +87,9 @@
                     <option value="019">019</option>
                 </select>
                 -
-                <input class="mb" id="mobile2" name="mobile[]" maxlength="4" value="" type="text">
+                <input th:field="*{phoneNum1}" class="mb" id="mobile2" name="mobile[]" maxlength="4" value="" type="text">
                 -
-                <input class="mb" id="mobile3" name="mobile[]" maxlength="4" value="" type="text">
+                <input th:field="*{phoneNum2}" class="mb" id="mobile3" name="mobile[]" maxlength="4" value="" type="text">
                 <span id="mobileMsg"></span>
             </dd>
         </dl>

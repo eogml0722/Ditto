@@ -16,8 +16,8 @@ import javax.persistence.*;
 public class Member extends BaseEntity{
 
     @Id
-    @Column(name = "member_id")
-    private Long id;
+    @Column(name = "member_id", unique = true) //회원 id값을 통해 유일하게 구분해야하기때문에 동일한 값이 들어올 수 없도록 unique속성을 지정
+    private String memberId;
 
     @Column(nullable = false)
     private String password;
@@ -33,14 +33,14 @@ public class Member extends BaseEntity{
 
     private String email;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING) //enum의 순서가 바뀔경우를 대비해 옵션을 String으로 지정
     private Role role;
     
-    //엔티티 생성 메서드 추가할 것
+    // Member 엔티티를 생성하는 메소드
     public static Member createMember(MemberFormDTO memberFormDTO,
                                       PasswordEncoder passwordEncoder) {
         Member member = new Member();
-        member.setId(memberFormDTO.getId());
+        member.setMemberId(memberFormDTO.getMemberId());
         member.setName(memberFormDTO.getName());
         member.setPhoneNum1(memberFormDTO.getPhoneNum1());
         member.setPhoneNum2(memberFormDTO.getPhoneNum2());
@@ -48,7 +48,7 @@ public class Member extends BaseEntity{
         member.setEmail(memberFormDTO.getEmail());
         member.setRole(Role.USER);
 
-        //패스워드에 관한 인코더
+        //비밀번호를 암호화 한다.
         String password = passwordEncoder.encode(memberFormDTO.getPassword());
         member.setPassword(password);
 
