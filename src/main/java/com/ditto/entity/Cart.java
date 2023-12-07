@@ -1,10 +1,13 @@
 package com.ditto.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+import javax.persistence.*;
+
+@Entity
+@Getter @Setter @ToString
 public class Cart {
     //장바구니
     @Id
