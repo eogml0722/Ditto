@@ -2,9 +2,12 @@ package com.ditto.entity;
 
 
 import com.ditto.constant.BoardCategory;
+import com.ditto.dto.BoardDTO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.modelmapper.ModelMapper;
+import org.springframework.web.accept.MappingMediaTypeFileExtensionResolver;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -26,6 +29,7 @@ public class Board extends BaseEntity {
     private String content;
 
     //조회수
+    @Column(nullable = false)
     private String viewCount;
 
     //게시판 분류
@@ -33,9 +37,13 @@ public class Board extends BaseEntity {
 
 
     @OneToMany(mappedBy = "board")
-    //이미지 업로드시 사용
+    //이미지 업로드 시 사용
     private List<Img> imgList = new ArrayList<>();
 
+
+
+
+    //static 아니면 생성자로 엔티티인스턴스를 생성해서 메서드를 써야한다.
 
 
 
