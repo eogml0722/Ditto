@@ -14,9 +14,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeRequests()
                 .mvcMatchers("/").permitAll()
-                .mvcMatchers("/css/**", "/js/**", "/members/**", "/img/**", "/extras/**").permitAll()
+                .mvcMatchers("/css/**", "/js/**", "/img/**", "/extras/**").permitAll()
                 .anyRequest().authenticated();
-
         return http.build();
     }
 

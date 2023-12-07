@@ -24,7 +24,7 @@ public class OrderItem {
     private Item item;
 
     @ManyToOne
-    @JoinColumn(name = "order")
+    @JoinColumn(name = "order_id")
     private Order order;
 
     //주문 가격과 아이템 이미지는 item 에서 가져올 수 있나?
