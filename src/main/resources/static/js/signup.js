@@ -169,10 +169,10 @@ function memberJoinAction() {
 	var cpw = document.getElementById("user_passwd_confirm")
 	var uname = document.getElementById("name")
 	var phm = document.getElementsByClassName("mb")
-	var adress = document.getElementById("adderss")
-	var dtadress = document.getElementById("detailaddress")
-	var chkmail = document.getElementById("e_malil")
-	var zonecode = document.getElementById("zipcode")
+	var address = document.getElementById("address")
+	var dtAdress = document.getElementById("detailAddress")
+	var chkMail = document.getElementById("e_mali")
+	var zoneCode = document.getElementById("zipcode")
 	
 	//정규식
 	var regId = /^[a-z]+[a-z0-9]{4,16}$/g;
@@ -263,32 +263,32 @@ if (!cpw.value == upw.value) {
 	}
 
 //주소확인
-if (zonecode.value == "") {
+if (zoneCode.value == "") {
 	alert("우편번호를 입력해 주세요.")
-	zonecode.focus();
+	zoneCode.focus();
 	return false;
-} else if (adress.value == 0) {
+} else if (address.value == 0) {
 	alert("기본주소를 입력해 주세요.")
-	adress.focus();
+	address.focus();
 	return false;
 } else if (!regadd.test(adress.vale)) {
 	alert("주소는 한글로 적어주세요.")
-	adress.focus();
+	address.focus();
 	return false;
-} else if (dtadress.vale == 0) {
+} else if (dtAddress.vale == 0) {
 	alert("나머지 주소를 입력해 주세요.")
-	dtadress.focus();
+	dtAddress.focus();
 	return false;
 } else if (!regadd.test(dtadress.vale)) {
 	alert("주소는 한글로 적어주세요.")
-	dtadress.focus();
+	dtAddress.focus();
 	return false;
 }
 	
 //이메일확인
-if (chkmail.value == "") {
+if (chkMail.value == "") {
 	alert("메일을 입력해 주세요.")
-	chkmail.focus();
+	chkMail.focus();
 	return false;
 } else if (!regmail.test(chkmail.value)) {
 	alert("입력하신 이메일은 사용할 수 없습니다.")
@@ -313,9 +313,9 @@ function openZipSearch() {
 
 //비밀번호 툴팁창 클릭시 화면보이게 
 var tip = document.getElementById("tooltip");
-var tipbtn = document.getElementById("passwd");
+var tipBtn = document.getElementById("passwd");
 
-tipbtn.addEventListener("click", function() {
+tipBtn.addEventListener("click", function() {
 	tip.style.display = "block";
 })
 

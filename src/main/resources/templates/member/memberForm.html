@@ -11,7 +11,7 @@
 </th:block>
 <div layout:fragment="content">
 
-<form id="joinForm" name="joinForm" action="/members/new" role="form" method="post" th:object="${memberFormDTO}">
+<form id="joinForm" name="joinForm" action="/members/new" role="form" method="get" th:object="${memberFormDTO}">
 
     <div class="main1">
         <h2 class="with-border">회원 가입</h2>
@@ -97,23 +97,25 @@
                 <input type="button" onclick="openZipSearch();" value="주소검색" id="post"><br>
                 <input type="text" id="address" class="inputTypeText" name="address" placeholder="기본주소" disabled
                        value=""><br>
-                <input type="text" id="detailaddress" class="inputTypeText" placeholder="나머지 주소">
+                <input th:field="*{address}" type="text" id="detailAddress" class="inputTypeText" placeholder="나머지 주소">
             </dd>
         </dl>
 
         <dl>
             <dt>이메일<span id="required">*</span></dt>
             <dd>
-                <input type="text" class="inputTypeText" id="e_mail" name="e_mail">
+                <input th:field="*{email}" type="text" class="inputTypeText" id="e_mail" name="e_mail">
                 <span id="emailMsg"></span>
             </dd>
         </dl>
 
         <div class="buttons-wrap">
             <a id="prev" href="#none" class="button">이전으로</a>
-            <button type="button" id="join" class="button primary" onclick="memberJoinAction()">회원가입</button>
-
+            <button type="submit" id="join" class="button primary">회원가입</button>
         </div>
+        <!--스프링 시큐리티 사용할 경우 기본적으로 CSRF 방어하기 위해 POST방식의 데이터전송에는 CSRF 토큰 값이 있어야 한다.-->
+<!--        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">-->
+        <!--탑버튼-->
         <button onclick="topFunction()" id="topbtn" title="gototop">Top</button>
     </div>
 </form>

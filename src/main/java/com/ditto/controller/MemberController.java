@@ -1,6 +1,7 @@
 package com.ditto.controller;
 
 import com.ditto.dto.MemberFormDTO;
+import com.ditto.entity.Member;
 import com.ditto.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,7 +20,7 @@ import javax.validation.Valid;
 public class MemberController {
 
     private final MemberService memberService;
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping(value="/new")
     public String memberForm(Model model) { //회원가입 페이지로 이동하는 메서드
@@ -27,14 +28,12 @@ public class MemberController {
         return "member/memberForm";
     }
 
-//    @PostMapping(value="/new")
-//    public String memberForm(@Valid MemberFormDTO memberFormDTO, BindingResult bindingResult, Model model) {
-//        if(bindingResult.hasErrors()){
-//            return "member/memberForm";
-//        }
-//        try {
-//            Memeber member = new Member();
-//
-//        }
-//    }
+    @PostMapping(value="/new")
+    public String memberForm(MemberFormDTO memberFormDTO) {
+
+        Member member = Member.createMember(memberFormDTO, passwordEncoder);
+        memberService.saveMember(member);
+
+        return "redirect:/";
+    }
 }

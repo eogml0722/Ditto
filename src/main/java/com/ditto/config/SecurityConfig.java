@@ -1,5 +1,7 @@
 package com.ditto.config;
 
+import com.ditto.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.security.ConditionalOnDefaultWebSecurity;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -12,6 +14,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 @Configuration
 @EnableWebSecurity //보안 설정 커스터마이징
@@ -21,19 +27,34 @@ import org.springframework.security.web.SecurityFilterChain;
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+
+    @Autowired
+    MemberService memberService;
+
+    public SecurityConfig() {
+    }
+
     @Bean
     @Order(SecurityProperties.BASIC_AUTH_ORDER) //(의존성주입 오류해결용 어노테이션)
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeRequests()
+                //"/"경로로 들어오면 인증 허가
                 .mvcMatchers("/").permitAll()
                 .mvcMatchers("/css/**", "/js/**", "/img/**", "/extras/**").permitAll()
                 .anyRequest().authenticated();
+
+        http.formLogin()
+                //
+                .loginPage("/members/login")
+                .defaultSuccessUrl("/")
+                .usernameParameter("memberId")
+                .failureUrl("/members/login/error")
+                .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
+                .logoutSuccessUrl("/");
+
         return http.build();
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception { //HTTP 요청에 대한 보안을 설정
-
     }
 
     @Bean
