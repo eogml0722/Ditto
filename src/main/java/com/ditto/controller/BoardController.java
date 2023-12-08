@@ -1,6 +1,6 @@
 package com.ditto.controller;
 
-import com.ditto.dto.BoardDTO;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,29 +19,15 @@ public class BoardController {
         return "board/menu";
     }
 
-    @GetMapping(value = "/board/create")
-    public String goCreateBoard(Model model){
-        model.addAttribute("boardDTO", new BoardDTO());
-        return "board/createBoardForm";
-    }
-
-
+//    @GetMapping(value = "/board/create")
+//    public String goCreateBoard(Model model){
+//        model.addAttribute("boardDTO", new BoardDTO());
+//        return "board/createBoardForm";
+//    }
 
     @PostMapping(value = "/board/create")
     public String createBoard(Model model){
         return null;
     }
 
-    @GetMapping(value = "/board/create")
-    public String goCreateBoard(Model model){
-        model.addAttribute("boardDTO", new BoardDTO());
-        return "board/createBoardForm";
-    }
-
-
-
-    @PostMapping(value = "/board/create")
-    public String createBoard(Model model){
-        return null;
-    }
 }
