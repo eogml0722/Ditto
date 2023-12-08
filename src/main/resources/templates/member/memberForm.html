@@ -6,6 +6,8 @@
 
 <th:block layout:fragment="css">
     <link th:href="@{/css/signUp.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </th:block>
 <div layout:fragment="content">
 
@@ -78,18 +80,11 @@
         <dl>
             <dt>휴대전화<span id="required">*</span></dt>
             <dd id="mobile1">
-                <select>
-                    <option value="010">010</option>
-                    <option value="011">011</option>
-                    <option value="016">016</option>
-                    <option value="017">017</option>
-                    <option value="018">018</option>
-                    <option value="019">019</option>
-                </select>
+                <input class="mb" name="mobile[]" value="010" type="text" placeholder="010" disabled>
                 -
-                <input th:field="*{phoneNum1}" class="mb" id="mobile2" name="mobile[]" maxlength="4" value="" type="text">
+                <input th:field="*{phoneNum1}" class="mb" id="mobile2" name="mobile[]" maxlength="4" type="text">
                 -
-                <input th:field="*{phoneNum2}" class="mb" id="mobile3" name="mobile[]" maxlength="4" value="" type="text">
+                <input th:field="*{phoneNum2}" class="mb" id="mobile3" name="mobile[]" maxlength="4" type="text">
                 <span id="mobileMsg"></span>
             </dd>
         </dl>
@@ -122,4 +117,9 @@
         <button onclick="topFunction()" id="topbtn" title="gototop">Top</button>
     </div>
 </form>
+    <th:block layout:fragment="script">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <script type="text/javascript" src="/js/signup.js"></script>
+    </th:block>
 </div>
