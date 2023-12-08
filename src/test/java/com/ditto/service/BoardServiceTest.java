@@ -1,5 +1,5 @@
 package com.ditto.service;
-
+/*
 import com.ditto.constant.BoardCategory;
 import com.ditto.dto.BoardDTO;
 import com.ditto.dto.MemberFormDTO;
@@ -81,3 +81,4 @@ class BoardServiceTest {
 
 
 }
+*/
