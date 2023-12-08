@@ -16,7 +16,7 @@ public class BoardController {
 
     @GetMapping(value = "/board")
     public String goBoard(){
-        return "menu";
+        return "board/menu";
     }
 
     @GetMapping(value = "/board/create")
