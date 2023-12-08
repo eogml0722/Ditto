@@ -13,7 +13,6 @@ public class MainController {
     public String goMain(Model model){
         return "index";
     }
-    //테스트
 
 
 }

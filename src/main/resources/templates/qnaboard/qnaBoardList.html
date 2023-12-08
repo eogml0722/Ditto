@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:status="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layouts/layout1}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block layout:fragment="css">
+    <link th:href="@{/css/mypage.css}" rel="stylesheet">
+</th:block>
+
+<div layout:fragment="content">
+    <div id="contents">
+
+        <h1>문의 게시판</h1>
+
+        <form method="get">
+            <table border="1" width="70%">
+                <tr>
+                    <td align="right">
+                        <select name="searchField">
+                            <option value="title">제목</option>
+                            <option value="writer">글쓴이</option>
+                        </select>
+                        <input type="text" name="searchWord">
+                        <input type="submit" value="검색하기">
+                    </td>
+                    <td>
+                        <div name="statusField">
+                            <input type="checkbox" value="notA">답변대기</input>
+                            <input type="checkbox" value="A">답변완료</input>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        <table border="1" width="70%">
+            <tr>
+                <th width="10%">글번호</th>
+                <th width="*%">제목</th>
+                <th width="10%">글쓴이</th>
+                <th width="10%">작성일</th>
+                <th width="10%">상태</th>
+            </tr>
+            <!--            <tbody th:swtich="${QNABoardDTO != null}">-->
+            <!--                <tr th:case=true th:each="QNABoardDTO:{QNABoardDTOList}">-->
+            <!--                    <td th:text="${QNABoardDTO.index}"></td>-->
+            <!--                    <td th:text="${QNABoardDTO.title}"></td>-->
+            <!--                    <td th:text="${QNABoardDTO.regDate}"></td>-->
+            <!--                    <td th:text="${QNABoardDTO.imgList}"></td>-->
+            <!--                </tr>-->
+            <!--                <tr th:case=false>-->
+            <!--                    <td>게시글이 없습니다</td>-->
+            <!--                </tr>-->
+            <!--            </tbody>-->
+            <tr>
+                <td width="10%">1</td>
+                <td width="60%" onclick="location.href='detail'">테스트1</td>
+                <td width="10%">글쓴이1</td>
+                <td width="10%">2023-20-23</td>
+                <td width="10%">답변대기</td>
+            </tr>
+            <tr>
+                <td width="10%">2</td>
+                <td width="60%" onclick="location.href='detail'">사과쥬스는 안파나요 ㅠㅠ</td>
+                <td width="10%">글쓴이</td>
+                <td width="10%">2023-20-23</td>
+                <td width="10%">답변완료</td>
+            </tr>
+
+        </table>
+
+        <table border="1" width="70%">
+            <tr align="right">
+                <td>
+                    <button type="button" onclick="location.href='write'">문의 글쓰기</button>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>
