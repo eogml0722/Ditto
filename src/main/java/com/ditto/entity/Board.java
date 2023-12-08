@@ -1,8 +1,6 @@
 //package com.ditto.entity;
 //
 //
-//import com.ditto.constant.BoardCategory;
-//import com.ditto.dto.BoardDTO;
 //import lombok.Getter;
 //import lombok.Setter;
 //import lombok.ToString;
@@ -36,8 +34,6 @@
 //    private BoardCategory boardCategory;
 //
 //    //사용자 정보
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name="member_id")
 //    private Member member;
 //
 //

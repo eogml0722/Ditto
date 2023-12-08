@@ -122,21 +122,14 @@
                 </a>
             </div>
 
-            <div id="content5box2">
-                <h3>
-                    매장찾기
-                </h3>
-                <p>성공 창업을 위한 선택</p>
-                <div id="storesearch">
-                    <input type="text" placeholder="매장 찾기" id="storebox">
-                    <button class="search-button" type="button">검색</button>
-                </div>
+            <div>
+                <div id="map" style="width:260px;height:300px;" class="content5box2"></div>
             </div>
 
             <div id="content5box3">
 
                 <div class="test55">
-                    뭐넣지?
+
                 </div>
 
                 <table>
@@ -182,13 +175,12 @@
                     <p class="loginfont">아이디</p>
                     <div class="input-box">
                         <i class='bx bx-user-circle'></i>
-                        <input type="text" id="id" placeholder="ID" maxlength="20">
+                        <input type="text" name="email" id="email" placeholder="ID" maxlength="20">
                     </div>
-
                     <p class="loginfont">비밀번호</p>
                     <div class="input-box">
                         <i class='bx bx-lock' ></i>
-                        <input type="password" id="password" placeholder="PASSWORD" maxlength="20">
+                        <input type="password" name="password" id="password" placeholder="PASSWORD" maxlength="20">
                     </div>
                     <div>
                         <input class="login" type="submit" value="로그인"><!-- onclick="return chklogin()" -->
@@ -200,12 +192,21 @@
                         <label id="auto">자동로그인</label>
                         <a href ="findid.html" id="finda">아이디/비밀번호찾기</a>
                     </div>
-                    <div>
+                    <div class="loginbox">
                         <input id="signup" type="button" value="회원가입">
+                        <div class="leftLoginBox">
+                        <a href="#">
+                            <img src="/img/kakao_login.png" height="38px">
+                        </a>
+                        <a href="/oauth2/authorization/google">
+                            <img src="/img/google_login.png" height="38px">
+                        </a>
+                        </div>
                     </div>
                     <div>
                         <a href="#"><i id="closebtn4" class='bx bx-x bx-flashing bx-rotate-90'></i></a>
                     </div>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                 </form>
             </div>
         </div>
@@ -281,6 +282,7 @@
         </div>
     </div>
     <th:block layout:fragment="script">
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=54298c533a76f904048422a758eca8da"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.css" rel="stylesheet" />

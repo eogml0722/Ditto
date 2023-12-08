@@ -198,8 +198,7 @@
 }
 
 #content5box2{
-	background: url(../img/imgtest.png);
-	background-size: 100% 100%;
+
 }
 
 #content5box3{
@@ -387,11 +386,21 @@
 .autologin a:hover{ /*a태그 마우스오버시 밑줄생김*/
     text-decoration:underline;
 }
+/*표시용*/
+.loginbox{
+    display:flex;
+    margin:0 auto;
+}
+
+.leftLoginBox{
+    position:relative;
+    left:10px;
+    bottom:5px;
+}
 
 #signup{
-    width:50%;
+    width:67.5%;
     height:30px;
-    transform:translateX(50%);
     border-radius:25px;
     border:2px solid rgb(45, 45, 45);
     background-color:rgb(45, 45, 45);
@@ -581,3 +590,4 @@ input[name="agreements"]+label {
 .hidden2 {
     display: none;
 }
+
