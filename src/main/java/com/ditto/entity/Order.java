@@ -17,8 +17,6 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
-    @OneToMany
-    @Column()
+    @OneToMany (mappedBy = "order")
     private List<OrderItem> orderItemList = new ArrayList<>();
 }

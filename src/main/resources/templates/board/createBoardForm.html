@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block layout:fragment="css">
+    <link th:href="@{/css/ditto2_text.css}" rel="stylesheet">
+</th:block>
+<body>
+<th:block layout:fragment="content">
+    <br><br>
+    <div id="container">
+        <div id="header">빽다방 메뉴 소식 커뮤니티</div>
+        <div id="main">
+            <div id="main_main1">
+                <img src="nbimg/shop_main06.jpg" id="main_main1_img1">
+                <div id="main_main1_text">
+                    <h1 id="main_main1_text1">소식</h1>
+                    <div id="main_main1_text2">
+                        다양한 이벤트와 새로운 소식을 확인하세요!
+                    </div>
+                </div>
+                <div></div>
+            </div>
+            <div id="main_main2">
+                <ul>
+                    <li>전체보기</li>
+                    <li>소식</li>
+                    <li>이벤트</li>
+                    <li>자유게시판</li>
+                    <li>커피클래스</li>
+                </ul>
+            </div>
+            <div id="main_text">
+                <div id="text_notice">
+                    <h1 id="text_headNotice">자유게시판</h1>
+                    <div id="text_subNotice">자유로운 글을 작성해보세요!</div>
+                </div>
+            <form action="/board/create" method="post">
+                <div id="text_main">
+                    <div id="text_title">
+                        <span>제목</span>
+                        <input type="text" placeholder="제목 입력">
+                    </div>
+                    <div id="text_article"><textarea placeholder="내용 입력"></textarea></div>
+                </div>
+
+
+                </div>
+                <div id="text_bottom">
+                    <input type="button" value="등록">
+                    <input type="button" value="취소">
+                </div>
+            </form>
+        </div>
+    </div>
+</th:block>
+
+</body>
+</html>
