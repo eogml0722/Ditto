@@ -47,7 +47,7 @@
 			<artifactId>thymeleaf-layout-dialect</artifactId>
 		</dependency>
 
-			<!--스프링 시큐리티-->
+			<!--스프링 시큐리티 스타터-->
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
