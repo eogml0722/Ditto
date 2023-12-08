@@ -35,6 +35,8 @@ public class Board extends BaseEntity {
     //게시판 분류
     private BoardCategory boardCategory;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
     //사용자 정보
     private Member member;
     
