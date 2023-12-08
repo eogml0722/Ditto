@@ -11,6 +11,7 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "item")
 @Getter @Setter @ToString
 public class Item {
     @Id
