@@ -3,14 +3,14 @@ var idMsg = document.getElementById("idMsg");
 var pw = document.getElementById("passwd");
 var pwcheck = document.getElementById("user_passwd_confirm");
 var testpw = document.getElementById("testpw");
-var mobileMsg = document.getElementById("mobileMsg")
-var nameMsg = document.getElementById("nameMsg")
+var mobileMsg = document.getElementById("mobileMsg");
+var nameMsg = document.getElementById("nameMsg");
 var pwMsg = document.getElementById("pwConfirmMsg");
 var mobileM = document.getElementById("mobile2");
 var mobileL = document.getElementById("mobile3");
 var emailcheck = document.getElementById("e_mail");
-var emailMsg = document.getElementById("emailMsg")
-var detailaddress = document.getElementById("detailaddress")
+var emailMsg = document.getElementById("emailMsg");
+var detailAddress = document.getElementById("detailAddress");
 
 id.addEventListener("blur", function() {
 	checkId();
@@ -37,7 +37,7 @@ pw.addEventListener("blur", function() {
 })
 
 function checkPw() {
-	var regpw = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/
+	var regpw = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
 	if (!regpw.test(pw.value)) {
 		pw.style.border = "1px solid red";
 	} else if (pw.value.length == 0) {
@@ -74,16 +74,16 @@ mobileM.addEventListener("blur", function() {
 })
 
 function checkphM() {
-	var telexp = /^[0-9]{4,}$/
+	var telexp = /^[0-9]{4}$/;
 	if (mobileM.value.length == 0) {
 		mobileM.style.border = "1px solid red";
 		mobileMsg.innerHTML = "전화번호를 입력해주세요!"
 	} else if (!telexp.test(mobileM.value)) {
 		mobileM.style.border = "1px solid red";
-		mobileMsg.innerHTML = "숫자4자리로 입력헤주세요!"
+		mobileMsg.innerHTML = "숫자4자리로 입력해주세요!"
 	} else {
 		mobileM.style.border = "1px solid black";
-		mobileMsg.innerHTML = ""
+		mobileMsg.innerHTML = "";
 	}
 }
 
@@ -92,16 +92,16 @@ mobileL.addEventListener("blur", function() {
 })
 
 function checkphL() {
-	var telexp = /^[0-9]{4,}$/
+	var telexp = /^[0-9]{4}$/;
 	if (mobileL.value.length == 0) {
 		mobileL.style.border = "1px solid red";
 		mobileMsg.innerHTML = "전화번호를 입력해주세요!"
 	} else if (!telexp.test(mobileL.value)) {
 		mobileL.style.border = "1px solid red";
-		mobileMsg.innerHTML = "숫자4자리로 입력헤주세요!"
+		mobileMsg.innerHTML = "숫자4자리로 입력해주세요!"
 	} else {
 		mobileL.style.border = "1px solid black";
-		mobileMsg.innerHTML = ""
+		mobileMsg.innerHTML = "";
 	}
 }
 
@@ -127,17 +127,17 @@ function checkema() {
 	}
 }
 
-detailaddress.addEventListener("blur", function() {
-	dtaddress();
+detailAddress.addEventListener("blur", function() {
+	dtAddress();
 })
 
-function dtaddress() {
-	if (detailaddress.value.length == 0) {
+function dtAddress() {
+	if (detailAddress.value.length == 0) {
 		/*실험용
-		detailaddress.style.border = "1px solid red";
+		detailAddress.style.border = "1px solid red";
 		*/
 	} else {
-		detailaddress.style.border = "1px solid black";
+		detailAddress.style.border = "1px solid black";
 	}
 }
 
@@ -168,17 +168,18 @@ function memberJoinAction() {
 	var upw = document.getElementById("passwd")
 	var cpw = document.getElementById("user_passwd_confirm")
 	var uname = document.getElementById("name")
-	var phm = document.getElementsByClassName("mb")
+	var phmM = document.getElementById("mobile2")
+	var phmL = document.getElementById("mobile3")
 	var address = document.getElementById("address")
-	var dtAdress = document.getElementById("detailAddress")
-	var chkMail = document.getElementById("e_mali")
+	var dtAddress = document.getElementById("detailAddress")
+	var chkMail = document.getElementById("e_mail")
 	var zoneCode = document.getElementById("zipcode")
-	
+
 	//정규식
 	var regId = /^[a-z]+[a-z0-9]{4,16}$/g;
-	var regpwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/
+	var regpwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
 	var regName = /^[가-힣a-zA-Z]{2,15}$/;
-	var phExp = /^[0-9]{4,}$/;
+	var phExp = /^[0-9]{4}$/;
 	var regadd = /^[가-힣]+$/;
 	var regmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -252,15 +253,24 @@ if (!cpw.value == upw.value) {
 
 	//폰번호확인
 
-	if (phm.value == "") {
+	if (phmM.value == "") {
 		alert("휴대폰 번호를 입력해 주세요.")
-		phm.focus();
+		phmM.focus();
 		return false;
-	} else if (!phExp.test(phm.value)) {
+	} else if (phmL.value = "") {
+	    alert("휴대폰 번호를 입력해 주세요.")
+	    phmL.focus();
+	    return false;
+	} else if (!phExp.test(phmM.value)) {
 		alert("올바른 휴대전화번호를 입력해 주세요.")
-		phm.focus();
+		phmM.focus();
 		return false;
+	} else if (!phExp.test(phmL.value)) {
+	    alert("올바른 휴대전화번호를 입력해 주세요.")
+	    phmL.focus();
+	    return false;
 	}
+
 
 //주소확인
 if (zoneCode.value == "") {
@@ -271,26 +281,26 @@ if (zoneCode.value == "") {
 	alert("기본주소를 입력해 주세요.")
 	address.focus();
 	return false;
-} else if (!regadd.test(adress.vale)) {
+} else if (!regadd.test(address.value)) {
 	alert("주소는 한글로 적어주세요.")
 	address.focus();
 	return false;
-} else if (dtAddress.vale == 0) {
+} else if (dtAddress.value == 0) {
 	alert("나머지 주소를 입력해 주세요.")
 	dtAddress.focus();
 	return false;
-} else if (!regadd.test(dtadress.vale)) {
+} else if (!regadd.test(dtAddress.value)) {
 	alert("주소는 한글로 적어주세요.")
 	dtAddress.focus();
 	return false;
 }
-	
+
 //이메일확인
 if (chkMail.value == "") {
 	alert("메일을 입력해 주세요.")
 	chkMail.focus();
 	return false;
-} else if (!regmail.test(chkmail.value)) {
+} else if (!regmail.test(chkMail.value)) {
 	alert("입력하신 이메일은 사용할 수 없습니다.")
 	regmail.focus();
 	return false;
@@ -305,13 +315,13 @@ function openZipSearch() {
 			document.getElementById('zipcode').value = data.zonecode;
 			document.getElementById('address').value = data.address;
 			//우편번호,상세주소 입력되면 나머지주소로 포커스 이동
-			document.getElementById('detailaddress').focus();
+			document.getElementById('detailAddress').focus();
 
 		}
 	}).open();
 }
 
-//비밀번호 툴팁창 클릭시 화면보이게 
+//비밀번호 툴팁창 클릭시 화면보이게
 var tip = document.getElementById("tooltip");
 var tipBtn = document.getElementById("passwd");
 
@@ -339,107 +349,107 @@ function scrollFunction(){
 	}
 }
 
-/*로그인 모달 기능*/
+///*로그인 모달 기능*/
+//
+//var open = () => { //open했을때 클래스네임 hidden을 지운다. (css에 hidden을 display:none;으로 적용시켜놓음)
+//	document.querySelector(".modal").classList.remove("hidden");
+//}
+//
+//var close = () => { //close했을때 클레스네임 hidden을 추가한다.
+//	document.querySelector(".modal").classList.add("hidden");
+//}
+//
+//document.querySelector(".btn1").addEventListener("click", open);
+//document.querySelector("#closebtn4").addEventListener("click", close);
 
-var open = () => { //open했을때 클래스네임 hidden을 지운다. (css에 hidden을 display:none;으로 적용시켜놓음)
-	document.querySelector(".modal").classList.remove("hidden");
-}
+///*이용약관*/
+//
+//function selectAll(selectAll) {
+//	var checkboxes = document.getElementsByName("agreements");
+//	checkboxes.forEach((checkbox) => {
+//		checkbox.checked = selectAll.checked;
+//	})
+//}
 
-var close = () => { //close했을때 클레스네임 hidden을 추가한다. 
-	document.querySelector(".modal").classList.add("hidden");
-}
-
-document.querySelector(".btn1").addEventListener("click", open);
-document.querySelector("#closebtn4").addEventListener("click", close);
-
-/*이용약관*/
-
-function selectAll(selectAll) {
-	var checkboxes = document.getElementsByName("agreements");
-	checkboxes.forEach((checkbox) => {
-		checkbox.checked = selectAll.checked;
-	})
-}
-
-//모달팝업창 열기,닫기
-
-var openModa1 = () => {  //open일때 클래스네임 'hidden2'를 지운다.
-	document.querySelector(".modal2").classList.remove("hidden2");
-}
-
-var closeModa1 = () => { //close일때 클래스네임 'hidden2'를 추가한다.
-	document.querySelector(".modal2").classList.add("hidden2");
-}
-
-document.querySelector(".btn2").addEventListener("click", openModa1); //열기버튼 클릭했을때
-document.querySelector("#closebtn2").addEventListener("click", closeModa1); //닫기버튼 클릭했을때
-
-//로그인->약관창으로 넘어가기
-
-var closeLogin = () => { //close했을때 클레스네임 hidden을 추가한다. 
-	document.querySelector(".modal").classList.add("hidden");
-}
-var openTerms = () => {  //open일때 클래스네임 'hidden2'를 지운다.
-	document.querySelector(".modal2").classList.remove("hidden2");
-}
-
-document.querySelector("#signup").addEventListener("click", closeLogin); //로그인창을 닫는다
-document.querySelector("#signup").addEventListener("click", openTerms); //약관창을 연다
-
-// 유효성 검사 and 약관창 -> 회원가입으로 넘어가기
-
-chkbtn = document.getElementById("chkbtn")
-chkbtn.addEventListener("click",function(event){
-	 event.preventDefault();
-
-	var termOfService = document.frmTos.termOfService.checked;
-	var privacy = document.frmTos.privacy.checked;
-	
-	if(!termOfService){
-		alert("필수약관에 동의해 주세요.");
-		return false;
-	}
-	if(!privacy){
-		alert("필수약관에 동의해 주세요");
-		return false;
-	}
-	if(termOfService && privacy){
-		alert("확인되었습니다!")
-		window.location.assign("teamproject.html")
-	}
-})
-
-// 로그인 모달 유효성 검사
-
-var idcmd = document.getElementById("id");
-var pwcmd = document.getElementById("password");
-var regExp = /^[a-z]+[a-z0-9]{4,16}$/g; //영어소문자 or 영어소문자와 숫자로 이루어진
-var regpw = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/
-
-function chklogin(){
-
-if(idcmd.value.length == 0){
-	alert("아이디를 입력해 주세요.")
-	return false;
-	}else if(!regExp.test(idcmd.value)){
-		alert("아이디를 확인해 주세요.")
-		return false;
-	}else if(pwcmd.value.length == 0){
-		alert("비밀번호를 입력해 주세요.")
-		return false;
-	}else if(!regpw.test(pwcmd.value)){
-		alert("비밀번호를 확인해 주세요.")
-		return false;
-	}else{
-		alert("환영합니다.")
-	}
-}
-
-/* sns로고 클릭시 이동 */
-
-function sns1(){
-	window.location.href="https://www.instagram.com/"
-}
-function sns2(){
-	window.location.href="https://ko-kr.facebook.com/"
-}
+////모달팝업창 열기,닫기
+//
+//var openModa1 = () => {  //open일때 클래스네임 'hidden2'를 지운다.
+//	document.querySelector(".modal2").classList.remove("hidden2");
+//}
+//
+//var closeModa1 = () => { //close일때 클래스네임 'hidden2'를 추가한다.
+//	document.querySelector(".modal2").classList.add("hidden2");
+//}
+//
+//document.querySelector(".btn2").addEventListener("click", openModa1); //열기버튼 클릭했을때
+//document.querySelector("#closebtn2").addEventListener("click", closeModa1); //닫기버튼 클릭했을때
+//
+////로그인->약관창으로 넘어가기
+//
+//var closeLogin = () => { //close했을때 클레스네임 hidden을 추가한다.
+//	document.querySelector(".modal").classList.add("hidden");
+//}
+//var openTerms = () => {  //open일때 클래스네임 'hidden2'를 지운다.
+//	document.querySelector(".modal2").classList.remove("hidden2");
+//}
+//
+//document.querySelector("#signup").addEventListener("click", closeLogin); //로그인창을 닫는다
+//document.querySelector("#signup").addEventListener("click", openTerms); //약관창을 연다
+//
+//// 유효성 검사 and 약관창 -> 회원가입으로 넘어가기
+//
+//chkbtn = document.getElementById("chkbtn")
+//chkbtn.addEventListener("click",function(event){
+//	 event.preventDefault();
+//
+//	var termOfService = document.frmTos.termOfService.checked;
+//	var privacy = document.frmTos.privacy.checked;
+//
+//	if(!termOfService){
+//		alert("필수약관에 동의해 주세요.");
+//		return false;
+//	}
+//	if(!privacy){
+//		alert("필수약관에 동의해 주세요");
+//		return false;
+//	}
+//	if(termOfService && privacy){
+//		alert("확인되었습니다!")
+//		window.location.assign("teamproject.html")
+//	}
+//})
+//
+//// 로그인 모달 유효성 검사
+//
+//var idcmd = document.getElementById("id");
+//var pwcmd = document.getElementById("password");
+//var regExp = /^[a-z]+[a-z0-9]{4,16}$/g; //영어소문자 or 영어소문자와 숫자로 이루어진
+//var regpw = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/
+//
+//function chklogin(){
+//
+//if(idcmd.value.length == 0){
+//	alert("아이디를 입력해 주세요.")
+//	return false;
+//	}else if(!regExp.test(idcmd.value)){
+//		alert("아이디를 확인해 주세요.")
+//		return false;
+//	}else if(pwcmd.value.length == 0){
+//		alert("비밀번호를 입력해 주세요.")
+//		return false;
+//	}else if(!regpw.test(pwcmd.value)){
+//		alert("비밀번호를 확인해 주세요.")
+//		return false;
+//	}else{
+//		alert("환영합니다.")
+//	}
+//}
+//
+///* sns로고 클릭시 이동 */
+//
+//function sns1(){
+//	window.location.href="https://www.instagram.com/"
+//}
+//function sns2(){
+//	window.location.href="https://ko-kr.facebook.com/"
+//}

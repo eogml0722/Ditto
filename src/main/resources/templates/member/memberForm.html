@@ -11,7 +11,7 @@
 </th:block>
 <div layout:fragment="content">
 
-<form id="joinForm" name="joinForm" action="/members/new" role="form" method="get" th:object="${memberFormDTO}">
+<form id="joinForm" name="joinForm" action="/members/new" role="form" method="post" th:object="${memberFormDTO}">
 
     <div class="main1">
         <h2 class="with-border">회원 가입</h2>
@@ -80,11 +80,11 @@
         <dl>
             <dt>휴대전화<span id="required">*</span></dt>
             <dd id="mobile1">
-                <input class="mb" name="mobile[]" value="010" type="text" placeholder="010" disabled>
+                <input class="firstMb" name="mobile[]" value="010" type="number" placeholder="010" disabled>
                 -
-                <input th:field="*{phoneNum1}" class="mb" id="mobile2" name="mobile[]" maxlength="4" type="text">
+                <input class="mb" id="mobile2" name="mobile[]" maxlength="4" type="text" value="">
                 -
-                <input th:field="*{phoneNum2}" class="mb" id="mobile3" name="mobile[]" maxlength="4" type="text">
+                <input class="mb" id="mobile3" name="mobile[]" maxlength="4" type="text" value="">
                 <span id="mobileMsg"></span>
             </dd>
         </dl>
@@ -111,7 +111,7 @@
 
         <div class="buttons-wrap">
             <a id="prev" href="#none" class="button">이전으로</a>
-            <button type="submit" id="join" class="button primary">회원가입</button>
+            <button type="button" id="join" class="button primary" onclick="memberJoinAction()" form="joinForm">회원가입</button>
         </div>
         <!--스프링 시큐리티 사용할 경우 기본적으로 CSRF 방어하기 위해 POST방식의 데이터전송에는 CSRF 토큰 값이 있어야 한다.-->
 <!--        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">-->
