@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter @Setter
 public class MemberFormDTO {
 
-    private long id;
+    private String memberId;
     private String password;
     private String name;
     private int phoneNum1;

@@ -16,7 +16,20 @@ public class BoardController {
 
     @GetMapping(value = "/board")
     public String goBoard(){
-        return "menu";
+        return "board/menu";
+    }
+
+    @GetMapping(value = "/board/create")
+    public String goCreateBoard(Model model){
+        model.addAttribute("boardDTO", new BoardDTO());
+        return "board/createBoardForm";
+    }
+
+
+
+    @PostMapping(value = "/board/create")
+    public String createBoard(Model model){
+        return null;
     }
 
     @GetMapping(value = "/board/create")

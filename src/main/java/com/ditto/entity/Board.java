@@ -30,10 +30,13 @@ public class Board extends BaseEntity {
 
     //조회수
     @Column(nullable = false)
-    private String viewCount;
+    private int viewCount;
 
     //게시판 분류
     private BoardCategory boardCategory;
+
+    //사용자 정보
+    private Member member;
 
 
     @OneToMany(mappedBy = "board")
@@ -46,5 +49,17 @@ public class Board extends BaseEntity {
     //static 아니면 생성자로 엔티티인스턴스를 생성해서 메서드를 써야한다.
 
 
+    public static Board createBoard(Long id, String title, String content,
+                 BoardCategory boardCategory, Member member, List<Img> imgList) {
+        Board board = new Board();
 
+        board.setId(id);
+        board.setTitle(title);
+        board.setContent(content);
+        board.setBoardCategory(boardCategory);
+        board.setMember(member);
+        board.setImgList(imgList);
+
+        return board;
+    }
 }
