@@ -29,6 +29,9 @@ class BoardServiceTest {
     private BoardService boardService;
 
     @Autowired
+    private MemberService memberService;
+
+    @Autowired
     private BoardRepository boardRepository;
     @Autowired
     private MemberRepository memberRepository;
@@ -52,7 +55,7 @@ class BoardServiceTest {
 
         Member member = Member.createMember(memberFormDTO, passwordEncoder);
 
-        member = memberRepository.save(member);
+        member = memberService.saveMember(member);
 
         return member;
     }
@@ -76,8 +79,16 @@ class BoardServiceTest {
                 .orElseThrow(EntityNotFoundException::new);
 
         System.out.println(findBoard);
-
     }
+
+
+    //전체 게시글 조회
+    @Test
+    @DisplayName("전체 게시글 조회")
+    public void getBoardList(){
+        memberRepository.findAll();
+    }
+
 
 
 }
