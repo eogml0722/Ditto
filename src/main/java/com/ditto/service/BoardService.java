@@ -14,8 +14,16 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
-    public void insertBoard(Board board){
-        boardRepository.save(board);
+    //게시글 생성
+    public Board insertBoard(Board board){
+        insertBoardDuplication(board);
+        return boardRepository.save(board);
+    }
+
+    //게시글 생성 중복 검사 (저장하기 전에 검사)
+    public void insertBoardDuplication(Board board){
+        if(board.getId() != null){
+            throw new IllegalArgumentException("중복된 게시글입니다.");}
     }
 
 }
