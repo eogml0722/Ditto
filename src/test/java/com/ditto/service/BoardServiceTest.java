@@ -63,7 +63,7 @@ class BoardServiceTest {
 
 
     //게시판 생성 테스트
-    @Test
+
 //    @Rollback(false)
     @DisplayName("게시판 생성 테스트")
     public void createBoardTest(){
@@ -85,10 +85,31 @@ class BoardServiceTest {
     //전체 게시글 조회
     @Test
     @DisplayName("전체 게시글 조회")
-    public void getBoardList(){
-        memberRepository.findAll();
+    public void getAllBoardList(){
+        boardRepository.findAll();
     }
 
+
+    //게시글 상세 조회
+    //아이디 및 카테고리만 
+    //검색어 조회는 추가할 것
+    @Test
+    @DisplayName("게시글 검색")
+    public void getSearchBoardList(){
+        boardRepository.findByMemberId("asd", null);
+    }
+
+    @Test
+    @DisplayName("게시글 상세 보기")
+    public void getSearchBoard(){
+        List<Board> getSearchBoardList = boardRepository.findByMemberId("asd", null);
+        for (Board board : getSearchBoardList){
+            if(board.getTitle().equals("test1")){
+                System.out.println(board);
+            }
+        }
+
+    }
 
 
 }
