@@ -2,10 +2,14 @@ package com.ditto.service;
 
 
 import com.ditto.entity.Board;
+import com.ditto.entity.Member;
 import com.ditto.repository.BoardRepository;
+import com.ditto.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -13,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final MemberRepository memberRepository;
+
 
     //게시글 생성
     public Board insertBoard(Board board){
@@ -25,5 +31,17 @@ public class BoardService {
         if(board.getId() != null){
             throw new IllegalArgumentException("중복된 게시글입니다.");}
     }
+
+    //게시글 검색
+    //id 는 principal이나 dto 로 교체?
+    public List<Board> selectBoard(String id, String title, String content){
+        //글 작성자 정보
+        Member member = memberRepository.findByMemberId(id);
+
+        //해당 회원이 작성한 글을 기준으로 검색
+        return boardRepository.findByMember(member, title, content);
+    }
+
+
 
 }
