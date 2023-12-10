@@ -1,6 +1,7 @@
 package com.ditto.service;
 
 
+import com.ditto.dto.BoardDTO;
 import com.ditto.entity.Board;
 import com.ditto.entity.Member;
 import com.ditto.repository.BoardRepository;
@@ -9,7 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -42,6 +45,34 @@ public class BoardService {
         return boardRepository.findByMember(member, title, content);
     }
 
+    //게시글 상세보기
+    public Optional<Board> getBoard(Long id){
+        return boardRepository.findById(id);
+    }
+
+    //게시글 삭제
+    public void deleteBoard(Long id){
+        try {
+            boardRepository.deleteById(id);
+        }catch (EntityNotFoundException e){
+            e.printStackTrace();
+            System.out.println("게시글이 없습니다.");
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("게시글 삭제 중 예외 발생");
+        }
 
 
+
+    }
+
+    //게시글 수정
+    public void updateBoard(BoardDTO boardDTO){
+        //게시글 상세보기 인 상태에서 수정하기 누르면 게시글 id 넘겨 받을 것
+        //뷰에서 넘겨받은 content, title, boardCategory를 setDTO
+        boardRepository.updateById(boardDTO.getTitle(),
+                boardDTO.getContent(),
+                boardDTO.getBoardCategory(),
+                boardDTO.getId());
+    }
 }
