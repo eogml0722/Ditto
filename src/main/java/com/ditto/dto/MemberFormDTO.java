@@ -9,8 +9,8 @@ public class MemberFormDTO {
     private String memberId;
     private String password;
     private String name;
-    private String phoneNum1;
-    private String phoneNum2;
+    private int phoneNum1;
+    private int phoneNum2;
     private String address;
     private String email;
 }
