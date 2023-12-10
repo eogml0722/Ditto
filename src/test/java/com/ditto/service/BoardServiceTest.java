@@ -68,8 +68,8 @@ class BoardServiceTest {
     @Rollback(false)
     @DisplayName("게시판 생성 테스트")
     public void createBoardTest(){
-        Member member = createMemberTest();
-//        Member member = memberRepository.findByMemberId("asd");
+//        Member member = createMemberTest();
+        Member member = memberRepository.findByMemberId("asd2");
         BoardDTO boardDTO = new BoardDTO();
         boardDTO.setTitle("test3");
         boardDTO.setContent("내용3");
@@ -104,7 +104,7 @@ class BoardServiceTest {
     //검색어 조회는 추가할 것
     @Test
     @DisplayName("게시글 검색")
-    public void getSearchBoardList(){
+    public void selectBoardTest(){
         List<Board> boardList = boardService.selectBoard("asd", null, "내용");
         for (Board board : boardList){
             System.out.println(board);
@@ -112,7 +112,34 @@ class BoardServiceTest {
 
     }
     
+    //게시글 제목 클릭시 내용보기
+    @Test
+    @DisplayName("게시글 상세 보기")
+    public void getBoardTest(){
+        //클릭하면 get으로 컨트롤러에서 게시글 id 받아온다.
+        //게시글 id로 내용 받아오기
+        System.out.println(boardService.getBoard(1L) );
+    }
 
+    //게시글 수정
+    @Test
+    @DisplayName("게시글 수정")
+    public void updateBoardTest(){
+        BoardDTO boardDTO = new BoardDTO();
+        boardDTO.setTitle("test11");
+        boardDTO.setContent("내용11");
+        boardDTO.setBoardCategory(BoardCategory.ANSWER);
+        boardDTO.setId(1L);
+        boardService.updateBoard(boardDTO);
+        System.out.println(boardService.getBoard(1L) );
+    }
 
+    @Test
+    @Rollback(value = false)
+    @DisplayName("게시글 삭제")
+    public void deleteBoardTest(){
+        boardService.deleteBoard(3L);
+        System.out.println(boardService.getBoard(3L) );
+    }
 
 }
