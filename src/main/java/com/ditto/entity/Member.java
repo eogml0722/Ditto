@@ -25,12 +25,16 @@ public class Member extends BaseEntity{
     @Column(nullable = false)
     private String name;
 
-    private int phoneNum1;
+    @Column(nullable = false)
+    private String phoneNum1;
 
-    private int phoneNum2;
+    @Column(nullable = false)
+    private String phoneNum2;
 
+    @Column(nullable = false)
     private String address;
 
+    @Column(nullable = false)
     private String email;
 
     @Enumerated(EnumType.STRING) //enum의 순서가 바뀔경우를 대비해 옵션을 String으로 지정
