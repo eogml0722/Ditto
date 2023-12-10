@@ -45,7 +45,7 @@ class BoardServiceTest {
     public Member createMemberTest(){
 
         MemberFormDTO memberFormDTO = new MemberFormDTO();
-        memberFormDTO.setMemberId("asd");
+        memberFormDTO.setMemberId("asd2");
         memberFormDTO.setPassword("asd");
         memberFormDTO.setName("sad");
         memberFormDTO.setPhoneNum1(45);
@@ -64,21 +64,27 @@ class BoardServiceTest {
 
     //게시판 생성 테스트
 
-//    @Rollback(false)
+    @Test
+    @Rollback(false)
     @DisplayName("게시판 생성 테스트")
     public void createBoardTest(){
         Member member = createMemberTest();
+//        Member member = memberRepository.findByMemberId("asd");
         BoardDTO boardDTO = new BoardDTO();
-        boardDTO.setTitle("test1");
-        boardDTO.setContent("내용1");
+        boardDTO.setTitle("test3");
+        boardDTO.setContent("내용3");
         boardDTO.setBoardCategory(BoardCategory.EVENT);
 
+
         Board board = Board.createBoard(boardDTO, member);
+        boardService.insertBoard(board);
+        /*
+
         Board result = boardRepository.saveAndFlush(board);
         Board findBoard =boardRepository.findById(result.getId())
                 .orElseThrow(EntityNotFoundException::new);
-
         System.out.println(findBoard);
+        */
     }
 
 
@@ -86,30 +92,27 @@ class BoardServiceTest {
     @Test
     @DisplayName("전체 게시글 조회")
     public void getAllBoardList(){
-        boardRepository.findAll();
+       List<Board> boardList =  boardRepository.findAll();
+       for (Board board : boardList){
+           System.out.println(board);
+       }
     }
 
 
-    //게시글 상세 조회
+    //게시글 검색
     //아이디 및 카테고리만 
     //검색어 조회는 추가할 것
     @Test
     @DisplayName("게시글 검색")
     public void getSearchBoardList(){
-        boardRepository.findByMemberId("asd", null);
-    }
-
-    @Test
-    @DisplayName("게시글 상세 보기")
-    public void getSearchBoard(){
-        List<Board> getSearchBoardList = boardRepository.findByMemberId("asd", null);
-        for (Board board : getSearchBoardList){
-            if(board.getTitle().equals("test1")){
-                System.out.println(board);
-            }
+        List<Board> boardList = boardService.selectBoard("asd", null, "내용");
+        for (Board board : boardList){
+            System.out.println(board);
         }
 
     }
+    
+
 
 
 }
