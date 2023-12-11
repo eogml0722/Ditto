@@ -70,7 +70,7 @@ class BoardServiceTest {
     @DisplayName("게시판 생성 테스트")
     public void createBoardTest(){
 //        Member member = createMemberTest();
-        Member member = memberRepository.findByMemberId("asd2");
+        Member member = memberRepository.findByMemberId("asd1");
         BoardDTO boardDTO = new BoardDTO();
         boardDTO.setTitle("test3");
         boardDTO.setContent("내용3");
