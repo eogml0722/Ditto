@@ -20,6 +20,7 @@ public class SecurityConfig {
         http.authorizeRequests()
                 .mvcMatchers("/").permitAll()
                 .mvcMatchers("/css/**", "/js/**", "/members/**", "/img/**", "/extras/**").permitAll()
+                .mvcMatchers("/qna/**").permitAll()
                 .anyRequest().authenticated();
 
         http.formLogin()
