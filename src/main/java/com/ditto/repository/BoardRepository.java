@@ -11,6 +11,7 @@ import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
@@ -19,8 +20,8 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
             " AND(:title IS NULL OR b.title = :title)" +
             " AND(:content IS NULL OR b.content Like %:content%)")
     List<Board> findByMember(@Param("member") Member member,
-                             @Param("title")String title,
-                             @Param("content")String content);
+                          @Param("title")String title,
+                          @Param("content")String content);
 
 
 

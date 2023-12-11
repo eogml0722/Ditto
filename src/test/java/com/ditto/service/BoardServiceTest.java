@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 @Transactional
@@ -105,7 +106,8 @@ class BoardServiceTest {
     @Test
     @DisplayName("게시글 검색")
     public void selectBoardTest(){
-        List<Board> boardList = boardService.selectBoard("asd", null, "내용");
+       List<Board> boardList = boardService.selectBoard("asd", null, "내용");
+
         for (Board board : boardList){
             System.out.println(board);
         }
