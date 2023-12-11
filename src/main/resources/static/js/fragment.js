@@ -67,14 +67,14 @@
 //		window.location.assign("/members/new")
 //	}
 //})
-
-// 로그인 모달 유효성 검사
-
+//
+// //로그인 모달 유효성 검사
+//
 //var idcmd = document.getElementById("id");
 //var pwcmd = document.getElementById("password");
 //var regExp = /^[a-z]+[a-z0-9]{4,16}$/g; //영어소문자 or 영어소문자와 숫자로 이루어진
 //var regpw = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/
-
+//
 //function chklogin(){
 //if(idcmd.value.length == 0){
 //	alert("아이디를 입력해 주세요.")

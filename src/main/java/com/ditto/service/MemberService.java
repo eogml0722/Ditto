@@ -20,7 +20,7 @@ public class MemberService implements UserDetailsService {
     public Member saveMember(Member member){
         validateDuplicateMember(member);
         return memberRepository.save(member);
-        }
+    }
 
     private void validateDuplicateMember(Member member) {
         Member findMember = memberRepository.findByMemberId(member.getMemberId());
