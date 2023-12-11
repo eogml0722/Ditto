@@ -1,6 +1,7 @@
 package com.ditto.dto;
 
-import com.ditto.entity.QBoard;
+import com.ditto.constant.QNAStatus;
+import com.ditto.entity.aQBoard;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
@@ -17,14 +18,15 @@ public class BoardWriteDTO {
     private String title;
     @NotBlank(message="내용은 필수 입력 값입니다.")
     private String content;
+    private QNAStatus qnaStatus;
     private List<BoardImageDTO> boardImageDTO = new ArrayList<>();
     private static ModelMapper modelMapper = new ModelMapper();
 
-    public QBoard createQBoard(){
-        return modelMapper.map(this, QBoard.class);
+    public aQBoard createQBoard(){
+        return modelMapper.map(this, aQBoard.class);
     }
 
-    public static BoardWriteDTO of(QBoard qboard){
+    public static BoardWriteDTO of(aQBoard qboard){
         return modelMapper.map(qboard, BoardWriteDTO.class);
     }
 

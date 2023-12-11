@@ -5,13 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name="qboard")
 @Getter
 @Setter
-public class QBoard extends BaseEntity {
+public class aQBoard extends BaseEntity {
     @Id
     @Column(name="qboard_id")
     @GeneratedValue

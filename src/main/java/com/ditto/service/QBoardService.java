@@ -1,19 +1,20 @@
 package com.ditto.service;
 
 
-import com.ditto.dto.BoardImageDTO;
+import com.ditto.constant.QNAStatus;
 import com.ditto.dto.BoardWriteDTO;
+import com.ditto.dto.QBoardSearchDTO;
 import com.ditto.entity.BoardImage;
-import com.ditto.entity.QBoard;
+import com.ditto.entity.aQBoard;
 import com.ditto.repository.BoardImageRepository;
-import com.ditto.repository.QboardRepository;
+import com.ditto.repository.QBoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,34 +22,27 @@ import java.util.List;
 @RequiredArgsConstructor
 public class QBoardService {
 
-    private final QboardRepository qboardRepository;
+    private final QBoardRepository qboardRepository;
     private final BoardImageService boardImageService;
     private final BoardImageRepository boardImageRepository;
 
     public Long writeBoard(BoardWriteDTO boardWriteDTO, List<MultipartFile> boardImgFileList) throws Exception{
-        QBoard qBoard = boardWriteDTO.createQBoard();
-        qboardRepository.save(qBoard);
+        aQBoard aQBoard = new aQBoard();
+        aQBoard = boardWriteDTO.createQBoard();
+        aQBoard.setQnaStatus(QNAStatus.NOT_ANSWER);
+        qboardRepository.save(aQBoard);
         System.out.println("qboardservice :" + boardImgFileList );
         for(int i=0;i<boardImgFileList.size();i++){
             BoardImage boardImage = new BoardImage();
-            boardImage.setQBoard(qBoard);
+            boardImage.setAQBoard(aQBoard);
             boardImageService.saveBoardImage(boardImage, boardImgFileList.get(i));
         }
-        return qBoard.getId();
+        return aQBoard.getId();
     }
 
-//    @Transactional(readOnly = true)
-//    public BoardWriteDTO getBoardList(Long qboardId){
-//        List<BoardImage> boardImageList = boardImageRepository.findByQboardIdOrderByIdAsc(qboardId);
-//        List<BoardImageDTO> boardImageDTOList = new ArrayList<>();
-//        for(BoardImage boardImage : boardImageList) {
-//            BoardImageDTO boardImageDTO = BoardImageDTO.of(boardImage);
-//            boardImageDTOList.add(boardImageDTO);
-//        }
-//        QBoard qBoard = qboardRepository.findById(qboardId).orElseThrow(EntityNotFoundException::new);
-//        BoardWriteDTO boardWriteDTO= BoardWriteDTO.of(qBoard);
-//        boardWriteDTO.setBoardImageDTOList(boardImageDTOList);
-//        return boardWriteDTO;
-//    }
+    @Transactional(readOnly = true)
+    public Page<aQBoard> getQBoardList(QBoardSearchDTO qBoardSearchDTO, Pageable pageable){
+        return qboardRepository.getQBoardList(qBoardSearchDTO, pageable);
+    }
 
 }
