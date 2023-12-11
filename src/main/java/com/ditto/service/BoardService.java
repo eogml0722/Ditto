@@ -7,6 +7,7 @@ import com.ditto.entity.Member;
 import com.ditto.repository.BoardRepository;
 import com.ditto.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,17 +39,29 @@ public class BoardService {
     //게시글 검색
     //id 는 principal이나 dto 로 교체?
     public List<Board> selectBoard(String id, String title, String content){
-        //글 작성자 정보
-        Member member = memberRepository.findByMemberId(id);
-
+        Member member = null;
+        try {
+            //글 작성자 정보
+            member = memberRepository.findByMemberId(id);
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("게시글 검색 중 예외 발생.");
+        }
         //해당 회원이 작성한 글을 기준으로 검색
         return boardRepository.findByMember(member, title, content);
     }
 
     //게시글 상세보기
-    public Optional<Board> getBoard(Long id){
-        return boardRepository.findById(id);
+    public Board getBoard(Long id){
+        Board board = null;
+        try {
+            board = boardRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        }catch (EntityNotFoundException e){
+            System.out.println("해당하는 게시글이 없습니다.");
+        }
+        return board;
     }
+
 
     //게시글 삭제
     public void deleteBoard(Long id){
@@ -70,9 +83,17 @@ public class BoardService {
     public void updateBoard(BoardDTO boardDTO){
         //게시글 상세보기 인 상태에서 수정하기 누르면 게시글 id 넘겨 받을 것
         //뷰에서 넘겨받은 content, title, boardCategory를 setDTO
-        boardRepository.updateById(boardDTO.getTitle(),
-                boardDTO.getContent(),
-                boardDTO.getBoardCategory(),
-                boardDTO.getId());
+        try {
+            boardRepository.updateById(boardDTO.getTitle(),
+                    boardDTO.getContent(),
+                    boardDTO.getBoardCategory(),
+                    boardDTO.getId());    
+        }catch (EntityNotFoundException e){
+            System.out.println("해당하는 글이 없습니다.");
+        }catch (Exception e){
+            System.out.println("글 수정 중 예외 발생");
+        }
     }
+
+
 }
