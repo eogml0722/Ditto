@@ -36,36 +36,36 @@
 
         <table border="1" width="70%">
             <tr>
-                <th width="10%">글번호</th>
-                <th width="*%">제목</th>
-                <th width="10%">글쓴이</th>
-                <th width="10%">작성일</th>
-                <th width="10%">상태</th>
+                <th>글번호</th>
+                <th>제목</th>
+                <th>글쓴이</th>
+                <th>작성일</th>
+                <th>상태</th>
             </tr>
-            <!--            <tbody th:swtich="${QNABoardDTO != null}">-->
-            <!--                <tr th:case=true th:each="QNABoardDTO:{QNABoardDTOList}">-->
-            <!--                    <td th:text="${QNABoardDTO.index}"></td>-->
-            <!--                    <td th:text="${QNABoardDTO.title}"></td>-->
-            <!--                    <td th:text="${QNABoardDTO.regDate}"></td>-->
-            <!--                    <td th:text="${QNABoardDTO.imgList}"></td>-->
-            <!--                </tr>-->
-            <!--                <tr th:case=false>-->
-            <!--                    <td>게시글이 없습니다</td>-->
-            <!--                </tr>-->
-            <!--            </tbody>-->
+            <tbody th:swtich="${QBoard != null}">
+                <tr th:case=true th:each="QBoardDTO:{QBoardDTOList}">
+                    <td th:text="${QBoard.index}"></td>
+                    <td th:text="${QBoard.title}"></td>
+                    <td th:text="${QBoard.regDate}"></td>
+                    <td th:text="${QBoard.QNAStatus}"></td>
+                </tr>
+                <tr th:case=false>
+                    <td>게시글이 없습니다</td>
+                </tr>
+            </tbody>
             <tr>
-                <td width="10%">1</td>
-                <td width="60%" onclick="location.href='detail'">테스트1</td>
-                <td width="10%">글쓴이1</td>
-                <td width="10%">2023-20-23</td>
-                <td width="10%">답변대기</td>
+                <td>1</td>
+                <td onclick="location.href='detail'">테스트1</td>
+                <td>글쓴이1</td>
+                <td>2023-20-23</td>
+                <td>답변대기</td>
             </tr>
             <tr>
-                <td width="10%">2</td>
-                <td width="60%" onclick="location.href='detail'">사과쥬스는 안파나요 ㅠㅠ</td>
-                <td width="10%">글쓴이</td>
-                <td width="10%">2023-20-23</td>
-                <td width="10%">답변완료</td>
+                <td>2</td>
+                <td onclick="location.href='detail'">사과쥬스는 안파나요 ㅠㅠ</td>
+                <td>글쓴이</td>
+                <td>2023-20-23</td>
+                <td>답변완료</td>
             </tr>
 
         </table>
