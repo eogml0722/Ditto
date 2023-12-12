@@ -8,7 +8,7 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
+/*
 @Getter @Setter @ToString
 public class BoardFormDTO {
 
@@ -19,8 +19,5 @@ public class BoardFormDTO {
     private String viewCount;
     private BoardCategory boardCategory;
 
-    private List<Board> boardList;
-    private LocalDateTime regDate;
-
-
 }
+*/
