@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,7 +30,7 @@ public class MemberController {
 
     @GetMapping(value = "/login/error")
     public String loginError(Model model){
-        model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
+        model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요.");
         return "member/memberLoginForm";
     }
 
@@ -46,5 +47,10 @@ public class MemberController {
         memberService.saveMember(member);
 
         return "redirect:/";
+    }
+
+    @RequestMapping(value="/findIdPassword")
+    public String idPasswordFind(){
+        return "member/findIdPassword";
     }
 }

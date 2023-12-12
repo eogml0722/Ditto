@@ -1,5 +1,6 @@
 package com.ditto.entity;
 
+import com.ditto.constant.OAuthType;
 import com.ditto.constant.Role;
 import com.ditto.dto.MemberFormDTO;
 import lombok.*;
@@ -33,11 +34,14 @@ public class Member extends BaseEntity{
 
     private String detailAddress; //상세주소
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Enumerated(EnumType.STRING) //enum의 순서가 바뀔경우를 대비해 옵션을 String으로 지정
     private Role role;
+
+    @Enumerated(EnumType.STRING)
+    private OAuthType oauth;
 
     // Member 엔티티를 생성하는 메소드
     public static Member createMember(MemberFormDTO memberFormDTO,

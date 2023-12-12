@@ -191,3 +191,8 @@ input[id="cb"]{ /*체크박스안보이게*/
     margin-left: 120px;
     margin-top: 5px;
 }
+
+.error {
+    color : red;
+    margin-bottom: 30px;
+}
