@@ -8,6 +8,9 @@ import lombok.ToString;
 import org.modelmapper.ModelMapper;
 
 import javax.persistence.Column;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 @Getter @Setter @ToString
 public class BoardDTO {
@@ -16,6 +19,16 @@ public class BoardDTO {
     private String content;
     private String viewCount;
     private BoardCategory boardCategory;
+
+    //BoardDTO 로 통합
+    private List<Board> boardList;
+    private LocalDateTime regTime;
+
+    //이전행
+    private Optional<Board> boardPrev;
+    //다음행
+    private Optional<Board> boardNext;
+
 
     private static ModelMapper modelMapper = new ModelMapper();
 
