@@ -58,7 +58,7 @@
                     <span th:text="${board.boardCategory}" ></span>
                 </td>
                 <td>
-                    <a th:href=""><span th:text="${board.title}" ></span></a>
+                    <a th:href="'/board/getBoard/'+${board.id}"><span th:text="${board.title}" ></span></a>
                 </td>
                 <td>
                     <span th:text="${board.regTime}" ></span>
