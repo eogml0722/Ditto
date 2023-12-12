@@ -37,4 +37,12 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
                     @Param("boardCategory")BoardCategory boardCategory,
                     @Param("id")Long id);
 
+
+//    @Query(value = "SELECT * FROM Board b WHERE b.id < ?1 order by b.id DESC limit 1", nativeQuery = true)
+//    @Query(value = "SELECT c FROM (SELECT b FROM Board b WHERE b.board_id < 1 ORDER BY b.board_id DESC) c WHERE c.ROWNUM <= 1")
+    @Query(value = "SELECT b FROM Board b WHERE b.board_id < ?1 ORDER BY b.board_id DESC")
+    Optional<Board> findLatestBoard(Long id);
+
+//    @Query("SELECT b FROM Board b WHERE b.id > :id")
+//    Optional<Board> getNext(@Param("id") Long id);
 }
