@@ -73,13 +73,17 @@
 	height:45px;
 	padding-top:15px;	
 }
-#text_title>input{
-	padding:10px;
-	width:86.8%;
-}
 #text_title>span{
 	margin-right:50px;
 	margin-left:20px;
+	height : 40px;
+}
+#text_title>span>select{
+height : 34px;
+}
+#text_title>span>input{
+width:80%;
+height : 30px;
 }
 #text_article>textarea{
 	border:none;
