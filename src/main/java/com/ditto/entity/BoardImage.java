@@ -19,7 +19,7 @@ public class BoardImage extends BaseEntity{
     private String url;
     @ManyToOne(fetch = FetchType.LAZY) // 하나의 보드는 여러개의 사진을...
     @JoinColumn(name="qboard_id")
-    private aQBoard aQBoard;
+    private AskBoard AskBoard;
 
     public void updateBoardImg(String oname, String sname, String url){
         this.oname = oname;

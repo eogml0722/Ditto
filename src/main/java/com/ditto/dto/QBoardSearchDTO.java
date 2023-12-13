@@ -1,6 +1,6 @@
 package com.ditto.dto;
 
-import com.ditto.constant.QNAStatus;
+import com.ditto.constant.ASKStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class QBoardSearchDTO {
     private String searchDateType;
-    private QNAStatus searchQNAStatus;
+    private ASKStatus searchQNAStatus;
     private String searchBy;
     private String searchQuery = "";
 }

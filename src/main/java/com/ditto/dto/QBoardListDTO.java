@@ -1,7 +1,7 @@
 package com.ditto.dto;
 
-import com.ditto.constant.QNAStatus;
-import com.ditto.entity.aQBoard;
+import com.ditto.constant.ASKStatus;
+import com.ditto.entity.AskBoard;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
@@ -18,11 +18,11 @@ public class QBoardListDTO {
     private String content;
     private String writer;
     private String regTime;
-    private QNAStatus qnaStatus;
+    private ASKStatus qnaStatus;
     private List<BoardImageDTO> boardImageDTOList = new ArrayList<>();
     private static ModelMapper modelMapper = new ModelMapper();
 
-    public QBoardListDTO(aQBoard qboard){
+    public QBoardListDTO(AskBoard qboard){
         this.id = qboard.getId();
         this.title = qboard.getTitle();
         this.content = qboard.getContent();
@@ -31,7 +31,7 @@ public class QBoardListDTO {
         this.qnaStatus = qboard.getQnaStatus();
     }
 
-    public static QBoardListDTO of(aQBoard qboard){
+    public static QBoardListDTO of(AskBoard qboard){
         return modelMapper.map(qboard, QBoardListDTO.class);
     }
 
