@@ -20,43 +20,45 @@
 #content2{
 	display:flex;
 	width:1280px;
+	height:270px;
 	margin:0 auto;
 	justify-content: center; /* 가로 중앙 정렬 */
     align-items: center; /* 세로 중앙 정렬 */
     width: 100%; /* 전체 화면 가로 크기에 맞게 설정 */
-
 }
 
 #content2leftbox{
 	width:25%;
-	height:300px;
+	height:270px;
 	text-wrap:nowrap;
-	background-color: blue;
+	margin: 0 auto;
+	background-color:blue;
 }
 
 #content2leftbox > h2{
-	margin:30px 0;
+	margin:35px 0;
 	margin-left:30px;
 	font-size:30px;
 	cursor:pointer;
 }
 
 #content2leftbox > h2:hover{
-	border:2px solid black;
+	font-size:45px;
 }
 
 #content2rightbox1{
 	width:75%;
-	height:300px;
-	display:block;
+	height:270px;
 	background-color:red;
+	display:block;
+	margin-right:5px;
 }
 
 #content2rightbox2, #content2rightbox3{
 	width:75%;
-	height:300px;
+	height:270px;
 	display:none;
-	background-color:red;
+	margin-right:5px;
 }
 
 .swiper-slide {
@@ -68,8 +70,8 @@
 }
 
 .swiper-slide img {
-  width: 200px;
-  height: 200px;
+  width: 220px;
+  height: 220px;
   object-fit: cover;
 }
 
