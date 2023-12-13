@@ -40,7 +40,7 @@ public class BoardController {
         BoardDTO boardDTO = BoardDTO.of(board);
 
         //이전행
-        boardDTO.setBoardPrev(boardRepository.findLatestBoard(boardDTO.getId()));
+//        boardDTO.setBoardPrev(boardRepository.findLatestBoard(boardDTO.getId()));
 
         //다음행
 //        boardDTO.setBoardNext(boardRepository.getNext(boardDTO.getId()));
@@ -54,13 +54,21 @@ public class BoardController {
     @GetMapping(value = "/create")
     public String goCreateBoard(Model model){
         model.addAttribute("boardDTO", new BoardDTO());
-        return "createBoardForm";
+        return "/board/createBoardForm";
     }
 
 
 
     @PostMapping(value = "/create")
-    public String createBoard(Model model){
-        return null;
+    public String createBoard(BoardDTO boardDTO){
+        try {
+        Board board = boardDTO.createBoard();
+        boardService.insertBoard(board);
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("글 등록 중 예외 발생");
+            return "redirect:/board/createBoardForm";
+        }
+        return "redirect:/board";
     }
 }
