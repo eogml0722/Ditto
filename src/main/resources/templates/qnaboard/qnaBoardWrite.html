@@ -18,7 +18,7 @@
         bindDomEvent();
 
     });
-    // 사용자가 이미지파일을 선택하면 이미지인지 확인하고 레이블에 이를 표시한다.
+
     function bindDomEvent(){
         $(".custom-file-input").on("change", function() {
             var fileName = $(this).val().split("\\").pop();  //이미지 파일명
@@ -39,7 +39,7 @@
 <div layout:fragment="content">
     <div id="contents">
     <h1>문의하기</h1>
-    <form name="writeFrm" method="post" action="/qna/write"
+    <form name="form" method="post" th:action="@{'/qna/write/'}"
           onsubmit="return validateForm(this)" enctype="multipart/form-data" th:object="${boardWriteDTO}">
         <table border="1" width="70%">
             <tr>

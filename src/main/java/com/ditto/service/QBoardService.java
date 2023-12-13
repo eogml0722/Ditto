@@ -2,9 +2,12 @@ package com.ditto.service;
 
 
 import com.ditto.constant.QNAStatus;
+import com.ditto.dto.BoardImageDTO;
 import com.ditto.dto.BoardWriteDTO;
+import com.ditto.dto.QBoardListDTO;
 import com.ditto.dto.QBoardSearchDTO;
 import com.ditto.entity.BoardImage;
+import com.ditto.entity.QBoardImage;
 import com.ditto.entity.aQBoard;
 import com.ditto.repository.BoardImageRepository;
 import com.ditto.repository.QBoardRepository;
@@ -15,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,9 +34,8 @@ public class QBoardService {
     public Long writeBoard(BoardWriteDTO boardWriteDTO, List<MultipartFile> boardImgFileList) throws Exception{
         aQBoard aQBoard = new aQBoard();
         aQBoard = boardWriteDTO.createQBoard();
-        aQBoard.setQnaStatus(QNAStatus.NOT_ANSWER);
+        aQBoard.setQnaStatus(QNAStatus. NOT_ANSWER);
         qboardRepository.save(aQBoard);
-        System.out.println("qboardservice :" + boardImgFileList );
         for(int i=0;i<boardImgFileList.size();i++){
             BoardImage boardImage = new BoardImage();
             boardImage.setAQBoard(aQBoard);
@@ -44,5 +48,6 @@ public class QBoardService {
     public Page<aQBoard> getQBoardList(QBoardSearchDTO qBoardSearchDTO, Pageable pageable){
         return qboardRepository.getQBoardList(qBoardSearchDTO, pageable);
     }
+
 
 }

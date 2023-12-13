@@ -1,6 +1,7 @@
 package com.ditto.controller;
 
 import com.ditto.dto.BoardWriteDTO;
+import com.ditto.dto.QBoardListDTO;
 import com.ditto.dto.QBoardSearchDTO;
 import com.ditto.entity.QABoard;
 import com.ditto.entity.aQBoard;
@@ -53,11 +54,11 @@ public class TestController {
             model.addAttribute("errorMessage", "문의 등록 중 에러가 발생하였습니다");
             return "qnaboard/qnaBoardWrite";
         }
-        return "/qnaboard/qnaBoardList";
+        return "qnaboard/qnaBoardList";
     }
 
-    @GetMapping("/detail")
-    public String Detail(){
+    @GetMapping("/detail/{boardId}")
+    public String Detail(Model model){
         return "qnaboard/qnaBoardDetail";
     }
 

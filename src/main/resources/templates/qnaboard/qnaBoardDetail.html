@@ -15,14 +15,20 @@
             <tr>
                 <td>글쓴이</td>
                 <td>
-                    <span>테스트</span>
+                    <p><td th:text="${qboard.id}"></td></p>
                 </td>
             </tr>
             <tr>
             <tr>
                 <td>제목</td>
                 <td>
-                    <span>테스트</span>
+                    <p><td th:text="${qboard.title}"></td></p>
+                </td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td>
+                    <p><td th:text="${qboard.content}"></td></p>
                 </td>
             </tr>
             <tr>
@@ -32,22 +38,10 @@
                 </td>
             </tr>
             <tr>
-                <td>내용</td>
-                <td>
-                    <span>테스트1</span>
-                </td>
-            </tr>
-            <!-- 답변이 없고 관리자 아이디면 -->
-            <!-- 만약 답변이 있으면 -->
-            <tr>
-                <td>답변제목</td>
-                <td>???</td>
-            </tr>
-            <tr>
                 <td colspan="2" align="center">
-                    <button type="submit" onclick="location.href='edit'">수정하기</button>
+                    <button type="submit" th:onclick="|location.href='@{/qna/edit}'|">수정하기</button>
                     <button type="delete">삭제하기</button>
-                    <button type="button" onclick="location.href='list'">목록보기</button>
+                    <button type="button"th:onclick="|location.href='@{/qna/list}'|">목록보기</button>
                 </td>
             </tr>
         </table>
