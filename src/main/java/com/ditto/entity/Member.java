@@ -1,11 +1,9 @@
 package com.ditto.entity;
 
+import com.ditto.constant.OAuthType;
 import com.ditto.constant.Role;
 import com.ditto.dto.MemberFormDTO;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
@@ -13,6 +11,8 @@ import javax.persistence.*;
 @Entity
 @Table(name="member")
 @Getter @Setter @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Member extends BaseEntity{
 
     @Id
@@ -26,31 +26,37 @@ public class Member extends BaseEntity{
     private String name;
 
     @Column(nullable = false)
-    private String phoneNum1;
+    private String phoneNum;
 
-    @Column(nullable = false)
-    private String phoneNum2;
+    private String zipcode; //우편번호
 
-    @Column(nullable = false)
-    private String address;
+    private String streetAddress; //도로명주소
 
-    @Column(nullable = false)
+    private String detailAddress; //상세주소
+
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Enumerated(EnumType.STRING) //enum의 순서가 바뀔경우를 대비해 옵션을 String으로 지정
     private Role role;
-    
+
+    @Enumerated(EnumType.STRING)
+    private OAuthType oauth;
+
     // Member 엔티티를 생성하는 메소드
     public static Member createMember(MemberFormDTO memberFormDTO,
                                       PasswordEncoder passwordEncoder) {
+
         Member member = new Member();
         member.setMemberId(memberFormDTO.getMemberId());
         member.setName(memberFormDTO.getName());
-        member.setPhoneNum1(memberFormDTO.getPhoneNum1());
-        member.setPhoneNum2(memberFormDTO.getPhoneNum2());
-        member.setAddress(memberFormDTO.getAddress());
+        member.setPhoneNum(memberFormDTO.getPhoneNum());
         member.setEmail(memberFormDTO.getEmail());
         member.setRole(Role.USER);
+
+        member.setZipcode(memberFormDTO.getZipcode());
+        member.setStreetAddress(memberFormDTO.getStreetAddress());
+        member.setDetailAddress(memberFormDTO.getDetailAddress());
 
         //비밀번호를 암호화 한다.
         String password = passwordEncoder.encode(memberFormDTO.getPassword());

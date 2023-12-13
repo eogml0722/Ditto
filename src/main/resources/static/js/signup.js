@@ -6,8 +6,7 @@ var testpw = document.getElementById("testpw");
 var mobileMsg = document.getElementById("mobileMsg");
 var nameMsg = document.getElementById("nameMsg");
 var pwMsg = document.getElementById("pwConfirmMsg");
-var mobileM = document.getElementById("mobile2");
-var mobileL = document.getElementById("mobile3");
+var mobile = document.getElementById("mobile");
 var emailcheck = document.getElementById("e_mail");
 var emailMsg = document.getElementById("emailMsg");
 var detailAddress = document.getElementById("detailAddress");
@@ -69,38 +68,20 @@ function checkPws() {
 	}
 }
 
-mobileM.addEventListener("blur", function() {
-	checkphM();
+mobile.addEventListener("blur", function() {
+	checkPhoneNum();
 })
 
-function checkphM() {
-	var telexp = /^[0-9]{4}$/;
-	if (mobileM.value.length == 0) {
-		mobileM.style.border = "1px solid red";
+function checkPhoneNum() {
+	var telExp = /^010-[0-9]{4}-[0-9]{4}$/;
+	if (mobile.value.length == 0) {
+		mobile.style.border = "1px solid red";
 		mobileMsg.innerHTML = "전화번호를 입력해주세요!"
-	} else if (!telexp.test(mobileM.value)) {
-		mobileM.style.border = "1px solid red";
-		mobileMsg.innerHTML = "숫자4자리로 입력해주세요!"
+	} else if (!telExp.test(mobile.value)) {
+		mobile.style.border = "1px solid red";
+		mobileMsg.innerHTML = "기호 '-' 포함하여 입력해 주세요!"
 	} else {
-		mobileM.style.border = "1px solid black";
-		mobileMsg.innerHTML = "";
-	}
-}
-
-mobileL.addEventListener("blur", function() {
-	checkphL();
-})
-
-function checkphL() {
-	var telexp = /^[0-9]{4}$/;
-	if (mobileL.value.length == 0) {
-		mobileL.style.border = "1px solid red";
-		mobileMsg.innerHTML = "전화번호를 입력해주세요!"
-	} else if (!telexp.test(mobileL.value)) {
-		mobileL.style.border = "1px solid red";
-		mobileMsg.innerHTML = "숫자4자리로 입력해주세요!"
-	} else {
-		mobileL.style.border = "1px solid black";
+		mobile.style.border = "1px solid black";
 		mobileMsg.innerHTML = "";
 	}
 }
@@ -127,19 +108,19 @@ function checkema() {
 	}
 }
 
-detailAddress.addEventListener("blur", function() {
-	dtAddress();
-})
-
-function dtAddress() {
-	if (detailAddress.value.length == 0) {
-		/*실험용
-		detailAddress.style.border = "1px solid red";
-		*/
-	} else {
-		detailAddress.style.border = "1px solid black";
-	}
-}
+//detailAddress.addEventListener("blur", function() {
+//	dtAddress();
+//})
+//
+//function dtAddress() {
+//	if (detailAddress.value.length == 0) {
+//		/*실험용
+//		detailAddress.style.border = "1px solid red";
+//		*/
+//	} else {
+//		detailAddress.style.border = "1px solid black";
+//	}
+//}
 
 var state = false;
 
@@ -179,7 +160,7 @@ function memberJoinAction() {
 	var regId = /^[a-z]+[a-z0-9]{4,16}$/g;
 	var regpwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
 	var regName = /^[가-힣a-zA-Z]{2,15}$/;
-	var phExp = /^[0-9]{4}$/;
+	var phExp = /^010-[0-9]{4}-[0-9]{4}$/
 	var regadd = /^[가-힣]+$/;
 	var regmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -253,37 +234,20 @@ if (!cpw.value == upw.value) {
 
 	//폰번호확인
 
-	if (phmM.value == "") {
-		alert("휴대폰 번호를 입력해 주세요.")
-		phmM.focus();
-		return false;
-	} else if (phmL.value = "") {
-	    alert("휴대폰 번호를 입력해 주세요.")
-	    phmL.focus();
-	    return false;
-	} else if (!phExp.test(phmM.value)) {
-		alert("올바른 휴대전화번호를 입력해 주세요.")
-		phmM.focus();
-		return false;
-	} else if (!phExp.test(phmL.value)) {
-	    alert("올바른 휴대전화번호를 입력해 주세요.")
-	    phmL.focus();
-	    return false;
-	}
-
+	if(mobile.value == "") {
+	alert("휴대폰 번호를 입력해 주세요.")
+	mobile.focus();
+	return false;
+	} else if (!phExp.test(mobile.value)) {
+      		alert("올바른 휴대폰 번호를 입력해 주세요.")
+      		mobile.focus();
+      		return false;
+    }
 
 //주소확인
 if (zoneCode.value == "") {
 	alert("우편번호를 입력해 주세요.")
 	zoneCode.focus();
-	return false;
-} else if (address.value == 0) {
-	alert("기본주소를 입력해 주세요.")
-	address.focus();
-	return false;
-} else if (!regadd.test(address.value)) {
-	alert("주소는 한글로 적어주세요.")
-	address.focus();
 	return false;
 } else if (dtAddress.value == 0) {
 	alert("나머지 주소를 입력해 주세요.")
@@ -305,20 +269,26 @@ if (chkMail.value == "") {
 	regmail.focus();
 	return false;
 	}
+
+	joinForm.submit();
 }
 
 function openZipSearch() {
-	new daum.Postcode({
-		oncomplete: function(data) {
-			//팝업을 통한 검색 결과 항목 클릭시 실행
-			console.log(data)
-			document.getElementById('zipcode').value = data.zonecode;
-			document.getElementById('address').value = data.address;
-			//우편번호,상세주소 입력되면 나머지주소로 포커스 이동
-			document.getElementById('detailAddress').focus();
-
+    new daum.Postcode({
+    	oncomplete: function(data) {
+		var addr = '';
+		if (data.userSelectedType === 'R') {
+			addr = data.roadAddress;
+		} else {
+			addr = data.jibunAddress;
 		}
-	}).open();
+
+		$("#zipcode").val(data.zonecode);
+		$("#streetAddress").val(addr);
+		$("#detailAddress").val("");
+		$("#detailAddress").focus();
+        }
+    }).open();
 }
 
 //비밀번호 툴팁창 클릭시 화면보이게

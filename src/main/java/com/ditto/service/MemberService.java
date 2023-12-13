@@ -1,5 +1,7 @@
 package com.ditto.service;
 
+import com.ditto.constant.OAuthType;
+import com.ditto.dto.MemberFormDTO;
 import com.ditto.entity.Member;
 import com.ditto.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +21,13 @@ public class MemberService implements UserDetailsService {
 
     public Member saveMember(Member member){
         validateDuplicateMember(member);
-        return memberRepository.save(member);
+
+        if (member.getOauth() == null) {
+            member.setOauth(OAuthType.DITTO);
         }
+
+        return memberRepository.save(member);
+    }
 
     private void validateDuplicateMember(Member member) {
         Member findMember = memberRepository.findByMemberId(member.getMemberId());
@@ -30,9 +37,13 @@ public class MemberService implements UserDetailsService {
         }
     }
 
+    @Override
     public UserDetails loadUserByUsername(String memberId) throws
             UsernameNotFoundException { //로그인할 유저의 id를 파라미터로 전달받음
         Member member = memberRepository.findByMemberId(memberId);
+
+        System.out.println(member);
+        System.out.println(memberId);
 
         if(member == null) {
             throw new UsernameNotFoundException(memberId);
@@ -44,4 +55,10 @@ public class MemberService implements UserDetailsService {
                 .roles(member.getRole().toString())
                 .build();
     }
+//    @Override
+//    public MemberFormDTO getMemberDetails(String memberId) {
+//        return memberRepository.getMemberDetails(memberId);
+//    }
+
+
 }
