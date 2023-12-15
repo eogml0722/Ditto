@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.management.ValueExp;
 import javax.swing.*;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/board")
@@ -24,10 +27,24 @@ public class BoardController {
     private final BoardService boardService;
     private final BoardRepository boardRepository;
 
-    @GetMapping(value = "")
-    public String goBoard(Model model){
+    @GetMapping(value = {"/{pageNum}", "/"})//Optional = null 체크알아서 해줌
+    public String goBoard(Model model, @PathVariable("pageNum") Optional<Integer> pageNum){
         List<Board> boardList = boardRepository.findAll();
+        /*
+        List<Integer> iList = new ArrayList<>();
+        int j= (boardList.size()+9)/10;
+        for(int i=1 ; i <= j ; i++ ){
+            iList.add(i);
+        }
+        */
+        if(!pageNum.isEmpty()) {
+            System.out.println("번호" + pageNum.get());
+            model.addAttribute("pageNum", pageNum.get());
+        }else {
+            model.addAttribute("pageNum", new Integer(1));
+        }
         model.addAttribute("boardList", boardList);
+
         return "/board/board";
     }
 
