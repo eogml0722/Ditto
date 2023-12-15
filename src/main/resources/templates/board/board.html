@@ -49,8 +49,13 @@
                 <th>조회수</th>
             </tr>
             </thead>
+            <th:block th:each="board , boardStat : ${boardList}">
             <tbody>
-            <tr th:each="board : ${boardList}" >
+            <!-- page = boardList.size()/10 else boardList.size()/10 +1 -->
+            <!--page = a -->
+            <!--board.index<= a*10-->
+
+            <tr th:if="${boardStat.count>10*(pageNum-1) && boardStat.count<=10*(pageNum)}">
                 <td>
                     <span th:text="${board.id}" ></span>
                 </td>
@@ -68,8 +73,36 @@
                 </td>
             </tr>
             </tbody>
+                <ul>
+                    <a th:if="${boardStat.size%10 == 0}" th:each="pageNum : ${#numbers.sequence(1,boardStat.size/10)}"
+                       th:href="'/board/'+${pageNum}">
+                        <li><th:block th:text="${pageNum}"></th:block></li>
+                    </a>
+                    <a th:unless="${boardStat.size%10 != 0}" th:text="pageNum : ${#numbers.sequence(1,(boardStat.size/10) +1)}"
+                       th:href="'/board/'+${pageNum}">
+                        <li><th:block th:text="${pageNum}"></th:block></li>
+                    </a>
+                </ul>
+            </th:block>
         </table>
 
+        <br><br><br><br><br>
+
+        </th:block>
+        <!--<ul>
+            <div th:each="board, boardStat : ${boardList}">
+                &lt;!&ndash;1이면 10개 2면 20개&ndash;&gt;
+                <li th:each="${i : (boardList.size/10) }">
+                    <span>i</span>
+                </li>
+            </div>
+            <a th:unless="${boardList.size()%10 == 0 }">
+                <li th:each="${i : (boardList.size/10) }">
+                    aaa<span th:text="${i.index}"></span>aa
+                </li>
+            </a>
+        </ul>-->
+        </div>
 
         </div>
     </div>
