@@ -19,96 +19,82 @@
 <div layout:fragment="content">
 
     <br><br><br><br><br>
-                <img src="nbimg/shop_main06.jpg" id="main_main1_img1">
-                <div id="main_main1_text">
-                    <h1 id="main_main1_text1">소식</h1>
-                    <div id="main_main1_text2">
-                        다양한 이벤트와 새로운 소식을 확인하세요!
-                    </div>
-                </div>
 
-<div id="main_main2">
-    <ul>
-        <li>전체보기</li>
-        <li>소식</li>
-        <li>이벤트</li>
-        <li>자유게시판</li>
-        <li>커피클래스</li>
-    </ul>
-</div>
-    <br><br><br><br><br><br>
-<div id="main_main3">
-    <div id="main_main3_table">
-        <table>
-            <thead>
-            <tr>
-                <th>번호</th>
-                <th>분류</th>
-                <th>제목</th>
-                <th>등록일</th>
-                <th>조회수</th>
-            </tr>
-            </thead>
-            <th:block th:each="board , boardStat : ${boardList}">
-            <tbody>
-            <!-- page = boardList.size()/10 else boardList.size()/10 +1 -->
-            <!--page = a -->
-            <!--board.index<= a*10-->
-
-            <tr th:if="${boardStat.count>10*(pageNum-1) && boardStat.count<=10*(pageNum)}">
-                <td>
-                    <span th:text="${board.id}" ></span>
-                </td>
-                <td>
-                    <span th:text="${board.boardCategory}" ></span>
-                </td>
-                <td>
-                    <a th:href="'/board/getBoard/'+${board.id}"><span th:text="${board.title}" ></span></a>
-                </td>
-                <td>
-                    <span th:text="${board.regTime}" ></span>
-                </td>
-                <td>
-                    <span th:text="${board.viewCount}" ></span>
-                </td>
-            </tr>
-            </tbody>
-                <ul>
-                    <a th:if="${boardStat.size%10 == 0}" th:each="pageNum : ${#numbers.sequence(1,boardStat.size/10)}"
-                       th:href="'/board/'+${pageNum}">
-                        <li><th:block th:text="${pageNum}"></th:block></li>
-                    </a>
-                    <a th:unless="${boardStat.size%10 != 0}" th:text="pageNum : ${#numbers.sequence(1,(boardStat.size/10) +1)}"
-                       th:href="'/board/'+${pageNum}">
-                        <li><th:block th:text="${pageNum}"></th:block></li>
-                    </a>
-                </ul>
-            </th:block>
-        </table>
-
-        <br><br><br><br><br>
-
-        </th:block>
-        <!--<ul>
-            <div th:each="board, boardStat : ${boardList}">
-                &lt;!&ndash;1이면 10개 2면 20개&ndash;&gt;
-                <li th:each="${i : (boardList.size/10) }">
-                    <span>i</span>
-                </li>
-            </div>
-            <a th:unless="${boardList.size()%10 == 0 }">
-                <li th:each="${i : (boardList.size/10) }">
-                    aaa<span th:text="${i.index}"></span>aa
-                </li>
-            </a>
-        </ul>-->
-        </div>
-
+    <img src="nbimg/shop_main06.jpg" id="main_main1_img1">
+    <div id="main_main1_text">
+        <h1 id="main_main1_text1">소식</h1>
+        <div id="main_main1_text2">
+            다양한 이벤트와 새로운 소식을 확인하세요!
         </div>
     </div>
-</div>
-</div>
-</div>
+
+    <div id="main_main2">
+        <ul>
+            <li>전체보기</li>
+            <li>소식</li>
+            <li>이벤트</li>
+            <li>자유게시판</li>
+            <li>커피클래스</li>
+        </ul>
+    </div>
+
+    <br><br><br><br><br><br>
+
+    <div id="main_main3">
+        <div id="main_main3_table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>분류</th>
+                        <th>제목</th>
+                        <th>등록일</th>
+                        <th>조회수</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                <!-- page = boardList.size()/10 else boardList.size()/10 +1 -->
+                    <th:block th:each="board, boardStat : ${boardList}">
+                        <tr th:if="${boardStat.count>10*(pageNum-1) && boardStat.count<=10*(pageNum)}">
+                            <td>
+                                <span th:text="${board.id}" ></span>
+                            </td>
+                            <td>
+                                <span th:text="${board.boardCategory}" ></span>
+                            </td>
+                            <td>
+                                <a th:href="'/board/getBoard/'+${board.id}"><span th:text="${board.title}" ></span></a>
+                            </td>
+                            <td>
+                                <span th:text="${board.regTime}" ></span>
+                            </td>
+                            <td>
+                                <span th:text="${board.viewCount}" ></span>
+                            </td>
+                        </tr>
+                    </th:block>
+                </tbody>
+            </table>
+        </div><!-- 메인3 테이블 끝-->
+            <ul th:with="start=${((pageNum-1)/maxPage)*maxPage+1}, end=(${ start+maxPage-1 < totalPage ? start+maxPage-1 : totalPage}) ">
+
+                <li><a href="/board/1" > << </a></li>
+                <li><a th:href="'/board/'+${pageNum >10 ? pageNum-10 : 1}" > < </a></li>
+                <li th:each="pageNum : ${#numbers.sequence(start, end)}" th:if="maxPage">
+                    <a th:href="'/board/'+${pageNum}"><span th:text="${pageNum}"></span></a>
+                </li>
+                <li><a th:href="'/board/'+${pageNum == totalPage  ? totalPage : pageNum+10}" > > </a></li>
+                <li><a th:href="'/board/'+${totalPage}" > >> </a></li>
+
+            </ul><!--페이지 리스트 끝-->
+
+            <br><br><br><br><br>
+
+
+    </div><!--메인 3 끝-->
+</div><!-- fragment=content 레이아웃 끝-->
+
 <th:block layout:fragment="script">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
