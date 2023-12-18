@@ -7,13 +7,15 @@ import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name="member")
 @Getter @Setter @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member extends BaseEntity{
+public class Member extends AuditingEntity{
 
     @Id
     @Column(name = "member_id", unique = true) //회원 id값을 통해 유일하게 구분해야하기때문에 동일한 값이 들어올 수 없도록 unique속성을 지정
@@ -43,6 +45,10 @@ public class Member extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private OAuthType oauth;
 
+    private String emailToken;
+
+    private LocalDateTime emailTokenGeneratedAt;
+
     // Member 엔티티를 생성하는 메소드
     public static Member createMember(MemberFormDTO memberFormDTO,
                                       PasswordEncoder passwordEncoder) {
@@ -63,7 +69,18 @@ public class Member extends BaseEntity{
         member.setPassword(password);
 
         return member;
-
-
     }
+
+    public void generateToken() {
+        this.emailToken = UUID.randomUUID().toString();
+        this.emailTokenGeneratedAt = LocalDateTime.now();
+    }
+    public boolean enableToSendEmail() {
+        return this.emailTokenGeneratedAt.isBefore(LocalDateTime.now().minusMinutes(5));
+    }
+
+    public boolean isValid(String token) {
+        return this.emailToken.equals(token);
+    }
+
 }
