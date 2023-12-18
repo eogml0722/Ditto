@@ -85,17 +85,18 @@ public class MemberController {
         String email = params.get("email").toString();
         if (params.size() == 3) {
             /* 아이디 찾기(이름, 이메일) */
-                log.info("find id 요청");
-                Member resultId = memberService.findId(name, email);
-                System.out.println(resultId);
-                if (resultId == null) {
-                    rttr.addFlashAttribute("forgotIdMessage", messageSource.getMessage("memberIdNotFound", null, locale));
-                } else {
+            log.info("find id 요청");
+            Member resultId = memberService.findId(name, email);
+            System.out.println(resultId);
+            if (resultId == null) {
+                rttr.addFlashAttribute("forgotIdMessage", messageSource.getMessage("memberIdNotFound", null, locale));
+            } else {
 
-                    rttr.addFlashAttribute("forgotIdMessage", resultId.getMemberId());
-                }
+                rttr.addFlashAttribute("forgotIdMessage", resultId.getMemberId());
+            }
         }
         return "redirect:/members/login";
+    }
 
     @GetMapping(value="/mypage")
     public String myPage(Model model, Principal principal){
@@ -140,8 +141,6 @@ public class MemberController {
 //        return "member/logged-in-by-email";
         return "redirect:/";
     }
-
-}
 
     @PostMapping(value="/update")
     public String memberUpdate(@Valid MemberFormDTO memberFormDTO, BindingResult bindingResult, Model model){
