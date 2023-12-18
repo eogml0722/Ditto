@@ -9,12 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </th:block>
+
 <div layout:fragment="content">
 
     <form id="joinForm" name="joinForm" action="/members/new" role="form" method="post" th:object="${memberFormDTO}" onsubmit="return false;">
 
         <div class="main1">
             <h2 class="with-border">회원 가입</h2>
+            <p th:if="${errorMessage}" class="error" th:text="${errorMessage}"></p>
             <dl class="">
                 <dt th:for="memberId">아이디<span id="required">*</span></dt>
                 <dd>
@@ -116,7 +118,10 @@
             <button onclick="topFunction()" id="topbtn" title="gototop">Top</button>
         </div>
     </form>
+    <section th:replace="fragments/alert::alert"></section>
     <th:block layout:fragment="script">
+
+        </script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         <script type="text/javascript" src="/js/signup.js"></script>

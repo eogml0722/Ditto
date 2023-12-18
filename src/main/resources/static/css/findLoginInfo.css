@@ -67,7 +67,15 @@
 	background-color:rgb(244,244,244);
 }
 
-#find1 {
+.id-input {
+	width:320px;
+	height:40px;
+	box-sizing:border-box;
+	border:1px solid #d5d5d5;
+	padding-left:10px;
+}
+
+.pwd-input {
 	width:320px;
 	height:40px;
 	box-sizing:border-box;
@@ -102,19 +110,19 @@
 	margin-bottom:70px;
 }
 
-#findIdbtn {
-	display:inline-block;
-	width:230px;
-	height:50px;
-	background-color:#222;
-	color:#fff;
-	text-decoration:none;
-	line-height:45px;
-	border-radius:2px;
-	font-weight:400;
+.buttons-wrap a {
+    display:inline-block;
+    width:230px;
+    height:50px;
+    background-color:#222;
+    color:#fff;
+    text-decoration:none;
+    line-height:45px;
+    border-radius:2px;
+    font-weight:400;
 }
 
-#findIdbtn:hover {
+.buttons-wrap a:hover {
 	background-color:#FF5029;
 }
 

@@ -31,7 +31,8 @@ public class SecurityConfig {
         http.authorizeRequests()
                 //모든 사용자가 인증없이 접근 가능
                 .mvcMatchers("/").permitAll()
-                .mvcMatchers("/css/**", "/js/**", "/members/**", "/img/**", "/extras/**").permitAll()
+                .mvcMatchers("/css/**", "/js/**", "/members/**", "/img/**", "/extras/**",
+                                      "/check-email-token","/email-login", "/check-email-login", "/login-link", "/login-by-email").permitAll()
                 //나머지는 모두 인증을 요청
                 .anyRequest().authenticated();
 
