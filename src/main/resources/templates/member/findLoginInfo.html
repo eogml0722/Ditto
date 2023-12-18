@@ -5,15 +5,19 @@
 
 <!-- 사용자 CSS 추가 -->
 <th:block layout:fragment="css">
-    <link th:href="@{/css/findIdPassword.css}" rel="stylesheet">
+    <link th:href="@{/css/findLoginInfo.css}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="shortcut icon" href="#">
 </th:block>
+
+
+
+</th:block>
 <!--아이디 찾기-->
 <div class="idpwFIND" layout:fragment="content">
 
-    <form action="/members/findIdPassword" role="form" method="post" onsubmit="return false;">
+    <form id="findIdForm" name="findIdForm" th:action="@{/members/findLoginInfo}" role="form" method="post" onsubmit="return false;">
 
         <div class="idpwWrapper">
 
@@ -32,60 +36,18 @@
                         <select id="SelectBox">
 
                             <option value="A">개인회원</option>
-
-                            <option value="B">개인 사업자회원</option>
-
-                            <option value="C">법인 사업자회원</option>
-
-                            <option value="D">외국인회원</option>
-
                         </select>
 
                     </dd>
 
                 </dl>
-
-                <dl class="check">
-
-                    <dt id="find0">찾는방법</dt>
-
-                    <dd>
-
-                        <input type="radio" class="findcheck" value="Cnumber" id="check_method0" name="check_method" style="display:none;">
-
-                        <label id="CpNumber1" for="check_method0" style="display:none;">법인번호</label>
-
-                        <input type="radio" class="findcheck" value="Fnumber" id="check_method3" name="check_method" style="display:none;">
-
-                        <label id="FNumber1" for="check_method3" style="display:none;">등록번호</label>
-
-                        <input type="radio" class="findcheck" value="email" name="check_method" id="check_method2" checked>
-
-                        <label for="check_method2">이메일</label>
-
-                    </dd>
-
-                </dl>
-
                 <dl>
 
-                    <dt id="find3" class="change_name">이름</dt>
+                    <dt id="find3" name="name" class="change_name">이름</dt>
 
                     <dd>
 
-                        <input type="text" name="name" id="find1" class="check_name check_name1">
-
-                    </dd>
-
-                </dl>
-
-                <dl style="display:none;" id="CpNumber">
-
-                    <dt id="ssn_name"></dt>
-
-                    <dd>
-
-                        <input type="text" id="find4" class="cpfindNum"> - <input type="text" id="find4" class="cpfindNum1">
+                        <input type="text" name="name" id="find1" class="id-input">
 
                     </dd>
 
@@ -93,11 +55,11 @@
 
                 <dl id="email_text">
 
-                    <dt id="find3">이메일</dt>
+                    <dt id="find3" >이메일</dt>
 
                     <dd>
 
-                        <input type="text" id="find1" class="check_mail">
+                        <input type="text" id="find1" class="id-input" name="email">
 
                     </dd>
 
@@ -105,139 +67,19 @@
 
                 <div class="buttons-wrap">
 
-                    <a href="#none" id="findIdbtn" onclick="find_check();">아이디 찾기</a>
-
+                    <a href="#" class="findIdBtn" onclick="submitFindForm();" form="findIdForm">아이디 찾기</a>
                 </div>
 
             </div>
         </div>
     </form>
+    <!-- Alert Messages -->
+    <section th:replace="fragments/alert::alert"></section>
 
-<!--비밀번호 찾기-->
-
-<!--<div class="idpwFIND1">-->
-
-    <form action="/members/findIdPassword" role="form" method="post" onsubmit="return false;">
-
-        <div class="idpwWrapper">
-
-            <h2>비밀번호 찾기</h2>
-
-            <h4>비밀번호를 찾을 방법을 선택해주세요.</h4>
-
-            <div class="find-wrapper">
-
-                <dl class="member">
-
-                    <dt id="find3">회원유형</dt>
-
-                    <dd>
-
-                        <select id="SelectBox1">
-
-                            <option value="A">개인회원</option>
-
-                            <option value="B">개인 사업자회원</option>
-
-                            <option value="C">법인 사업자회원</option>
-
-                            <option value="D">외국인회원</option>
-
-                        </select>
-
-                    </dd>
-
-                </dl>
-
-                <dl class="check">
-
-                    <dt id="find0">찾는방법</dt>
-
-                    <dd>
-
-                        <input type="radio" class="findcheck1" value="Cnumber" id="check_method4" name="check_method1" style="display:none;">
-
-                        <label id="CpNumber2" for="check_method4" style="display:none;">법인번호</label>
-
-                        <input type="radio" class="findcheck1" value="Fnumber" id="check_method5" name="check_method1" style="display:none;">
-
-                        <label id="FNumber2" for="check_method5" style="display:none;">등록번호</label>
-
-                        <input type="radio" class="findcheck1" value="email" name="check_method1" id="check_method6" checked>
-
-                        <label for="check_method6">이메일</label>
-
-                    </dd>
-
-                </dl>
-
-                <dl>
-
-                    <dt id="find3">아이디</dt>
-
-                    <dd>
-
-                        <input type="text" name="id_method" id="find1" class="check_id">
-
-                    </dd>
-
-                </dl>
-
-                <dl>
-
-                    <dt id="find3" class="change_name2">이름</dt>
-
-                    <dd>
-
-                        <input type="text" name="name" id="find1" class="check_name2 check_names">
-
-                    </dd>
-
-                </dl>
-
-                <dl style="display:none;" id="CpNumber3">
-
-                    <dt id="ssn_name2"></dt>
-
-                    <dd>
-
-                        <input type="text" id="find4" class="find_number1"> - <input type="text" id="find4" class="find_number2">
-
-                    </dd>
-
-                </dl>
-
-                <dl id="email_text2">
-
-                    <dt id="find3">이메일</dt>
-
-                    <dd>
-
-                        <input type="text" id="find1" class="check_mail2">
-
-                    </dd>
-
-                </dl>
-
-                <div class="buttons-wrap">
-
-                    <a href="#none" id="findIdbtn" onclick="find_check1();">비밀번호 찾기</a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </form>
-
-
-
-
-<th:block layout:fragment="script">
+    <th:block layout:fragment="script">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script type="text/javascript" src="/js/findIdPassword.js"></script>
+    <script type="text/javascript" src="/js/findLoginInfo.js"></script>
 </th:block>
 </div>
 </html>

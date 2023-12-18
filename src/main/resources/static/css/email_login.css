@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+.container {
+    margin: 0 auto;
+    margin-top: 250px;
+    margin-bottom: 300px;
+    width: 380px;
+    position: relative;
+}
+
+.py-5 text-center {
+    color:white;
+    background-color: black;
+}
+
+.form-control {
+    width: 80%;
+    padding: 20px 45px 20px 10px;
+    border-radius: 15px;
+    border: 2px solid rgb(0, 0, 0);
+    margin-top: 10px;
+}
+
+#emailHelp {
+    font-size: 13px;
+    color: dimgray;
+}
+
+.loginBtn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 95%;
+    height: 45px;
+    background-color: rgb(45, 45, 45);
+    color: white;
+    border: 2px solid rgb(45, 45, 45);
+}
+
+.loginBtn:hover {
+    background-color:#ff5029;
+    border:1px solid #ff5029;
+    transition-duration:1s;
+}
+
+.signUpLink {
+    text-decoration: underline;
+    color: #0d09a5;
+}
+
+
+
