@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,9 +43,6 @@ public class MemberService implements UserDetailsService {
             UsernameNotFoundException { //로그인할 유저의 id를 파라미터로 전달받음
         Member member = memberRepository.findByMemberId(memberId);
 
-        System.out.println(member);
-        System.out.println(memberId);
-
         if(member == null) {
             throw new UsernameNotFoundException(memberId);
         }
@@ -55,10 +53,49 @@ public class MemberService implements UserDetailsService {
                 .roles(member.getRole().toString())
                 .build();
     }
-//    @Override
-//    public MemberFormDTO getMemberDetails(String memberId) {
-//        return memberRepository.getMemberDetails(memberId);
-//    }
 
+    public boolean deleteMember(String id, String password) {
+        Member member = memberRepository.findByMemberId(id);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if(encoder.matches(password, member.getPassword())){
+            memberRepository.deleteById(member.getMemberId());
+            return true;
+        }
+        return false;
+    }
 
+    public Member detailMember(String id){
+        Member member = memberRepository.findByMemberId(id);
+        if(member == null){
+            throw new IllegalStateException("존재하지 않는 회원입니다?");
+        }
+        return member;
+    }
+
+    public Member updateMember(Member member){
+        String id = memberRepository.findByMemberId(member.getMemberId()).getMemberId();
+        member.setMemberId(id);
+        member.setName(member.getName());
+        member.setPhoneNum(member.getPhoneNum());
+        member.setZipcode(member.getZipcode());
+        member.setStreetAddress(member.getStreetAddress());
+        member.setDetailAddress(member.getDetailAddress());
+        member.setPassword(member.getPassword());
+        member.setEmail(member.getEmail());
+        return memberRepository.save(member);
+    }
+
+    public MemberFormDTO updatePassword(MemberFormDTO member){
+        String id = memberRepository.findByMemberId(member.getMemberId()).getMemberId();
+        Member oldMember = memberRepository.findByMemberId(id);
+        member.setMemberId(id);
+        member.setPassword(member.getPassword());
+        member.setName(oldMember.getName());
+        member.setPhoneNum(oldMember.getPhoneNum());
+        member.setZipcode(oldMember.getZipcode());
+        member.setStreetAddress(oldMember.getStreetAddress());
+        member.setDetailAddress(oldMember.getDetailAddress());
+        member.setEmail(oldMember.getEmail());
+        return member;
+    }
 }

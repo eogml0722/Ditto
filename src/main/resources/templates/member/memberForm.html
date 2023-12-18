@@ -89,11 +89,10 @@
             <dl>
                 <dt>주소<span id="required">*</span></dt>
                 <dd>
-                    <input th:field="*{zipcode}" type="text" id="zipcode" name="zipcode" size="7" placeholder="우편번호" readonly
-                    ><!--입력창수정불가능하게disalbed넣음-->
+                    <input th:field="*{zipcode}" type="text" id="zipcode" name="zipcode" size="7" placeholder="우편번호" value="1234" >
                     <input type="button" onclick="openZipSearch();" value="주소검색" id="post"><br>
-                    <input th:field="*{streetAddress}" type="text" id="streetAddress" class="inputTypeText" name="streetAddress" placeholder="도로명 주소" readonly
-                           value=""><br>
+                    <input th:field="*{streetAddress}" type="text" id="streetAddress" class="inputTypeText" name="streetAddress" placeholder="도로명 주소" value="1234">
+                    <br>
                     <input th:field="*{detailAddress}" type="text" id="detailAddress" class="inputTypeText" name="detailAddress" placeholder="나머지 주소">
                 </dd>
             </dl>

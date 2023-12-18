@@ -9,43 +9,37 @@
 </th:block>
 
 <div layout:fragment="content">
-    <div id="contents">
-        <h1>문의글 수정하기</h1>
-        <form name="writeFrm" method="post" action="/qna/update"
-              onsubmit="return validateForm(this)">
+    <form name="Form" method="post" th:action="@{'/ask/delete/' + ${boardWriteDTO.id}}" th:object="${boardWriteDTO}">
+        <div id="contents">
+            <h1>문의 글보기</h1>
             <table border="1" width="70%">
                 <tr>
                     <td>글쓴이</td>
-                    <td>
-                        <span>테스트</span>
-                    </td>
+                    <td th:text="${boardWriteDTO.member.getName}"></td>
                 </tr>
                 <tr>
                     <td>제목</td>
-                    <td>
-                        <input type="text" name="title" style="width:150px;">
-                    </td>
+                    <td th:text="${boardWriteDTO.title}"></td>
                 </tr>
                 <tr>
                     <td>내용</td>
-                    <td>
-                        <textarea name="content" style="width:90%; height:100px;"></textarea>
-                    </td>
+                    <td th:text="${boardWriteDTO.content}"></td>
                 </tr>
                 <tr>
-                    <td>첨부파일</td>
+                    <td>이미지</td>
                     <td>
-                        <input type="file" name="ofile">
+                        <img th:src="${boardWriteDTO.askBoardImageDTO[0].Url}">
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" align="center">
-                        <button type="submit">수정완료</button>
-                        <button type="reset">되돌리기</button>
-                        <button type="button" onclick="location.href='list'">목록보기</button>
+                        <button type="button" th:onclick="|location.href='@{'/ask/edit/' + ${boardWriteDTO.id}}'|">수정하기</button>
+                        <button type="submit">삭제하기</button>
+                        <button type="button" th:onclick="|location.href='@{/ask/list}'|">목록보기</button>
                     </td>
                 </tr>
             </table>
-        </form>
-    </div>
+        </div>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+    </form>
 </div>

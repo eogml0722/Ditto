@@ -108,19 +108,19 @@ function checkema() {
 	}
 }
 
-//detailAddress.addEventListener("blur", function() {
-//	dtAddress();
-//})
-//
-//function dtAddress() {
-//	if (detailAddress.value.length == 0) {
-//		/*실험용
-//		detailAddress.style.border = "1px solid red";
-//		*/
-//	} else {
-//		detailAddress.style.border = "1px solid black";
-//	}
-//}
+detailAddress.addEventListener("blur", function() {
+	dtAddress();
+})
+
+function dtAddress() {
+	if (detailAddress.value.length == 0) {
+		/*실험용
+		detailAddress.style.border = "1px solid red";
+		*/
+	} else {
+		detailAddress.style.border = "1px solid black";
+	}
+}
 
 var state = false;
 

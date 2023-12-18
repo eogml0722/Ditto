@@ -11,26 +11,33 @@
                     </a>
                 </div>
 
-                <div id="headmenu">
+                <div class="headmenu">
                     <ul>
-                        <a href="items/detail"><li>상품</li></a>
+                        <a href="/items/detail"><li>상품</li></a>
                         <a href="#"><li>공지사항</li></a>
                         <a href="#"><li>주문</li></a>
                         <a href="#"><li sec:authorize="isAuthenticated()">장바구니</li></a>
-                        <a href="#"><li sec:authorize="isAuthenticated()">문의게시판</li></a>
+                        <a href="/ask/list"><li sec:authorize="isAuthenticated()">문의게시판</li></a>
                     </ul>
                 </div>
 
-                <div class="headbtn">
-                    <img src="/img/login.png" class="btn" id="loginbtn" >
+                <div class="headmenu">
+                    <ul>
+                        <a href="admin/items/mng"><li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품관리</li></a>
+                        <a href="admin/items/mng"><li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">회원관리</li></a>
+                        <a href="admin/board/mng"><li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">게시판관리</li></a>
+                    </ul>
+                </div>
+
+                <div class="headbtn" sec:authorize="isAnonymous()">
+                    <img src="/img/login.png" class="btn" id="loginbtn" th:onclick="|location.href='@{/members/login}'|">
                     <img src="/img/signup.png" class="btn" id="signupbtn">
                 </div>
 
                 <div class="headbtn" sec:authorize="isAuthenticated()">
                     <a href="/members/logout"><img src="/img/login.png" class="btn" id="logoutbtn"></a>
-                    <img src="/img/signup.png" class="btn" id="mypage">
+                    <a href="/members/mypage"><img src="/img/signup.png" class="btn" id="mypage"></a>
                 </div>
-
 
             </div><!--headbox-->
         </div>

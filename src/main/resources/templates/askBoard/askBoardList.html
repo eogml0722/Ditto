@@ -20,12 +20,12 @@
 
     function page(page){
         var searchDateType = $("#searchDateType").val();
-        var searchQNAStatus = $("#searchQNAStatus").val();
+        var searchAskStatus = $("#searchAskStatus").val();
         var searchBy = $("#searchBy").val();
         var searchQuery = $("#searchQuery").val();
 
         location.href="/qna/list/" + page + "?searchDateType=" + searchDateType
-        + "&searchQNAStatus=" + searchQNAStatus
+        + "&searchAskStatus=" + searchAskStatus
         + "&searchBy=" + searchBy
         + "&searchQuery=" + searchQuery;
     }
@@ -36,7 +36,7 @@
     <div id="contents">
 
         <h1>문의 게시판</h1>
-    <form th:action="@{'/qna/list/' + ${QBoards?.number}}" method="get"  th:object="${QBoards}">
+    <form th:action="@{'/ask/list/' + ${askBoards?.number}}" method="get"  th:object="${askBoards}">
         <table border="1" width="70%">
             <tr>
                 <th>글번호</th>
@@ -46,12 +46,12 @@
                 <th>상태</th>
             </tr>
             <tbody>
-                <tr th:each="qboard, status: ${QBoards.getContent()}">
-                    <td th:text="${qboard.id}"></td>
-                    <td><a th:text="${qboard.title}" th:href="@{'detail/'+${qboard.id}}"></a></td>
-                    <td th:text="${qboard.createdBy}"></td>
-                    <td th:text="${qboard.regTime}"></td>
-                    <td th:text="${qboard.qnaStatus == T(com.ditto.constant.QNAStatus).NOT_ANSWER} ? '답변대기' : '답변완료'"></td>
+                <tr th:each="askBoards, status: ${askBoards.getContent()}">
+                    <td th:text="${askBoards.id}"></td>
+                    <td><a th:text="${askBoards.title}" th:href="@{'/ask/detail/'+${askBoards.id}}"></a></td>
+                    <td th:text="${askBoards.member.getName}"></td>
+                    <td th:text="${askBoards.regTime}"></td>
+                    <td th:text="${askBoards.askStatus == T(com.ditto.constant.AskStatus).NOT_ASK} ? '답변대기' : '답변완료'"></td>
                 </tr>
             </tbody>
         </table>
@@ -59,26 +59,26 @@
         <table border="1" width="70%">
             <tr align="right">
                 <td>
-                    <button type="button" th:onclick="|location.href='@{/qna/write}'|">문의 글쓰기</button>
+                    <button type="button" th:onclick="|location.href='@{/ask/write}'|">문의 글쓰기</button>
                 </td>
             </tr>
         </table>
 
-        <div th:with="start=${(QBoards?.number/maxPage)*maxPage + 1}, end=(${(QBoards.totalPages == 0) ? 1 : (start + (maxPage - 1) < QBoards.totalPages ? start + (maxPage - 1) : QBoards.totalPages)})" >
+        <div th:with="start=${(askBoards?.number/maxPage)*maxPage + 1}, end=(${(askBoards.totalPages == 0) ? 1 : (start + (maxPage - 1) < askBoards.totalPages ? start + (maxPage - 1) : askBoards.totalPages)})" >
             <ul class="pagination justify-content-center">
 
-                <li class="page-item" th:classappend="${QBoards.first}?'disabled'">
-                    <a th:onclick="'javascript:page(' + ${QBoards?.number - 1} + ')'" aria-label='Previous' class="page-link">
+                <li class="page-item" th:classappend="${askBoards.first}?'disabled'">
+                    <a th:onclick="'javascript:page(' + ${askBoards?.number - 1} + ')'" aria-label='Previous' class="page-link">
                         <span aria-hidden='true'>이전</span>
                     </a>
                 </li>
 
-                <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${QBoards?.number eq page-1}?'active':''">
+                <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${askBoards?.number eq page-1}?'active':''">
                     <a th:onclick="'javascript:page(' + ${page - 1} + ')'" th:inline="text" class="page-link">[[${page}]]</a>
                 </li>
 
-                <li class="page-item" th:classappend="${QBoards.last}?'disabled'">
-                    <a th:onclick="'javascript:page(' + ${QBoards?.number + 1} + ')'" aria-label='Next' class="page-link">
+                <li class="page-item" th:classappend="${askBoards.last}?'disabled'">
+                    <a th:onclick="'javascript:page(' + ${askBoards?.number + 1} + ')'" aria-label='Next' class="page-link">
                         <span aria-hidden='true'>다음</span>
                     </a>
                 </li>
@@ -86,7 +86,7 @@
             </ul>
         </div>
 
-        <div th:object="${qBoardSearchDTO}">
+        <div th:object="${askBoardSearchDTO}">
             <select th:field="*{searchDateType}">
                 <option value="all">전체기간</option>
                 <option value="1d">1일</option>
@@ -94,10 +94,10 @@
                 <option value="1m">1개월</option>
                 <option value="6m">6개월</option>
             </select>
-            <select th:field="*{searchQNAStatus}">
+            <select th:field="*{searchAskStatus}">
                 <option value="">답변상태(전체)</option>
-                <option value="NOT_ANSWER">답변대기</option>
-                <option value="ANSWER">답변완료</option>
+                <option value="NOT_ASK">답변대기</option>
+                <option value="ASK">답변완료</option>
             </select>
             <select th:field="*{searchBy}">
                 <option value="title">제목</option>

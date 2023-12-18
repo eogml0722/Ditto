@@ -6,20 +6,20 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name="boardimage")
+@Table(name="askboardimage")
 @Getter
 @Setter
-public class BoardImage extends BaseEntity{
+public class AskBoardImage extends BaseEntity{
     @Id
-    @Column(name="boardimage_id")
-    @GeneratedValue
+    @Column(name="askboardimage_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String oname;
     private String sname;
     private String url;
-    @ManyToOne(fetch = FetchType.LAZY) // 하나의 보드는 여러개의 사진을...
-    @JoinColumn(name="qboard_id")
-    private AskBoard AskBoard;
+    @ManyToOne
+    @JoinColumn(name="askboard_id")
+    private AskBoard askBoard;
 
     public void updateBoardImg(String oname, String sname, String url){
         this.oname = oname;

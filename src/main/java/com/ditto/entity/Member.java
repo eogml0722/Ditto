@@ -3,6 +3,7 @@ package com.ditto.entity;
 import com.ditto.constant.OAuthType;
 import com.ditto.constant.Role;
 import com.ditto.dto.MemberFormDTO;
+import com.ditto.repository.MemberRepository;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -63,7 +64,5 @@ public class Member extends BaseEntity{
         member.setPassword(password);
 
         return member;
-
-
     }
 }

@@ -1,21 +1,21 @@
 package com.ditto.dto;
 
-import com.ditto.entity.BoardImage;
+import com.ditto.entity.AskBoardImage;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
 
 @Setter
 @Getter
-public class BoardImageDTO {
+public class AskBoardImageDTO {
     private Long id;
     private String oname;
     private String sname;
     private String url;
     private static ModelMapper modelMapper = new ModelMapper();
 
-    public static BoardImageDTO of(BoardImage boardImage){
-        return modelMapper.map(boardImage, BoardImageDTO.class);
+    public static AskBoardImageDTO of(AskBoardImage askBoardImage){
+        return modelMapper.map(askBoardImage, AskBoardImageDTO.class);
     }
 
 }

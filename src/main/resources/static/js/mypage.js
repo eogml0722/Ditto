@@ -3,7 +3,6 @@
 var showMyPage = document.getElementById("shoWrightPage");
 
 showMyPage.onclick = function() {
-	resetPage();
     document.getElementById("rightPageMenu").style.display = "block";
 	document.getElementById("rightPageMenu1").style.display = "none";
 	document.getElementById("rightPageMenu2").style.display = "none";
@@ -13,7 +12,6 @@ showMyPage.onclick = function() {
 };
 
 function showRightPageMenu1() {
-	resetPage();
 	document.getElementById("rightPageMenu").style.display = "none";
 	document.getElementById("rightPageMenu1").style.display = "block";
 	document.getElementById("rightPageMenu2").style.display = "none";
@@ -23,7 +21,6 @@ function showRightPageMenu1() {
 };
 
 function showRightPageMenu2() {
-	resetPage();
     document.getElementById("rightPageMenu").style.display = "none";
     document.getElementById("rightPageMenu1").style.display = "none";
 	document.getElementById("rightPageMenu2").style.display = "block";
@@ -33,7 +30,6 @@ function showRightPageMenu2() {
 };
 
 function showRightPageMenu3() {
-	resetPage();
     document.getElementById("rightPageMenu").style.display = "none";
     document.getElementById("rightPageMenu1").style.display = "none";
 	document.getElementById("rightPageMenu2").style.display = "none";
@@ -43,7 +39,6 @@ function showRightPageMenu3() {
 };
 
 function showRightPageMenu4() {
-	resetPage();
 	document.getElementById("rightPageMenu").style.display = "none";
 	document.getElementById("rightPageMenu1").style.display = "none";
 	document.getElementById("rightPageMenu2").style.display = "none";
@@ -53,7 +48,6 @@ function showRightPageMenu4() {
 }
 
 function showRightPageMenu5() {
-	resetPage();
 	document.getElementById("rightPageMenu").style.display = "none";
     document.getElementById("rightPageMenu1").style.display = "none";
 	document.getElementById("rightPageMenu2").style.display = "none";
@@ -80,15 +74,15 @@ unregibtn.addEventListener("click", function(){
 
 // 오른쪽 화면 바뀌면 input 초기화
 
-function resetPage() {
-	var inputFields = document.querySelectorAll(".menu2Input");
-	var inputFields1 = document.querySelectorAll(".menu2InputNum");
-	inputFields.forEach(function(inputField) {
-		inputField.value = "";
-	});
-	inputFields1.forEach(function(inputField1) {
-		inputField1.value = "";
-	});
-}
+//function resetPage() {
+//	var inputFields = document.querySelectorAll(".menu2Input");
+//	var inputFields1 = document.querySelectorAll(".menu2InputNum");
+//	inputFields.forEach(function(inputField) {
+//		inputField.value = "";
+//	});
+//	inputFields1.forEach(function(inputField1) {
+//		inputField1.value = "";
+//	});
+//}
 
 

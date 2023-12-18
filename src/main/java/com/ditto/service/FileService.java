@@ -22,6 +22,7 @@ public class FileService {
     }
     
     public void deleteFile(String filepath) throws Exception {
+        System.out.println("파일서비스 확인용");
         File deleteFile = new File(filepath);
         if(deleteFile.exists()){
             deleteFile.delete();
