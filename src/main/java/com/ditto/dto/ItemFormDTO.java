@@ -1,5 +1,6 @@
 package com.ditto.dto;
 
+import com.ditto.constant.ItemCategory;
 import com.ditto.constant.ItemSellStatus;
 import com.ditto.entity.Item;
 import lombok.Getter;
@@ -29,8 +30,10 @@ public class ItemFormDTO {
     @NotNull(message = "재고는 필수입니다.")
     private Integer stockNumber;
 
+
+    private ItemCategory itemCategory;
     private ItemSellStatus itemSellStatus;
-    private List<ItemImgDTO> itemImgDtoList = new ArrayList<>();
+    private List<ItemImgDTO> itemImgDTOList = new ArrayList<>();
     private List<Long> itemImgIds = new ArrayList<>();
 
     private static ModelMapper modelMapper = new ModelMapper();

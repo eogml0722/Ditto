@@ -2,6 +2,7 @@ package com.ditto.entity;
 
 import com.ditto.constant.ItemCategory;
 import com.ditto.constant.ItemSellStatus;
+import com.ditto.dto.ItemFormDTO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -43,6 +44,13 @@ public class Item extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private ItemCategory itemCategory;
 
+    public void updateItem(ItemFormDTO itemFormDTO) {
+        this.itemName = itemFormDTO.getItemName();
+        this.price = itemFormDTO.getPrice();
+        this.stockNumber = itemFormDTO.getStockNumber();
+        this.itemDetail = itemFormDTO.getItemDetail();
+        this.itemSellStatus = itemFormDTO.getItemSellStatus();
+    }
 
 
 }

@@ -29,7 +29,7 @@ public class BoardImageService {
         String imgUrl = "";
 
         if(!StringUtils.isEmpty(oname)){
-            imgName = fileService.uploadFIle(boardImgLocation, oname, boardImgFile.getBytes());
+            imgName = fileService.uploadFile(boardImgLocation, oname, boardImgFile.getBytes());
             imgUrl = "/images/board/" + imgName;
         }
 
@@ -47,7 +47,7 @@ public class BoardImageService {
             }
 
             String oname = askBoardImgFile.getOriginalFilename();
-            String sname = fileService.uploadFIle(boardImgLocation, oname, askBoardImgFile.getBytes());
+            String sname = fileService.uploadFile(boardImgLocation, oname, askBoardImgFile.getBytes());
             String url = "/images/board/" + sname;
 
             savedAskBoardImg.updateBoardImg(oname, sname, url);
