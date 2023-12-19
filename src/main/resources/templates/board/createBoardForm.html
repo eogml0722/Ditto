@@ -55,10 +55,12 @@
                 </div>
 
                 <div id="text_bottom">
-                    <input type="submit" value="등록">
-                    <input onclick="location.href='/board'" type="button" value="취소">
+                    <input type="submit" th:value="${boardDTO.id} ? '수정' : '등록'">
+
+                    <input onclick="location.href='/board/'" type="button" value="취소">
                 </div>
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <input type="hidden" th:field="*{id}">
             </form>
         </div>
     </div>
