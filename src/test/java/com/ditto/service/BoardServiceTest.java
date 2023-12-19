@@ -70,15 +70,16 @@ class BoardServiceTest {
     @DisplayName("게시판 생성 테스트")
     public void createBoardTest(){
 //        Member member = createMemberTest();
-        Member member = memberRepository.findByMemberId("asd1");
-        BoardDTO boardDTO = new BoardDTO();
-        boardDTO.setTitle("test3");
-        boardDTO.setContent("내용3");
-        boardDTO.setBoardCategory(BoardCategory.EVENT);
+        for(int i=200 ; i<600 ; i++){
+            Member member = memberRepository.findByMemberId("asd1");
+            BoardDTO boardDTO = new BoardDTO();
+            boardDTO.setTitle("test" + i);
+            boardDTO.setContent("내용" + i);
+            boardDTO.setBoardCategory(BoardCategory.EVENT);
+            Board board = Board.createBoard(boardDTO, member);
+            boardService.insertBoard(board);
+        }
 
-
-        Board board = Board.createBoard(boardDTO, member);
-        boardService.insertBoard(board);
         /*
 
         Board result = boardRepository.saveAndFlush(board);
