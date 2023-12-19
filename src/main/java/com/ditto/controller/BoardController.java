@@ -1,21 +1,22 @@
 package com.ditto.controller;
 
 import com.ditto.dto.BoardDTO;
+import com.ditto.dto.BoardFormDTO;
 import com.ditto.entity.Board;
 import com.ditto.repository.BoardRepository;
 import com.ditto.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import javax.management.ValueExp;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Id;
 import javax.swing.*;
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,14 +31,17 @@ public class BoardController {
     private final BoardRepository boardRepository;
 
     @GetMapping(value = {"/{pageNum}", "/"})//Optional = null 체크알아서 해줌
-    public String goBoard(Model model, @PathVariable("pageNum") Optional<Integer> pageNum) {
-        List<Board> boardList = boardRepository.findAll();
+    public String goBoard(Model model, @PathVariable("pageNum") Optional<Integer> pageNum,
+                        BoardFormDTO boardFormDTO) {
+            List<Board> boardList = boardRepository.findAllByOrderByIdDesc();
+        if( boardFormDTO.getSearchField() != null){
+            boardList = boardRepository.findBySearch(boardFormDTO.getSearchField(),boardFormDTO.getSearchOption(),boardFormDTO.getBoardCategory());
+        }
 
         //maxPage : 페이지 최대 갯수
         final Integer maxPage = 10;
 
         if (!pageNum.isEmpty()) {
-            System.out.println("번호" + pageNum.get());
             model.addAttribute("pageNum", pageNum.get());
         } else {
             model.addAttribute("pageNum", new Integer(1));
@@ -47,6 +51,9 @@ public class BoardController {
         model.addAttribute("totalPage", (int) (Math.ceil((double) boardList.size() / 10)));
         return "/board/board";
     }
+
+
+
 
     @GetMapping(value = "/getBoard/{boardId}")
     public String getBoard(@PathVariable("boardId") Long boardId, Model model) {
@@ -83,6 +90,7 @@ public class BoardController {
 
     @GetMapping(value = "/create/{boardId}")
     public String updateBoard(Model model, @PathVariable("boardId") Long boardId) {
+        //아이디로 해당글 정보를 뷰로 전달
         Board board = boardRepository.findById(boardId).orElseThrow(EntityNotFoundException::new);
         BoardDTO boardDTO = BoardDTO.of(board);
         model.addAttribute("boardDTO", boardDTO);
