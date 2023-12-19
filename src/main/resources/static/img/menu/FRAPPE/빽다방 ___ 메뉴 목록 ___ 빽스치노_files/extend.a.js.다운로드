@@ -1,0 +1,74 @@
+console.log('%c (✖ ‿ ✖)/', 'color: #4082ed;font-size:24px;font-weight:700;');
+
+jQuery(document).ready(function(){	
+	//TABS FUNCTION
+	jQuery("ul.tabs").wrap("<div class=\"tabs-wrap\">");
+	jQuery(".tabs-wrap").prepend("<button class=\"btn-open\">선택</button>");
+
+	jQuery(".btn-open").text( jQuery("ul.tabs li.active").text() );
+	jQuery.each( jQuery("ul.tabs li.active"), function() {
+		var object_id = jQuery(this).data("tab");
+		jQuery("#"+object_id).addClass("active");
+	});
+
+	jQuery(".tabs-wrap .btn-open").click(function() {
+		jQuery(this).closest(".tabs-wrap").toggleClass("active");
+	});
+
+	jQuery("ul.tabs li").click(function(){
+		var object_id = jQuery(this).attr("data-tab");
+		//모바일 대응
+		jQuery(this).closest(".tabs-wrap").toggleClass("active");
+		jQuery(this).closest(".tabs-wrap").find(".btn-open").text( jQuery(this).text() );
+		//hash change
+		location.hash = object_id;
+	});
+	
+	//exists hash
+	if( jQuery("ul.tabs").length && location.hash ) {
+		var hash = location.hash;
+		hash = hash.replace("#", "");			
+		jQuery('*[data-tab="'+hash+'"]').closest("ul.tabs").find("li").removeClass("active");
+		jQuery("#"+hash).closest(".tab-contents").find(".tab-content").removeClass("active");
+		jQuery("ul.tabs li[data-tab="+hash+"]").addClass("active");
+		jQuery("#"+hash).addClass("active");
+		var tab_text = jQuery("ul.tabs li[data-tab="+hash+"]").text();
+		jQuery("ul.tabs li[data-tab="+hash+"]").closest(".tabs-wrap").find(".btn-open").text(tab_text);
+	}
+
+	//hash change event
+	jQuery(window).on('hashchange', function() {
+		if( jQuery("ul.tabs").length && location.hash ) {
+			var hash = location.hash;
+			hash = hash.replace("#", "");			
+			jQuery('*[data-tab="'+hash+'"]').closest("ul.tabs").find("li").removeClass("active");
+			jQuery("#"+hash).closest(".tab-contents").find(".tab-content").removeClass("active");
+			jQuery("ul.tabs li[data-tab="+hash+"]").addClass("active");
+			jQuery("#"+hash).addClass("active");
+			var tab_text = jQuery("ul.tabs li[data-tab="+hash+"]").text();
+			jQuery("ul.tabs li[data-tab="+hash+"]").closest(".tabs-wrap").find(".btn-open").text(tab_text);
+		}
+	});
+
+	jQuery(".onlyNumber").keyup(function(event){
+		jQuery(this).val( onlyNumber(jQuery(this).val()) );
+	});
+})
+
+function emailcheck(strValue) {
+	var regExp = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
+	if(strValue.lenght == 0) return false;
+	if (!strValue.match(regExp)) return false;
+	return true;
+}
+
+function onlyNumber(inputVal) {
+	var returnVal;
+	returnVal = inputVal.replace(/[^0-9]/gi,'')
+	return returnVal;		
+}
+
+function getBaseName(path) {
+	var filename = path.replace(/^.*\\/, "");
+	return filename;
+}
