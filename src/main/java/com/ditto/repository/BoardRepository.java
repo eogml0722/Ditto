@@ -15,6 +15,9 @@ import java.util.Optional;
 
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
+
+    List<Board> findAllByOrderByIdDesc();
+
     //작성자의 글 목록 보기
     @Query("SELECT b FROM Board b WHERE (:member IS NULL OR b.member = :member)" +
             " AND(:title IS NULL OR b.title = :title)" +
@@ -22,6 +25,15 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     List<Board> findByMember(@Param("member") Member member,
                           @Param("title")String title,
                           @Param("content")String content);
+
+    //검색어로 리스트 반환. 없으면 전체 반환
+
+    @Query("SELECT b FROM Board b WHERE " +
+            "(:searchOption = 'title' AND b.title LIKE CONCAT('%', :searchField, '%') AND b.boardCategory = :boardCategory) OR " +
+            "(:searchOption = 'content' AND b.content LIKE CONCAT('%', :searchField, '%') AND b.boardCategory = :boardCategory)")
+    List<Board> findBySearch(@Param("searchField") String searchField,
+                             @Param("searchOption") String searchOption,
+                             @Param("boardCategory") BoardCategory boardCategory);
 
 
 
