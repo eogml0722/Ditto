@@ -40,7 +40,7 @@
                         <span th:text="${boardDTO.title}" ></span>
                     </td>
                 </tr>
-                =========================================
+
                 <tr>
                     <td>
                         <span th:text="${boardDTO.boardPrev}" ></span>
@@ -54,8 +54,11 @@
 
                 </tbody>
             </table>
-
-
+            <form th:action="'/board/getBoard/' + ${boardDTO.id}" method="post">
+                <input type="submit" value="게시글 삭제">
+            </form>
+            <button type="submit"  onclick="location.href='/board/'">목록으로</button>
+                <button type="submit"   th:onclick="|location.href='@{/board/create/{id}(id=${boardDTO.id})}'|" >수정하기</button>
         </div>
     </div>
 </div>
