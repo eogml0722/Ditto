@@ -33,6 +33,7 @@ public class Board extends BaseEntity {
     private int viewCount;
 
     //게시판 분류
+    @Enumerated(EnumType.STRING)
     private BoardCategory boardCategory;
 
 
