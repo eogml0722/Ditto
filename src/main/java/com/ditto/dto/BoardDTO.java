@@ -20,15 +20,15 @@ public class BoardDTO {
     private String viewCount;
     private BoardCategory boardCategory;
 
-    //BoardDTO 로 통합
+    //Auditing
     private List<Board> boardList;
     private LocalDateTime regTime;
 
+    //BoardFormDTO 로 분리
     //이전행
     private Optional<Board> boardPrev;
     //다음행
     private Optional<Board> boardNext;
-
 
     private static ModelMapper modelMapper = new ModelMapper();
 
