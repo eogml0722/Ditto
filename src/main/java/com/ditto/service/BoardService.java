@@ -83,17 +83,25 @@ public class BoardService {
     public void updateBoard(BoardDTO boardDTO){
         //게시글 상세보기 인 상태에서 수정하기 누르면 게시글 id 넘겨 받을 것
         //뷰에서 넘겨받은 content, title, boardCategory를 setDTO
-        try {
-            boardRepository.updateById(boardDTO.getTitle(),
-                    boardDTO.getContent(),
-                    boardDTO.getBoardCategory(),
-                    boardDTO.getId());    
-        }catch (EntityNotFoundException e){
-            System.out.println("해당하는 글이 없습니다.");
-        }catch (Exception e){
-            System.out.println("글 수정 중 예외 발생");
-        }
+        /*
+try {
+    boardRepository.updateById(boardDTO.getTitle(),
+            boardDTO.getContent(),
+            boardDTO.getBoardCategory(),
+            boardDTO.getId());
+} catch (EntityNotFoundException e){
+    System.out.println("해당 게시글이 없습니다.");
+} catch (Exception e){
+    System.out.println("글 수정 중 예외 발생");
+}
+*/
+
+            //Repasitory에 쿼리로 안 만들어줘도 사용할 수 있다.
+            Board board = boardRepository.findById(boardDTO.getId()).orElseThrow(EntityNotFoundException::new);
+            board.setTitle(boardDTO.getTitle());
+            board.setContent(boardDTO.getContent());
+            board.setBoardCategory(boardDTO.getBoardCategory());
+
+
     }
-
-
 }
