@@ -95,6 +95,15 @@
     padding : 10px;
 }
 
+#searchBox{
+    display:flex;
+    justify-content:center;
+}
+
+.pageNow{
+    background-color : #ebff82;
+}
+
 #navLink_div{
 	margin-top:50px;
 	text-align:center;
