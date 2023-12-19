@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.management.ValueExp;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.Id;
 import javax.swing.*;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -28,28 +30,26 @@ public class BoardController {
     private final BoardRepository boardRepository;
 
     @GetMapping(value = {"/{pageNum}", "/"})//Optional = null 체크알아서 해줌
-    public String goBoard(Model model, @PathVariable("pageNum") Optional<Integer> pageNum){
+    public String goBoard(Model model, @PathVariable("pageNum") Optional<Integer> pageNum) {
         List<Board> boardList = boardRepository.findAll();
-        /*
-        List<Integer> iList = new ArrayList<>();
-        int j= (boardList.size()+9)/10;
-        for(int i=1 ; i <= j ; i++ ){
-            iList.add(i);
-        }
-        */
-        if(!pageNum.isEmpty()) {
+
+        //maxPage : 페이지 최대 갯수
+        final Integer maxPage = 10;
+
+        if (!pageNum.isEmpty()) {
             System.out.println("번호" + pageNum.get());
             model.addAttribute("pageNum", pageNum.get());
-        }else {
+        } else {
             model.addAttribute("pageNum", new Integer(1));
         }
         model.addAttribute("boardList", boardList);
-
+        model.addAttribute("maxPage", maxPage);
+        model.addAttribute("totalPage", (int) (Math.ceil((double) boardList.size() / 10)));
         return "/board/board";
     }
 
     @GetMapping(value = "/getBoard/{boardId}")
-    public String getBoard(@PathVariable("boardId") Long boardId , Model model) {
+    public String getBoard(@PathVariable("boardId") Long boardId, Model model) {
         //경로로 board의 id를 받아왔다.
         //받아온 id 와 일치하는 board.id 의 board를 dto로 보내준다.
         Board board = boardService.getBoard(boardId);
@@ -67,25 +67,42 @@ public class BoardController {
         return "/board/getBoard";
     }
 
+    //글삭제
+    @PostMapping(value = "/getBoard/{boardId}")
+    public String deleteBoard(@PathVariable("boardId") Long boardId) {
+        boardService.deleteBoard(boardId);
+        return "redirect:/board/";
+    }
+
 
     @GetMapping(value = "/create")
-    public String goCreateBoard(Model model){
+    public String goCreateBoard(Model model) {
         model.addAttribute("boardDTO", new BoardDTO());
         return "/board/createBoardForm";
     }
 
-
+    @GetMapping(value = "/create/{boardId}")
+    public String updateBoard(Model model, @PathVariable("boardId") Long boardId) {
+        Board board = boardRepository.findById(boardId).orElseThrow(EntityNotFoundException::new);
+        BoardDTO boardDTO = BoardDTO.of(board);
+        model.addAttribute("boardDTO", boardDTO);
+        return "/board/createBoardForm";
+    }
 
     @PostMapping(value = "/create")
-    public String createBoard(BoardDTO boardDTO){
+    public String createBoard(BoardDTO boardDTO) {
         try {
-        Board board = boardDTO.createBoard();
-        boardService.insertBoard(board);
-        }catch (Exception e){
+            if (boardDTO.getId() == null) {
+                Board board = boardDTO.createBoard();
+                boardService.insertBoard(board);
+            } else {
+                boardService.updateBoard(boardDTO);
+            }
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("글 등록 중 예외 발생");
             return "redirect:/board/createBoardForm";
         }
-        return "redirect:/board";
+        return "redirect:/board/";
     }
 }
