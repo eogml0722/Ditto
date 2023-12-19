@@ -13,10 +13,20 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 @Getter
 @Setter
+<<<<<<< HEAD
 public abstract class BaseEntity extends BaseTimeEntity {
     @CreatedBy
     private String createdBy;
     @LastModifiedBy
     private String modifiedBy;
 
+=======
+public abstract class BaseEntity extends BaseTimeEntity{
+
+    @CreatedBy
+    private String createdBy;
+
+    @LastModifiedBy
+    private String modifiedBy;
+>>>>>>> yj
 }

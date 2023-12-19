@@ -5,6 +5,7 @@ import com.ditto.constant.Role;
 import com.ditto.dto.MemberFormDTO;
 import com.ditto.repository.MemberRepository;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
@@ -19,7 +20,7 @@ import java.util.UUID;
 public class Member extends AuditingEntity{
 
     @Id
-    @Column(name = "member_id", unique = true) //회원 id값을 통해 유일하게 구분해야하기때문에 동일한 값이 들어올 수 없도록 unique속성을 지정
+    @Column(name = "member_id")
     private String memberId;
 
     @Column(nullable = false)
@@ -59,7 +60,7 @@ public class Member extends AuditingEntity{
         member.setName(memberFormDTO.getName());
         member.setPhoneNum(memberFormDTO.getPhoneNum());
         member.setEmail(memberFormDTO.getEmail());
-        member.setRole(Role.USER);
+        member.setRole(Role.ADMIN);
 
         member.setZipcode(memberFormDTO.getZipcode());
         member.setStreetAddress(memberFormDTO.getStreetAddress());
