@@ -47,10 +47,10 @@
             </tr>
             <tbody>
                 <tr th:each="askBoards, status: ${askBoards.getContent()}">
-                    <td th:text="${askBoards.id}"></td>
+                    <td th:text="${max-now-status.index}"></td>
                     <td><a th:text="${askBoards.title}" th:href="@{'/ask/detail/'+${askBoards.id}}"></a></td>
                     <td th:text="${askBoards.member.getName}"></td>
-                    <td th:text="${askBoards.regTime}"></td>
+                    <td th:text="${#temporals.format(askBoards.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
                     <td th:text="${askBoards.askStatus == T(com.ditto.constant.AskStatus).NOT_ASK} ? '답변대기' : '답변완료'"></td>
                 </tr>
             </tbody>
@@ -64,25 +64,23 @@
             </tr>
         </table>
 
-        <div th:with="start=${(askBoards?.number/maxPage)*maxPage + 1}, end=(${(askBoards.totalPages == 0) ? 1 : (start + (maxPage - 1) < askBoards.totalPages ? start + (maxPage - 1) : askBoards.totalPages)})" >
-            <ul class="pagination justify-content-center">
-
-                <li class="page-item" th:classappend="${askBoards.first}?'disabled'">
-                    <a th:onclick="'javascript:page(' + ${askBoards?.number - 1} + ')'" aria-label='Previous' class="page-link">
-                        <span aria-hidden='true'>이전</span>
+        <div th:with="start=${(askBoards.number/maxPage)*maxPage + 1}, end=(${(askBoards.totalPages == 0) ? 1 : (start + (maxPage - 1) < askBoards.totalPages ? start + (maxPage - 1) : askBoards.totalPages)})" >
+            <ul>
+                <li th:if="${askBoards.number != 0}">
+                    <a th:href="@{'/ask/list/'+${askBoards.number - 1}}">
+                        <span>이전</span>
                     </a>
                 </li>
 
-                <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${askBoards?.number eq page-1}?'active':''">
-                    <a th:onclick="'javascript:page(' + ${page - 1} + ')'" th:inline="text" class="page-link">[[${page}]]</a>
+                <li th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${askBoards.number eq page-1}?'active':''">
+                    <a th:href="@{'/ask/list/'+${page - 1}}" th:inline="text" class="page-link">[[${page}]]</a>
                 </li>
 
-                <li class="page-item" th:classappend="${askBoards.last}?'disabled'">
-                    <a th:onclick="'javascript:page(' + ${askBoards?.number + 1} + ')'" aria-label='Next' class="page-link">
-                        <span aria-hidden='true'>다음</span>
+                <li th:if="${askBoards.number != askBoards.totalPages - 1}">
+                    <a th:href="@{'/ask/list/'+${askBoards.number + 1}}">
+                        <span>다음</span>
                     </a>
                 </li>
-
             </ul>
         </div>
 
@@ -101,7 +99,7 @@
             </select>
             <select th:field="*{searchBy}">
                 <option value="title">제목</option>
-                <option value="createdBy">작성자</option>
+                <option value="member.getName">작성자</option>
             </select>
             <input th:field="*{searchQuery}" type="text" placeholder="검색어를 입력해주세요">
             <button id="searchBtn" type="submit">검색</button>

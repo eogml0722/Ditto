@@ -65,9 +65,6 @@ public class MemberService implements UserDetailsService {
             UsernameNotFoundException { //로그인할 유저의 id를 파라미터로 전달받음
         Member member = memberRepository.findByMemberId(memberId);
 
-        System.out.println(member);
-        System.out.println(memberId);
-
         if(member == null) {
             throw new UsernameNotFoundException(memberId);
         }
