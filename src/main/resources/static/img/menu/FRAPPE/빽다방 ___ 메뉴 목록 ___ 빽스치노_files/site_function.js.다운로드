@@ -1,0 +1,98 @@
+//MOBILE MENU
+jQuery("header .nav .nav-icon").click(function() {
+	jQuery(this).toggleClass("active");
+	jQuery("header .navbar").toggleClass("active");
+
+	jQuery(".overlay").fadeToggle();
+	jQuery(".overlay").css("z-index","1");
+});
+jQuery(document).on("click","header .navbar.active .menu-item-has-children>a",function() {
+	jQuery(this).removeAttr("href");
+	jQuery(this).toggleClass("on");
+	jQuery(this).next(".sub-menu").slideToggle().parents().siblings().children(".sub-menu").slideUp();
+});
+
+//PC MENU
+jQuery(".in_header .nav .navbar>.menu-item-has-children").on("mouseenter",function(){
+	jQuery(".sub-bg").addClass("on");
+});
+jQuery(".in_header .nav .navbar>.menu-item-has-children").on("mouseleave",function(){
+	jQuery(".sub-bg").removeClass("on");
+});
+
+//로딩애니메이션
+// jQuery(window).on("load",function(){
+// 	jQuery('body').css({
+// 		"overflow-y":"hidden",
+// 	});
+// 	jQuery('body').bind('touchmove',function(e){
+// 		e.preventDefault();
+// 	});
+//     if( jQuery(".load_main").length ) {
+
+// 		jQuery(".load_main img").css({
+// 			"transform" : "translateY(0)",
+// 			"opacity" : 0,
+// 			"display" : "none",
+//         });
+//         jQuery(".load_main").css({
+// 			"height" : 0,
+// 			"visibility" : "hidden",
+// 			"transition-delay" : ".6s"
+//         });
+// 		jQuery(".load_main").addClass("active");
+//     }
+
+// 	setTimeout(function(){
+// 		jQuery('body').css({'overflow-y' : 'inherit'});
+// 		jQuery('body').unbind('touchmove');
+// 	},500);
+// });
+
+// jQuery(window).on("load",function(){
+// 	jQuery('body').css({"overflow-y":"hidden"});
+// 	jQuery('body').bind('touchmove',function(e){
+// 		e.preventDefault();
+// 	});
+// 	if( jQuery("#pageload").length ) {
+// 		setTimeout(function(){
+// 			jQuery("#pageload img").css({
+// 				"transform" : "translateY(0)",
+// 				"opacity" : 0,
+// 				"display" : "none",
+// 	        });
+// 			jQuery("#pageload").css({
+// 				"height" : 0,
+// 				"visibility" : "hidden",
+// 				"transition-delay" : ".6s"
+// 	        });
+// 			jQuery("#pageload").addClass("active");
+// 		},1000);
+//     }
+
+// 	setTimeout(function(){
+// 		jQuery('body').css({'overflow-y' : 'inherit'});
+// 		jQuery('body').unbind('touchmove');
+// 	},500);
+// });
+
+//TOP button
+$(window).scroll(function(){
+	if($(this).scrollTop() > 1){
+		$('.to_top').fadeIn();
+	}else{
+		$('.to_top').fadeOut();
+	}
+});
+jQuery('.to_top').click(function() {
+	jQuery('html, body').animate({
+		scrollTop: 0
+	}, 400);
+	return false;
+});
+
+// 패밀리사이트
+jQuery("#family_site").change(function() {
+	var href = jQuery(this).val();
+	window.open(href, '_blank');
+});

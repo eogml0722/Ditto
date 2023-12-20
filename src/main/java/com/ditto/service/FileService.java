@@ -10,7 +10,7 @@ import java.util.UUID;
 @Service
 @Log
 public class FileService {
-    public String uploadFIle(String uploadPath, String oname, byte[] fileData) throws Exception{
+    public String uploadFile(String uploadPath, String oname, byte[] fileData) throws Exception{
         UUID uuid = UUID.randomUUID();
         String extension = oname.substring(oname.lastIndexOf("."));
         String sname =  uuid.toString() + extension;

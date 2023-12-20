@@ -7,6 +7,7 @@ import com.ditto.repository.MemberRepository;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
@@ -23,7 +24,7 @@ import java.util.UUID;
 public class Member extends AuditingEntity{
 
     @Id
-    @Column(name = "member_id", unique = true) //회원 id값을 통해 유일하게 구분해야하기때문에 동일한 값이 들어올 수 없도록 unique속성을 지정
+    @Column(name = "member_id")
     private String memberId;
 
     @Column(nullable = false)

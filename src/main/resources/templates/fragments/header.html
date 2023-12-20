@@ -23,6 +23,7 @@
 
                 <div class="headmenu">
                     <ul>
+                        <a href="/admin/item/new"><li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품등록</li></a>
                         <a href="admin/items/mng"><li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품관리</li></a>
                         <a href="admin/items/mng"><li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">회원관리</li></a>
                         <a href="admin/board/mng"><li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">게시판관리</li></a>

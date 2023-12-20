@@ -32,6 +32,8 @@ public class SecurityConfig {
                 .mvcMatchers("/").permitAll()
                 .mvcMatchers("/css/**", "/js/**", "/members/**", "/img/**", "/extras/**",
                                       "/check-email-token","/email-login", "/check-email-login", "/login-link", "/login-by-email").permitAll()
+                //admin으로 시작하는 경로는 ADMIN만 가능
+                .mvcMatchers("/admin/**").hasRole("ADMIN")
                 //나머지는 모두 인증을 요청
                 .mvcMatchers("/ask/**", "/images/**").permitAll()
                 .anyRequest().authenticated();
@@ -52,6 +54,8 @@ public class SecurityConfig {
         return http.build();
     }
 
+    //AuthenticationManager : 스프링 시큐리티에서 인증을 처리하는 인터페이스
+    //AuthenticationConfiguration : 스프링 시큐리티에서 인증 구성을 담당하는 클래스, 인증과 관련된 설정을 가져옴
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration
