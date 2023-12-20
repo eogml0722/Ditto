@@ -1,9 +1,13 @@
 package com.ditto.repository;
 
+import com.ditto.constant.ItemCategory;
 import com.ditto.constant.ItemSellStatus;
 import com.ditto.dto.ItemSearchDTO;
+import com.ditto.dto.MainItemDTO;
+import com.ditto.dto.QMainItemDTO;
 import com.ditto.entity.Item;
 import com.ditto.entity.QItem;
+import com.ditto.entity.QItemImg;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.Wildcard;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -25,7 +29,11 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
     public ItemRepositoryCustomImpl(EntityManager em) {
         this.queryFactory = new JPAQueryFactory(em);
     }
-
+    
+    //카테고리에 따라 itemCategory가 같은 값인지 비교하는 조건을 생성
+    private BooleanExpression searchCategoryEq(ItemCategory searchCategory) {
+        return searchCategory == null ? null : QItem.item.itemCategory.eq(searchCategory);
+    }
     //반환타입 BooleanExpression: Querydsl에서 조건을 표현하기 위해 사용되는 인터페이스
     //sql문의 where에 해당하는 부분
     //상품 판매 상태가 null이면 null을 반환,
@@ -66,6 +74,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
 
     @Override
     public Page<Item> getAdminItemPage(ItemSearchDTO itemSearchDTO, Pageable pageable) {
+
         //쿼리를 실행해서 조회된 항목을 가져옴
         List<Item> content = queryFactory
                 .selectFrom(QItem.item)
@@ -73,6 +82,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
                 //where절에 ,를 표시하면 and로 실행됨
                 //or조건을 이용하고자 한다면 BooleanBuilder를 사용
                 .where(regDtsAfter(itemSearchDTO.getSearchDateType()),
+                        searchCategoryEq(itemSearchDTO.getSearchCategory()),
                         searchSellStatusEq(itemSearchDTO.getSearchSellStatus()),
                         searchByLike(itemSearchDTO.getSearchBy(),
                                 itemSearchDTO.getSearchQuery()))
@@ -92,6 +102,45 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
                 .fetchOne();
 
         //조회된 항목의 리스트, 페이지정보, 전체항목수를 page객체로 반환
+        return new PageImpl<>(content, pageable, total);
+    }
+    
+    //검색어가 null이 아니면 상품명에 해당 검색어가 포함되는 상품을 조회하는 조건 반환
+    private BooleanExpression itemNameLike(String searchQuery) {
+        return StringUtils.isEmpty(searchQuery) ? null : QItem.item.itemName.like("%" + searchQuery + "%");
+    }
+
+    @Override
+    public Page<MainItemDTO> getMainItemPage(ItemSearchDTO itemSearchDTO, Pageable pageable) {
+        //Querydsl을 사용하기위해서 Q클래스 선언
+        QItem item = QItem.item;
+        QItemImg itemImg = QItemImg.itemImg;
+
+        //QMainItemDto의 생성자에 반환할 값을 입력
+        List<MainItemDTO> content = queryFactory.select(
+                        new QMainItemDTO(
+                                item.id,
+                                item.itemName,
+                                item.itemDetail,
+                                itemImg.imgUrl,
+                                item.price)
+                )
+                .from(itemImg)
+                .join(itemImg.item, item) //itemImg와 item을 조인
+                .where(itemImg.repImgYn.eq("Y")) //대표이미지만 불러옴
+                .orderBy(item.id.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        //전체 아이템의 개수를 조회
+        long total = queryFactory.select(Wildcard.count)
+                .from(itemImg)
+                .join(itemImg.item, item)
+                .where(itemImg.repImgYn.eq("Y"))
+                .where(itemNameLike(itemSearchDTO.getSearchQuery()))
+                .fetchOne();
+
         return new PageImpl<>(content, pageable, total);
 
     }

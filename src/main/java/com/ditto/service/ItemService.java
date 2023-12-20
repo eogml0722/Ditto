@@ -1,9 +1,6 @@
 package com.ditto.service;
 
-import com.ditto.dto.ItemDTO;
-import com.ditto.dto.ItemFormDTO;
-import com.ditto.dto.ItemImgDTO;
-import com.ditto.dto.ItemSearchDTO;
+import com.ditto.dto.*;
 import com.ditto.entity.Item;
 import com.ditto.entity.ItemImg;
 import com.ditto.repository.ItemImgRepository;
@@ -97,6 +94,9 @@ public class ItemService {
         return itemRepository.getAdminItemPage(itemSearchDTO, pageable);
     }
 
-
-
+    //메인 페이지에 보여줄 상품 데이터 조회
+    @Transactional(readOnly = true)
+    public Page<MainItemDTO> getMainItemPage(ItemSearchDTO itemSearchDTO, Pageable pageable) {
+        return itemRepository.getMainItemPage(itemSearchDTO, pageable);
+    }
 }

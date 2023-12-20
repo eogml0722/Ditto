@@ -21,7 +21,7 @@
 	display:flex;
 	width:1280px;
 	height:270px;
-	margin:0 auto;
+	margin:0 auto 0 5px;
 	justify-content: center; /* 가로 중앙 정렬 */
     align-items: center; /* 세로 중앙 정렬 */
     width: 100%; /* 전체 화면 가로 크기에 맞게 설정 */
@@ -32,7 +32,8 @@
 	height:270px;
 	text-wrap:nowrap;
 	margin: 0 auto;
-	background-color:blue;
+	background-color:#343a40;
+	color:white;
 }
 
 #content2leftbox > h2{
@@ -49,9 +50,17 @@
 #content2rightbox1{
 	width:75%;
 	height:270px;
-	background-color:red;
+	background-color:white;
 	display:block;
 	margin-right:5px;
+}
+
+.swiper mySwiper1 {
+    margin-top:20px;
+}
+
+#swiper-button {
+    color:#343a40;
 }
 
 #content2rightbox2, #content2rightbox3{
@@ -59,6 +68,10 @@
 	height:270px;
 	display:none;
 	margin-right:5px;
+}
+
+.swiper-wrapper {
+    margin-top:15px;
 }
 
 .swiper-slide {

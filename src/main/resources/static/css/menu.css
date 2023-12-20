@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.menuImg {
+    margin-bottom : 80px;
+}
+
+.row {
+
+    width: 1150px;
+    margin: 0 auto;
+    margin-bottom:40px;
+}
+
+.card-body {
+    height:190px;
+}

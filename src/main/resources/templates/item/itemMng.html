@@ -38,6 +38,23 @@
         select{
             margin-right:10px;
         }
+
+        .content{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .page-link{
+          color:black;
+        }
+
+        .page-item.active .page-link {
+            background-color:#343a40;
+            border-color:#343a40;
+        }
+
     </style>
 </th:block>
 
@@ -57,13 +74,16 @@
             </thead>
             <tbody>
             <tr th:each="item, status: ${items.getContent()}">
-                <td th:text="${item.itemCategory}"></td>
+<!--                <td th:text="${item.itemCategory}"></td>-->
+                <td th:if="${item.itemCategory == T(com.ditto.constant.ItemCategory).COFFEE}" th:text="커피"></td>
+                <td th:if="${item.itemCategory == T(com.ditto.constant.ItemCategory).BEVERAGE}" th:text="음료"></td>
+                <td th:if="${item.itemCategory == T(com.ditto.constant.ItemCategory).DESSERT}" th:text="디저트"></td>
+                <td th:if="${item.itemCategory == T(com.ditto.constant.ItemCategory).FRAPPE}" th:text="프라페"></td>
                 <td th:text="${item.id}"></td>
                 <td>
                     <a th:href="'/admin/item/'+${item.id}" th:text="${item.itemName}"></a>
                 </td>
                 <!-- T() : 클래스의 타입을 의미        -->
-                <td th:text="${item.itemCategory}"></td>
                 <td th:text="${item.itemSellStatus == T(com.ditto.constant.ItemSellStatus).SELL} ? '판매중' : '품절'"></td>
                 <td th:text="${item.createdBy}"></td>
                 <td th:text="${item.regTime}"></td>
@@ -122,7 +142,7 @@
                 <option value="createdBy">등록자</option>
             </select>
             <input th:field="*{searchQuery}" type="text" class="form-control" placeholder="검색어를 입력해주세요">
-            <button id="searchBtn" type="submit" class="btn btn-primary">검색</button>
+            <button id="searchBtn" type="submit" class="btn btn-dark">검색</button>
         </div>
     </form>
 

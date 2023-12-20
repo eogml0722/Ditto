@@ -12,19 +12,19 @@
         position: relative;
         margin: 0 auto;
         margin-top: 200px;
-        margin-bottom: 200px;
+        margin-bottom: 150px;
  }
 
 .wrapper .input-box{
     position:relative;
     width:100%;
     height:50px;
-    margin:40px 0; /*top,bottom 30, left,right 0*/
+    margin:50px 0; /*top,bottom 50, left,right 0*/
     background:transparent;
 }
 
 .input-box input{
-    width:80%;
+    width:99%;
     background:transparent;
     border:none;
     border-radius:15px;
@@ -150,7 +150,7 @@ input[id="cb"]:checked + label{
 }
 
 #auto{
-    transform: translate(-215%,5%); /*좌우로 이동*/
+    transform: translate(-175%,2%); /*좌우로 이동*/
 }
 
 #finda{

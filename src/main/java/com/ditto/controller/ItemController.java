@@ -2,6 +2,7 @@ package com.ditto.controller;
 
 import com.ditto.dto.ItemFormDTO;
 import com.ditto.dto.ItemSearchDTO;
+import com.ditto.dto.MainItemDTO;
 import com.ditto.entity.Item;
 import com.ditto.service.ItemService;
 import lombok.RequiredArgsConstructor;
@@ -122,7 +123,7 @@ public class ItemController {
         //url경로에 페이지 번호가 있음 해당 페이지를 조회
         // PageRequest.of(조회할 페이지 번호, 한번에 가져올 데이터의 수)
         //page.isPresent() : optinal객체에 값이 존재하는지 여부를 확인
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
         //조회할 페이지에 대한 조건과 페이지에 대한 정보를 매개변수로 전달하여
         //page객체를 반환받음
         Page<Item> items = itemService.getAdminItemPage(itemSearchDTO, pageable);
@@ -132,6 +133,24 @@ public class ItemController {
         model.addAttribute("maxPage", 5);
 
         return "item/itemMng";
+    }
+
+    @GetMapping(value="/menu")
+    public String main(ItemSearchDTO itemSearchDTO, Optional<Integer> page, Model model) {
+        //페이지번호를 출력하기 위한 계산
+        //페이지가 존재하면 해당 페이지를 사용하고 존재하지 않으면 0페이지
+        //한 페이지당 6개씩 출력
+        Pageable pageable = PageRequest.of(page.isPresent() ?page.get()  : 0, 8);
+
+        //itemService를 사용하여 아이템을 가져옴
+        Page<MainItemDTO> items = itemService.getMainItemPage(itemSearchDTO, pageable);
+
+        //뷰로 전달하기위해 모델에 추가
+        model.addAttribute("items", items);
+        model.addAttribute("itemSearchDTO", itemSearchDTO);
+        model.addAttribute("maxPage", 5);
+        return "item/menu";
+
     }
 
 }

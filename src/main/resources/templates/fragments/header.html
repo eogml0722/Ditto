@@ -13,7 +13,7 @@
 
                 <div class="headmenu">
                     <ul>
-                        <a href="/items/detail"><li>상품</li></a>
+                        <a href="/menu"><li>메뉴</li></a>
                         <a href="#"><li>공지사항</li></a>
                         <a href="#"><li>주문</li></a>
                         <a href="#"><li sec:authorize="isAuthenticated()">장바구니</li></a>
@@ -24,7 +24,7 @@
                 <div class="headmenu">
                     <ul>
                         <a href="/admin/item/new"><li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품등록</li></a>
-                        <a href="admin/items/mng"><li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품관리</li></a>
+                        <a href="/admin/items"><li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품관리</li></a>
                         <a href="admin/items/mng"><li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">회원관리</li></a>
                         <a href="admin/board/mng"><li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">게시판관리</li></a>
                     </ul>
