@@ -5,11 +5,15 @@ import com.ditto.constant.Role;
 import com.ditto.dto.MemberFormDTO;
 import com.ditto.repository.MemberRepository;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -51,6 +55,14 @@ public class Member extends AuditingEntity{
 
     private LocalDateTime emailTokenGeneratedAt;
 
+    @OneToMany(mappedBy="member", cascade = CascadeType.ALL
+            ,orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<AskBoard> askboards = new ArrayList<>();
+
+    @OneToMany(mappedBy="member", cascade = CascadeType.ALL
+            ,orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<AskComment> askComments = new ArrayList<>();
+
     // Member 엔티티를 생성하는 메소드
     public static Member createMember(MemberFormDTO memberFormDTO,
                                       PasswordEncoder passwordEncoder) {
@@ -68,6 +80,23 @@ public class Member extends AuditingEntity{
 
         //비밀번호를 암호화 한다.
         String password = passwordEncoder.encode(memberFormDTO.getPassword());
+        member.setPassword(password);
+
+        return member;
+    }
+
+    public static Member testMember(PasswordEncoder passwordEncoder){
+        Member member = new Member();
+        member.setMemberId("test12");
+        member.setName("김그린");
+        member.setPhoneNum("010-1234-5678");
+        member.setEmail("test@mail.com");
+        member.setRole(Role.USER);
+
+        member.setZipcode("12345");
+        member.setStreetAddress("12345");
+        member.setDetailAddress("주소");
+        String password = passwordEncoder.encode("xptmxm12!");
         member.setPassword(password);
 
         return member;

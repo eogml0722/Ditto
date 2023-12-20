@@ -2,6 +2,8 @@ package com.ditto.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -17,9 +19,15 @@ public class AskBoardImage extends BaseEntity{
     private String oname;
     private String sname;
     private String url;
-    @ManyToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="askboard_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private AskBoard askBoard;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="askcomment_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private AskComment askComment;
 
     public void updateBoardImg(String oname, String sname, String url){
         this.oname = oname;

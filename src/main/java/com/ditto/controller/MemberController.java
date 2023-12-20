@@ -1,7 +1,9 @@
 package com.ditto.controller;
 
 import com.ditto.dto.MemberFormDTO;
+import com.ditto.entity.AskBoard;
 import com.ditto.entity.Member;
+import com.ditto.repository.AskBoardRepository;
 import com.ditto.repository.MemberRepository;
 import com.ditto.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
@@ -16,9 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Locale;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -30,11 +30,10 @@ import java.security.Principal;
 public class MemberController {
 
     private final MemberRepository memberRepository;
+    private final AskBoardRepository askBoardRepository;
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
-
     private final MessageSource messageSource;
-
 
     //로그인
     @GetMapping(value = "/login")
@@ -100,10 +99,16 @@ public class MemberController {
 
     @GetMapping(value="/mypage")
     public String myPage(Model model, Principal principal){
+        // 회원정보를 불러옴
         String email = principal.getName();
         Member member = memberService.detailMember(principal.getName());
         String name = member.getName();model.addAttribute("name", name);
         model.addAttribute("memberFormDTO", member);
+        // 문의했던 내역을 불러옴
+        ArrayList<AskBoard> askBoards = askBoardRepository.findByMemberOrderByIdDesc(member);
+        model.addAttribute("askBoards", askBoards);
+        // 주문했던 내역을 불러옴
+
         return "member/MyPage";
     }
 
@@ -174,7 +179,7 @@ public class MemberController {
     }
 
     @PostMapping(value="/delete")
-    public String loginDelete(@RequestParam String password, Model model, Principal principal){
+    public String MemberDelete(@RequestParam String password, Model model, Principal principal){
         boolean chk = memberService.deleteMember(principal.getName(), password);
         if(chk){
             model.addAttribute("alert", "삭제되었습니다");
@@ -184,6 +189,13 @@ public class MemberController {
             model.addAttribute("errorMsg", "비밀번호가 일치하지않습니다.");
             return "member/memberDelete";
         }
+    }
+
+    @GetMapping(value="/test/test")
+    public String CreateMember(){
+        Member member = Member.testMember(passwordEncoder);
+        memberRepository.save(member);
+        return "redirect:/";
     }
 
 

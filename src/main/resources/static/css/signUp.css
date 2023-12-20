@@ -277,3 +277,20 @@ select {
 #eyefocus {
 	position: relative;
 }
+
+#topbtn{
+	display:none;
+	position: fixed;
+	bottom: 60px;
+	right: 80px;
+	z-index: 3;
+	border: 1px solid black;
+	outline: none;
+	background-color:white;
+	color:black;
+	font-weight:bold;
+	font-size:20px;
+	cursor: pointer;
+	padding: 15px;
+	border-radius: 10px;
+}

@@ -72,17 +72,3 @@ unregibtn.addEventListener("click", function(){
 	}
 });
 
-// 오른쪽 화면 바뀌면 input 초기화
-
-//function resetPage() {
-//	var inputFields = document.querySelectorAll(".menu2Input");
-//	var inputFields1 = document.querySelectorAll(".menu2InputNum");
-//	inputFields.forEach(function(inputField) {
-//		inputField.value = "";
-//	});
-//	inputFields1.forEach(function(inputField1) {
-//		inputField1.value = "";
-//	});
-//}
-
-
