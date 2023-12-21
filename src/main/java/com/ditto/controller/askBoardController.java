@@ -83,8 +83,7 @@ public class askBoardController {
             boardWriteDTO.setMember(member);
             askBoardService.writeBoard(boardWriteDTO, boardImgFileList);
         } catch (Exception e) {
-            model.addAttribute("errorMessage", "게시글 등록중 에러가 발생");
-            model.addAttribute("moveUrl", "/askBoard/askBoardList");
+
             return "errorMessage";
         }
         return "redirect:/ask/list";

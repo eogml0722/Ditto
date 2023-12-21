@@ -106,14 +106,14 @@
 	position: absolute;
 	/*공중에 띄어져있으니까 absolute*/
 	white-space:nowrap;
-	left: 495px;
-	top: 15px;
+	left: 520px;
+	top: -25px;
 	border: 1px solid black;
 	padding: 30px 30px 30px 30px;
 	/*위 오른쪽 아래 왼쪽*/
 	background-color: white;
 	color: #ff5029;
-	height:180px;
+	height:265px;
 }
 
 #tooltip:after {
@@ -143,8 +143,8 @@
 .btnClose {
 	/*툴팁창 끄는 모션*/
 	position: absolute;
-    left: 75px;
-    bottom: 15px;
+    left: 47px;
+    bottom: 25px;
     transform: translate(270px, -200px);
 
 }

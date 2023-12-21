@@ -10,7 +10,7 @@
 
 <div layout:fragment="content">
     <!--몸통-->
-    <div id="contents">
+    <div id="myPage-contents">
         <div id="MyPage">
             <div id="leftPage">
                 <h1 id="showRightPage">마이페이지</h1>
@@ -28,9 +28,9 @@
                 <div id="rightPageMenu">
                     <div id = "pageMenuBox1">
                         <div id = "box1">
-                            <img src="/img/google_login.png" class="profileimg">
+                            <img src="/img/free-icon-managers-4412857.png" class="profileimg">
                             <div>
-                                <span sec:authorize="hasAnyAuthority('ROLE_ADMIN')"><span th:text="${name}"></span>관리자 계정입니다.</span><br>
+                                <span sec:authorize="hasAnyAuthority('ROLE_ADMIN')"><span th:text="${name}"></span> 관리자 계정입니다.</span><br>
                                 <span><span sec:authorize="isAuthenticated()" th:text="${name}"></span>님 안녕하세요!</span>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                             <div id="box3">
                                 <h2>최근 주문내역</h2>
                             </div>
-                            <table>
+                            <table class="order-table">
                                 <tr>
                                     <td>주문번호</td>
                                     <td>제품명</td>

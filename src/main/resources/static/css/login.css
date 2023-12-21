@@ -40,7 +40,7 @@
 
 .input-box i{
     position:absolute;
-    top:57%;
+    top:67%;
     left:12px;
     transform:translateY(-50%); /*absolute쓰면 translateY로 중앙으로 맞춰준다.*/
     font-size:25px;
