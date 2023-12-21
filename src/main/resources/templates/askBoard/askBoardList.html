@@ -24,7 +24,7 @@
         var searchBy = $("#searchBy").val();
         var searchQuery = $("#searchQuery").val();
 
-        location.href="/qna/list/" + page + "?searchDateType=" + searchDateType
+        location.href="/ask/list/" + page + "?searchDateType=" + searchDateType
         + "&searchAskStatus=" + searchAskStatus
         + "&searchBy=" + searchBy
         + "&searchQuery=" + searchQuery;
@@ -73,7 +73,7 @@
                 </li>
 
                 <li th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${askBoards.number eq page-1}?'active':''">
-                    <a th:href="@{'/ask/list/'+${page - 1}}" th:inline="text" class="page-link">[[${page}]]</a>
+                    <a th:href="@{'/ask/list/'+${page - 1}}" th:inline="text">[[${page}]]</a>
                 </li>
 
                 <li th:if="${askBoards.number != askBoards.totalPages - 1}">

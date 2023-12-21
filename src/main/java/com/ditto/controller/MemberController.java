@@ -148,31 +148,36 @@ public class MemberController {
     }
 
     @PostMapping(value="/update")
-    public String memberUpdate(@Valid MemberFormDTO memberFormDTO, BindingResult bindingResult, Model model){
+    public String memberUpdate(@Valid MemberFormDTO memberFormDTO, BindingResult bindingResult, Principal principal, Model model){
         if(bindingResult.hasErrors()){
             return "member/MyPage";
         }
         try{
+            Member oldmember = memberRepository.findByMemberId(principal.getName());
+            memberFormDTO.setPassword(oldmember.getPassword());
             Member member = Member.createMember(memberFormDTO, passwordEncoder);
             memberService.updateMember(member);
         } catch (Exception e) {
-            model.addAttribute("errorMessage", e.getMessage());
+            model.addAttribute("errorMessage", "정보변경중 오류가 발생하였습니다.");
             return "member/MyPage";
         }
         return "redirect:/";
     }
 
     @PostMapping(value="/pwupdate")
-    public String passwordUpdate(@Valid MemberFormDTO memberFormDTO, BindingResult bindingResult, Model model){
+    public String passwordUpdate(@RequestParam String password,@RequestParam String oldPassword, @Valid MemberFormDTO memberFormDTO, BindingResult bindingResult, Principal principal, Model model){
         if(bindingResult.hasErrors()){
             return "member/MyPage";
         }
         try{
-            MemberFormDTO memberFormDTO1 = memberService.updatePassword(memberFormDTO);
+            String email = principal.getName();
+            memberFormDTO.setMemberId(email);
+            memberFormDTO.setPassword(password);
+            MemberFormDTO memberFormDTO1 = memberService.updatePassword(memberFormDTO, oldPassword);
             Member member = Member.createMember(memberFormDTO1, passwordEncoder);
             memberService.updateMember(member);
         } catch (Exception e) {
-            model.addAttribute("errorMessage", e.getMessage());
+            model.addAttribute("errorMessage", "비밀번호를 다시 확인해주세요!");
             return "member/MyPage";
         }
         return "redirect:/";
@@ -182,12 +187,12 @@ public class MemberController {
     public String MemberDelete(@RequestParam String password, Model model, Principal principal){
         boolean chk = memberService.deleteMember(principal.getName(), password);
         if(chk){
-            model.addAttribute("alert", "삭제되었습니다");
+            model.addAttribute("Message", "삭제되었습니다");
             SecurityContextHolder.clearContext();
             return "redirect:/";
         } else  {
-            model.addAttribute("errorMsg", "비밀번호가 일치하지않습니다.");
-            return "member/memberDelete";
+            model.addAttribute("errorMessage", "비밀번호가 일치하지않습니다.");
+            return "redirect:/members/mypage";
         }
     }
 

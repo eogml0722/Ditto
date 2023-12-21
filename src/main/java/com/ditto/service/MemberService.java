@@ -119,18 +119,26 @@ public class MemberService implements UserDetailsService {
         return memberRepository.save(member);
     }
 
-    public MemberFormDTO updatePassword(MemberFormDTO member){
-        String id = memberRepository.findByMemberId(member.getMemberId()).getMemberId();
-        Member oldMember = memberRepository.findByMemberId(id);
-        member.setMemberId(id);
-        member.setPassword(member.getPassword());
-        member.setName(oldMember.getName());
-        member.setPhoneNum(oldMember.getPhoneNum());
-        member.setZipcode(oldMember.getZipcode());
-        member.setStreetAddress(oldMember.getStreetAddress());
-        member.setDetailAddress(oldMember.getDetailAddress());
-        member.setEmail(oldMember.getEmail());
-        return member;
+    public MemberFormDTO updatePassword(MemberFormDTO member, String password){
+
+        Member memberx = memberRepository.findByMemberId(member.getMemberId());
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+        if(encoder.matches(password, memberx.getPassword())) {
+            String id = memberRepository.findByMemberId(member.getMemberId()).getMemberId();
+
+            Member oldMember = memberRepository.findByMemberId(id);
+            member.setMemberId(id);
+            member.setPassword(member.getPassword());
+            member.setName(oldMember.getName());
+            member.setPhoneNum(oldMember.getPhoneNum());
+            member.setZipcode(oldMember.getZipcode());
+            member.setStreetAddress(oldMember.getStreetAddress());
+            member.setDetailAddress(oldMember.getDetailAddress());
+            member.setEmail(oldMember.getEmail());
+            return member;
+        }
+        return null;
     }
 
     public void login(Member member) {

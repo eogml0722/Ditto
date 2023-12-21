@@ -212,12 +212,12 @@ function memberJoinAction() {
 
 	}
 
-	//비밀번호 확인
-if (!cpw.value == upw.value) {
-	alert("비밀번호와 동일하지 않습니다.")
-	cpw.focus();
-	return false;
-}
+        //비밀번호 확인
+    if (!cpw.value == upw.value) {
+        alert("비밀번호와 동일하지 않습니다.")
+        cpw.focus();
+        return false;
+    }
 
 	//이름확인
 
