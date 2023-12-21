@@ -7,6 +7,10 @@
 	padding:0;
 }
 
+html, body, section, div, button, input, select, textarea {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
 ul, ol{
 	list-style:none;
 }
@@ -21,49 +25,64 @@ a{
 	color:black;
 }
 
+a:hover {
+    text-decoration:none;
+    color:black;
+}
+
 /* 머리 */
 
 #head{
 	width: 100%;
-	height:70px;
+	height:110px;
 	margin:0 auto;
-	position: fixed;
+	padding-bottom: 90px;
+    position: fixed;
 	top:0;
 	background-color:white;
-	z-index:2;
+	z-index:10000;
 	text-align: center;
 }
 
 #headbox{
-	max-width: 1280px;
 	margin:0 auto;
 	display: flex;
 	align-items: center;
-	justify-content:center;
 }
 
 .logo{
-	width:140px;
+    margin-top:20px;
+    margin-left:40px;
 	height:70px;
 	cursor:pointer;
 }
 
 .headmenu{
-    width:350px;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-left: 100px;
+
 }
 
 .headmenu > ul {
 	display: flex;
+	width:100%;
 }
 
-.headmenu > ul > a > li {
-	width:70px;
+.headmenu li {
+    margin-left:20px;
+	width:100px;
+	font-size:20px;
+	font-weight: 600;
+	letter-spacing: 1px;
 }
 
 .headbtn{
-	width:80px;
-	height:70px;
-	display:flex;
+	width: 300px;
+    margin-top: 15px;
+    margin-left: auto;
+    display: flex;
 }
 
 .btn{
@@ -79,43 +98,22 @@ a{
 }
 
 #foot{
-	width: 100%;
-	margin:0 auto;
-	background-color:white;
-	z-index:2;
+    margin-top:80px;
+	height: 150px;
+	background-color: #222;
 	text-align: center;
 }
 
-#footbox1{
-	display:flex;
-	max-width: 1280px;
-	min-width: 510px;
-	margin:0 auto;
-	justify-content:center;
-}
-
-.footbtn{
-	display:flex;
-}
-
-.centerbtn{
-	width:120px;
-	height:40px;
-	margin-top:15px;
+.footer-top {
+    padding-top: 60px;
 }
 
 #foot a{
 	color:gray;
 }
 
-.QNAbtn{
-	margin-top:10px;
-	width:70px;
-	height:50px;
-}
-
-#footbox2{
-	text-align:center;
-	margin:0 auto;
-	font-size:12px;
+#foot span {
+    color:gray;
+    margin-left: 10px;
+    margin-right: 5px;
 }

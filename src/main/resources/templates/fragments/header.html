@@ -13,31 +13,26 @@
 
                 <div class="headmenu">
                     <ul>
-                        <a href="/menu"><li>메뉴</li></a>
-                        <a href="#"><li>공지사항</li></a>
-                        <a href="#"><li>주문</li></a>
-                        <a href="/cart"><li sec:authorize="isAuthenticated()">장바구니</li></a>
-                        <a href="/ask/list"><li sec:authorize="isAuthenticated()">문의게시판</li></a>
-                    </ul>
-                </div>
-
-                <div class="headmenu">
-                    <ul>
-                        <a href="/admin/item/new"><li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품등록</li></a>
-                        <a href="/admin/items"><li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품관리</li></a>
-                        <a href="admin/items/mng"><li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">회원관리</li></a>
-                        <a href="admin/board/mng"><li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">게시판관리</li></a>
+                        <li><a href="#">공지사항</a></li>
+                        <li><a href="/menu">메뉴</a></li>
+                        <li><a href="#">주문</a></li>
+                        <li sec:authorize="isAuthenticated()"><a href="#">장바구니</a></li>
+                        <li sec:authorize="isAuthenticated()"><a href="/ask/list">문의게시판</a></li>
+                        <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')"><a href="/admin/item/new">상품등록</a></li>
+                        <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')"><a href="/admin/items">상품관리</a></li>
+                        <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')"><a href="admin/items/mng">회원관리</a></li>
+                        <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')"><a href="admin/board/mng">게시판관리</a></li>
                     </ul>
                 </div>
 
                 <div class="headbtn" sec:authorize="isAnonymous()">
-                    <img src="/img/login.png" class="btn" id="loginbtn" th:onclick="|location.href='@{/members/login}'|">
-                    <img src="/img/signup.png" class="btn" id="signupbtn">
+                    <a href="/members/login"><img src="/img/login.png" class="btn" id="loginbtn" th:onclick="|location.href='@{/members/login}'|">로그인</a>
+                    <a href="/members/new"><img src="/img/signup.png" class="btn" id="signupbtn">회원가입</a>
                 </div>
 
                 <div class="headbtn" sec:authorize="isAuthenticated()">
-                    <a href="/members/logout"><img src="/img/login.png" class="btn" id="logoutbtn"></a>
-                    <a href="/members/mypage"><img src="/img/signup.png" class="btn" id="mypage"></a>
+                    <a href="/members/logout"><img src="/img/login.png" class="btn" id="logoutbtn">로그아웃</a>
+                    <a href="/members/mypage"><img src="/img/signup.png" class="btn" id="mypage">마이페이지</a>
                 </div>
 
             </div><!--headbox-->

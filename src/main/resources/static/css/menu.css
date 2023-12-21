@@ -14,3 +14,12 @@
 .card-body {
     height:190px;
 }
+
+.page-link{
+    color:black;
+}
+
+.page-item.active .page-link {
+    background-color:#343a40;
+    border-color:#343a40;
+}
