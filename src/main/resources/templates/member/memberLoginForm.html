@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <link th:href="@{/css/login.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="shortcut icon" href="#">
+</th:block>
+
+<div layout:fragment="content">
+
+    <div class="wrapper">
+        <form role="form" method="post" action="/members/login">
+            <p th:if="${findIdMsg}" class="error" th:text="${findIdMsg}"></p>
+            <p class="loginfont">아이디</p>
+            <div class="input-box">
+                <i class='bx bx-user-circle'></i>
+                <input type="text" name="memberId" id="memberId" placeholder="ID" maxlength="20">
+            </div>
+            <p class="loginfont">비밀번호</p>
+            <div class="input-box">
+                <i class='bx bx-lock' ></i>
+                <input type="password" name="password" id="password" placeholder="PASSWORD" maxlength="20" autoComplete="off">
+            </div>
+            <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
+            <div>
+                <input class="login" type="submit" value="로그인">
+            </div>
+
+            <div class="autologin">
+                <input id="cb" type="checkbox">
+                <label for="cb"></label>
+                <label id="auto">자동로그인</label>
+                <a href ="/members/findLoginInfo" id="finda">아이디 찾기</a>
+            </div>
+            <label class="findPwd">비밀번호가 기억나지 않으시나요?<a href="/members/email-login">이메일로 로그인하기</a></label>
+            <div class="loginbox">
+                <input id="signup" type="button" value="회원가입" onClick="location.href='/members/new'">
+            </div>
+<!--            <div class="leftLoginBox">-->
+<!--                <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=ae63b177de3ef756be6b505e79583fb9&redirect_uri=http://localhost:8002/members/kakao">-->
+<!--                    <img class="kakaoImg" src="/img/kakao_login_btn.png" width="400px">-->
+<!--                </a>-->
+<!--&lt;!&ndash;                <a href="/oauth2/authorization/google">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <img class="googleImg" src="/img/web_light_sq_SI@1x.png">&ndash;&gt;-->
+<!--&lt;!&ndash;                </a>&ndash;&gt;-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <a href="#"><i id="closebtn4" class='bx bx-x bx-flashing bx-rotate-90'></i></a>-->
+<!--            </div>-->
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        </form>
+    </div>
+    <!-- Alert Messages -->
+    <section th:replace="fragments/alert::alert"></section>
+</div>
+</html>

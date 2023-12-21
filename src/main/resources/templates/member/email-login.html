@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <link th:href="@{/css/email_login.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="shortcut icon" href="#">
+</th:block>
+
+<div layout:fragment="content" class="container">
+    <div class="py-5 text-center">
+        <p class="lead">Ditto</p>
+        <h2>비밀번호 없이 로그인하기</h2>
+    </div>
+    <div class="row justify-content-center">
+        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+            <span th:text="${error}">error</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <form class="needs-validation col-sm-6" action="#" th:action="@{/members/email-login}" method="post" novalidate>
+            <label for="email">가입 할 때 사용한 이메일</label>
+            <div class="form-group mb-3">
+                <input id="email" type="text" name="email" class="form-control"
+                       placeholder="your@email.com" aria-describedby="emailHelp" required>
+            </div>
+            <small id="emailHelp" class="form-text text-muted">
+                가입할 때 사용한 이메일을 입력하세요.
+            </small>
+            <div class="form-group">
+                <button class="loginBtn" type="submit" aria-describedby="submitHelp">
+                    로그인 링크 보내기
+                </button>
+                <small id="submitHelp">
+                    Ditto 처음 오신거라면 <a href="#" th:href="@{/members/new}" class="signUpLink">계정을 먼저 만드세요.</a>
+                </small>
+            </div>
+        </form>
+    <!-- Alert Messages -->
+    <section th:replace="fragments/alert::alert"></section>
+    </div>
+<th:block layout:fragment="script">
+        <script type="text/javascript"></script>
+    </th:block>
+</div>
+</html>

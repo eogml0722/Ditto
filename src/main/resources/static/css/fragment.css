@@ -48,29 +48,34 @@ a{
 	cursor:pointer;
 }
 
-#headmenu{
-	width:280px;
+.headmenu{
+    width:350px;
 }
 
-#headmenu > ul {
+.headmenu > ul {
 	display: flex;
 }
 
-#headmenu > ul > a > li {
+.headmenu > ul > a > li {
 	width:70px;
 }
 
-#headbtn{
+.headbtn{
 	width:80px;
 	height:70px;
 	display:flex;
 }
 
 .btn{
-	margin-top:15px;
-	width:40px;
-	height:40px;
-	cursor:pointer
+	width:70px;
+	cursor:pointer;
+}
+
+.itemNewContent {
+    margin-bottom: 100px;
+    margin-top: 120px;
+    margin-left: 200px;
+    margin-right: 200px;
 }
 
 #foot{

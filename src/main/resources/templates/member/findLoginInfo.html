@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <link th:href="@{/css/findLoginInfo.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="shortcut icon" href="#">
+</th:block>
+
+
+
+</th:block>
+<!--아이디 찾기-->
+<div class="idpwFIND" layout:fragment="content">
+
+    <form id="findIdForm" name="findIdForm" th:action="@{/members/findLoginInfo}" role="form" method="post" onsubmit="return false;">
+
+        <div class="idpwWrapper">
+
+            <h2>아이디 찾기</h2>
+
+            <h4>아이디 찾을 방법을 선택해주세요.</h4>
+
+            <div class="find-wrapper">
+
+                <dl class="member">
+
+                    <dt id="find3">회원유형</dt>
+
+                    <dd>
+
+                        <select id="SelectBox">
+
+                            <option value="A">개인회원</option>
+                        </select>
+
+                    </dd>
+
+                </dl>
+                <dl>
+
+                    <dt id="find3" name="name" class="change_name">이름</dt>
+
+                    <dd>
+
+                        <input type="text" name="name" id="find1" class="id-input">
+
+                    </dd>
+
+                </dl>
+
+                <dl id="email_text">
+
+                    <dt id="find3" >이메일</dt>
+
+                    <dd>
+
+                        <input type="text" id="find1" class="id-input" name="email">
+
+                    </dd>
+
+                </dl>
+
+                <div class="buttons-wrap">
+
+                    <a href="#" class="findIdBtn" onclick="submitFindForm();" form="findIdForm">아이디 찾기</a>
+                </div>
+
+            </div>
+        </div>
+    </form>
+    <!-- Alert Messages -->
+    <section th:replace="fragments/alert::alert"></section>
+
+    <th:block layout:fragment="script">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script type="text/javascript" src="/js/findLoginInfo.js"></script>
+</th:block>
+</div>
+</html>
