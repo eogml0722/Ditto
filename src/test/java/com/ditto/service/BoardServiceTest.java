@@ -1,6 +1,8 @@
 package com.ditto.service;
 
 import com.ditto.constant.BoardCategory;
+import com.ditto.constant.OAuthType;
+import com.ditto.constant.Role;
 import com.ditto.dto.BoardDTO;
 import com.ditto.dto.MemberFormDTO;
 import com.ditto.entity.Board;
@@ -16,7 +18,11 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Column;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,16 +52,18 @@ class BoardServiceTest {
     public Member createMemberTest(){
 
         MemberFormDTO memberFormDTO = new MemberFormDTO();
-        memberFormDTO.setMemberId("asd2");
-        memberFormDTO.setPassword("asd");
-        memberFormDTO.setName("sad");
-        memberFormDTO.setPhoneNum1(45);
-        memberFormDTO.setPhoneNum2(12);
-        memberFormDTO.setAddress("asd");
-        memberFormDTO.setEmail("sad");
+        memberFormDTO.setMemberId("asd1");
+        memberFormDTO.setPassword("asd1");
+        memberFormDTO.setName("aaa1");
+        memberFormDTO.setPhoneNum("1234");
+        memberFormDTO.setZipcode("1234");
+        memberFormDTO.setStreetAddress("aaa");
+        memberFormDTO.setDetailAddress("aaa");
+        memberFormDTO.setEmail("aaaa");
+
 
         Member member = Member.createMember(memberFormDTO, passwordEncoder);
-
+        memberService.saveMember(member);
         member = memberService.saveMember(member);
 
         return member;
@@ -70,8 +78,8 @@ class BoardServiceTest {
     @DisplayName("게시판 생성 테스트")
     public void createBoardTest(){
 //        Member member = createMemberTest();
-        for(int i=300 ; i<600 ; i++){
-            Member member = memberRepository.findByMemberId("asd2");
+        for(int i=1 ; i<600 ; i++){
+            Member member = memberRepository.findByMemberId("asdasd1");
             BoardDTO boardDTO = new BoardDTO();
             boardDTO.setTitle("test" + i);
             boardDTO.setContent("내용" + i);
