@@ -87,21 +87,6 @@
   height: 220px;
   object-fit: cover;
 }
-
-#content3{
-	width:100%;
-	display:flex;
-	justify-content: center;
-	align-items: center;
-	position:relative;
-	margin:0 auto;
-}
-
-#content3 img{
-	width: 100%;
-	height: 400px;
-}
-
 .textloca3 {
 	padding: 0 50px;
 	position: absolute;
@@ -131,21 +116,49 @@
 	margin:5px 0px 0px 0px;
 }
 
-.content4box1 img{
-	height:500px;
-	width:80%;
+#content4 li a {
+    padding: 38px 40px;
+    text-decoration:none;
+    display:block;
+    transition: all 0.4s;
+}
+#content4 ul {
+    margin-top:65px;
+}
+#content4 li {
+    border-bottom : 1px solid #ebebeb;
+    width:590px;
+    height:180px;
+
 }
 
-.content4box1{
-	color:yellow;
-	font-weight:bold;
-	position:relative;
-	padding:0;
-	width:100%;
-	color:black;
-	font-size:1.5vh;
-	text-align:center;
-	align-items:center;
+#content4 li a:hover{
+    background-color:#333;
+    color:white;
+}
+
+#content4 em {
+    display:block;
+    margin-bottom:14px;
+    font-style:normal;
+    color: #d50037;
+}
+
+#content4 strong {
+    display:block;
+    font-size:24px;
+    font-weight:bold;
+    margin-bottom: 10px;
+}
+
+#content4 span {
+    display:block;
+    margin-top: 1px;
+    font-size: 16px;
+}
+
+.content4box1 {
+    display:flex;
 }
 
 .content4box1 h1{
@@ -179,8 +192,14 @@
 #content5 {
 	height: 300px;
 	position:relative;
+	margin-top:20px;
 	display:flex;
-	justify-content: center;
+	margin-left:348px;
+}
+
+#content5 label {
+    font-weight: 900;
+    font-size: 20px;
 }
 
 #content5box1, #content5box2{
@@ -197,25 +216,18 @@
 	font-size:2.0vh;
 }
 
-#content5box1 a{
-	background: url(../img/imgtest.png);
+#content5box1 {
+	background: url(../img/17.png);
 	background-size: 100% 100%;
-	cursor:pointer;
-	margin-left:0.5%;
-	display:block;
-	width:25%;
-	position:absolute;
-	top:0;
-	bottom:0;
-	padding:40px 0px;
-	text-decoration:none;
-	color:black;
+	margin-left:120px;
+	margin-top:8px;
+	height:100%;
 }
 
-#content5box2{
-
+#map {
+    margin-top:8px;
+    margin-left:20px;
 }
-
 #content5box3{
 	padding:50px 0;
 	background-color:aliceblue;
@@ -230,25 +242,7 @@
 	cursor:pointer;
 }
 
-#content5box3 table{
-	width:100%;
-}
 
-#content5box3 table{
-	margin:0;
-	padding-bottom:10px;
-}
-
-#content5box3 table th:first-child{
-	text-align:left;
-}
-
-#content5box3 table thead th{
-	padding:10px 0;
-}
-
-#content5box3 table td:first-child, #content5box3 table th:first-child{width:85%}
-#content5box3 table td:nth-child(2), #content5box3 table th:nth-child(2){width:15%}
 
 /*수정중*/
 .test55{
