@@ -91,7 +91,7 @@ public class Member extends AuditingEntity{
         member.setName("김그린");
         member.setPhoneNum("010-1234-5678");
         member.setEmail("test@mail.com");
-        member.setRole(Role.USER);
+        member.setRole(Role.ADMIN);
 
         member.setZipcode("12345");
         member.setStreetAddress("12345");

@@ -41,23 +41,21 @@ public class askBoardController {
         return "redirect:/ask/list/0";
     }
 
-//    @GetMapping(value={"/list", "/list/{page}"})
     @GetMapping("/list/{page}")
     public String AskBoardList(AskBoardSearchDTO askBoardSearchDTO, @PathVariable("page") Optional<Integer> page, Model model){
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 4);
         Page<AskBoard> askBoards = askBoardService.getAskBoardList(askBoardSearchDTO, pageable);
 
-        int now= page.get()+1;
+        int now= page.get();
         int max = (int) askBoards.getTotalElements();
 
-        // 10 - (1,2,3,4) - 4 = 5 4 3 2
-        if(now == 1){
+        if(now == 0){
             now = 0;
-        } else if (now == 2){
+        } else if (now == 1){
             now = 4;
-        } else if (now == 3){
+        } else if (now == 2){
             now = 8;
-        } else if (now == 4){
+        } else if (now == 3){
             now = 12;
         }
 
@@ -86,7 +84,8 @@ public class askBoardController {
             askBoardService.writeBoard(boardWriteDTO, boardImgFileList);
         } catch (Exception e) {
             model.addAttribute("errorMessage", "게시글 등록중 에러가 발생");
-            return "askBoard/askBoardList";
+            model.addAttribute("moveUrl", "/askBoard/askBoardList");
+            return "errorMessage";
         }
         return "redirect:/ask/list";
     }
