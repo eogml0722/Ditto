@@ -27,7 +27,7 @@
 
                 <div class="headbtn" sec:authorize="isAnonymous()">
                     <a href="/members/login"><img src="/img/login.png" class="btn" id="loginbtn" th:onclick="|location.href='@{/members/login}'|">로그인</a>
-                    <a><img src="/img/signup.png" class="btn" id="signupbtn">회원가입</a>
+                    <a href="/members/new"><img src="/img/signup.png" class="btn" id="signupbtn">회원가입</a>
                 </div>
 
                 <div class="headbtn" sec:authorize="isAuthenticated()">

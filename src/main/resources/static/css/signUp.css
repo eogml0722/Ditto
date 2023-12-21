@@ -4,6 +4,9 @@
 	margin: 0 auto;
 
 }
+.content {
+    margin-top: 80px;
+}
 
 .with-border {
 	font-size: 30px;

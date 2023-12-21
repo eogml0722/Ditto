@@ -40,7 +40,7 @@ a:hover {
     position: fixed;
 	top:0;
 	background-color:white;
-	z-index:9999;
+	z-index:10000;
 	text-align: center;
 }
 
@@ -52,7 +52,7 @@ a:hover {
 
 .logo{
     margin-top:20px;
-    margin-left:70px;
+    margin-left:40px;
 	height:70px;
 	cursor:pointer;
 }
