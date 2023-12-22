@@ -1,6 +1,5 @@
 package com.ditto.service;
 
-import com.ditto.config.MemberPrincipalDetails;
 import com.ditto.constant.OAuthType;
 import com.ditto.dto.MemberFormDTO;
 import com.ditto.entity.Member;
@@ -70,7 +69,11 @@ public class MemberService implements UserDetailsService {
             throw new UsernameNotFoundException(memberId + "is not found.");
         }
 
-         return new MemberPrincipalDetails(member);
+        return User.builder()
+                .username(member.getMemberId())
+                .password(member.getPassword())
+                .roles(member.getRole().toString())
+                .build();
     }
 
     public boolean deleteMember(String id, String password) {
@@ -141,7 +144,7 @@ public class MemberService implements UserDetailsService {
     public void login(Member member) {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(new UserAccount(member),
                 member.getPassword(), Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")));
-        SecurityContextHolder.getContext().setAuthentication(token); // AuthenticationManager를 쓰는 방법이 정석적인 방ㅇ법
+        SecurityContextHolder.getContext().setAuthentication(token); // AuthenticationManager를 쓰는 방법이 정석적인 방법
     }
 
 }
