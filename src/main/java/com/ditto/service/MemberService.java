@@ -66,10 +66,10 @@ public class MemberService implements UserDetailsService {
         Member member = memberRepository.findByMemberId(memberId);
 
         if(member == null) {
-            throw new UsernameNotFoundException(memberId);
+            throw new UsernameNotFoundException(memberId + "is not found.");
         }
 
-        return User.builder() //User 객체 생성을 위해 회원의 아이디,비밀번호, role을 파라미터로 넘겨줌
+        return User.builder()
                 .username(member.getMemberId())
                 .password(member.getPassword())
                 .roles(member.getRole().toString())
@@ -144,7 +144,7 @@ public class MemberService implements UserDetailsService {
     public void login(Member member) {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(new UserAccount(member),
                 member.getPassword(), Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")));
-        SecurityContextHolder.getContext().setAuthentication(token); // AuthenticationManager를 쓰는 방법이 정석적인 방ㅇ법
+        SecurityContextHolder.getContext().setAuthentication(token); // AuthenticationManager를 쓰는 방법이 정석적인 방법
     }
 
 }

@@ -35,9 +35,9 @@
 <div layout:fragment="content">
     <div id="contents">
 
-        <h1>문의 게시판</h1>
+        <h1 class="board-h1">문의 게시판</h1>
     <form th:action="@{'/ask/list/' + ${askBoards?.number}}" method="get"  th:object="${askBoards}">
-        <table border="1" width="70%">
+        <table>
             <tr>
                 <th>글번호</th>
                 <th>제목</th>
@@ -56,15 +56,15 @@
             </tbody>
         </table>
 
-        <table border="1" width="70%">
+        <table>
             <tr align="right">
                 <td>
-                    <button type="button" th:onclick="|location.href='@{/ask/write}'|">문의 글쓰기</button>
+                    <button class="write-button" type="button" th:onclick="|location.href='@{/ask/write}'|">문의 글쓰기</button>
                 </td>
             </tr>
         </table>
 
-        <div th:with="start=${(askBoards.number/maxPage)*maxPage + 1}, end=(${(askBoards.totalPages == 0) ? 1 : (start + (maxPage - 1) < askBoards.totalPages ? start + (maxPage - 1) : askBoards.totalPages)})" >
+        <div class="numberPage" th:with="start=${(askBoards.number/maxPage)*maxPage + 1}, end=(${(askBoards.totalPages == 0) ? 1 : (start + (maxPage - 1) < askBoards.totalPages ? start + (maxPage - 1) : askBoards.totalPages)})" >
             <ul>
                 <li th:if="${askBoards.number != 0}">
                     <a th:href="@{'/ask/list/'+${askBoards.number - 1}}">
@@ -84,7 +84,7 @@
             </ul>
         </div>
 
-        <div th:object="${askBoardSearchDTO}">
+        <div class="search-Input" th:object="${askBoardSearchDTO}">
             <select th:field="*{searchDateType}">
                 <option value="all">전체기간</option>
                 <option value="1d">1일</option>

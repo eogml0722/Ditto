@@ -121,6 +121,7 @@ public class askBoardController {
             model.addAttribute("url", "/ask/list");
             return "/fragments/alert";
         }
+
         try{
             BoardWriteDTO boardWriteDTO = askBoardService.getAskBoardDetail(id);
             model.addAttribute("boardWriteDTO", boardWriteDTO);
