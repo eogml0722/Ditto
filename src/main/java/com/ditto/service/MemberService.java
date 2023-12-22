@@ -1,5 +1,6 @@
 package com.ditto.service;
 
+import com.ditto.config.MemberPrincipalDetails;
 import com.ditto.constant.OAuthType;
 import com.ditto.dto.MemberFormDTO;
 import com.ditto.entity.Member;
@@ -66,14 +67,10 @@ public class MemberService implements UserDetailsService {
         Member member = memberRepository.findByMemberId(memberId);
 
         if(member == null) {
-            throw new UsernameNotFoundException(memberId);
+            throw new UsernameNotFoundException(memberId + "is not found.");
         }
 
-        return User.builder() //User 객체 생성을 위해 회원의 아이디,비밀번호, role을 파라미터로 넘겨줌
-                .username(member.getMemberId())
-                .password(member.getPassword())
-                .roles(member.getRole().toString())
-                .build();
+         return new MemberPrincipalDetails(member);
     }
 
     public boolean deleteMember(String id, String password) {

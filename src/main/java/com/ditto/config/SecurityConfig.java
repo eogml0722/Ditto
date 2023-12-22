@@ -1,20 +1,31 @@
 package com.ditto.config;
 
+
+import com.ditto.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private MemberService memberService;
+
+    //5.7.0부터는 오버라이드 하지않고 SecurityFilterChain을 직접 생성하여 구현
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.formLogin()
@@ -38,16 +49,12 @@ public class SecurityConfig {
                 .mvcMatchers("/ask/**", "/cart/**", "/images/**").permitAll()
                 .anyRequest().authenticated();
 
-        //OAuth2기반의 로그인을 한 경우
-//        http.oauth2Login()
-//                //인증이 필요한 URL에 접근하면 /loginForm으로 이동
-//                .loginPage("/members/login")
-//                //로그인 성공 시 메인화면
-//                .defaultSuccessUrl("/")
-//                //로그인 실패 시 /loginForm으로 이동
-//                .failureUrl("/members/login/error")
-//                //로그인 성공 후 사용자 정보를 가져온다.
-//                .userInfoEndpoint();
+        //자동로그인
+        http.rememberMe()
+                .key("ditto") //인증토큰 생성시 사용할 키
+                .tokenValiditySeconds(60*60*24*7) //인증 토큰 유효 시간(초) 1년으로 할경우 (3600*24*365) 로 설정
+                .userDetailsService(memberService) //인증 토큰 생성시 사용할 userDetailService
+                .rememberMeParameter("remember-me"); //로그인 페이지에서 사용할 파라미터 이름
 
         //인증받지 않은 사용자가 접근하면 수행
         http.exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint());
@@ -68,7 +75,4 @@ public class SecurityConfig {
         // 비밀번호 암호화
         return new BCryptPasswordEncoder();
     }
-
-
-
 }

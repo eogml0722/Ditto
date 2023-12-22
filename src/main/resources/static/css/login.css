@@ -135,7 +135,7 @@
     transition-duration:1s;
 }
 
-input[id="cb"] + label{ /*체크박스꾸미기위해 라벨을하나만들어 체크박스와 연결*/
+input[id="rememberMe"] + label{ /*체크박스꾸미기위해 라벨을하나만들어 체크박스와 연결*/
     display:inline-block;
     width:18px;
     height:18px;
@@ -145,7 +145,7 @@ input[id="cb"] + label{ /*체크박스꾸미기위해 라벨을하나만들어 �
     margin-left:1px;
 }
 
-input[id="cb"]:checked + label{
+input[id="rememberMe"]:checked + label{
     background-color:dimgray;
 }
 
@@ -157,7 +157,7 @@ input[id="cb"]:checked + label{
     transform: translate(-10%,5%);
 }
 
-input[id="cb"]{ /*체크박스안보이게*/
+input[id="rememberMe"]{ /*체크박스안보이게*/
     display:none;
 }
 
