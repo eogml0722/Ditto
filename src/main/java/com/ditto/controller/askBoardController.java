@@ -43,7 +43,7 @@ public class askBoardController {
 
     @GetMapping("/list/{page}")
     public String AskBoardList(AskBoardSearchDTO askBoardSearchDTO, @PathVariable("page") Optional<Integer> page, Model model){
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 4);
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
         Page<AskBoard> askBoards = askBoardService.getAskBoardList(askBoardSearchDTO, pageable);
 
         int now= page.get();
@@ -52,18 +52,20 @@ public class askBoardController {
         if(now == 0){
             now = 0;
         } else if (now == 1){
-            now = 4;
+            now = 5;
         } else if (now == 2){
-            now = 8;
+            now = 10;
         } else if (now == 3){
-            now = 12;
+            now = 15;
+        } else if (now == 4){
+            now = 20;
         }
 
         model.addAttribute("now", now);
         model.addAttribute("max", max);
         model.addAttribute("askBoards", askBoards);
         model.addAttribute("askBoardSearchDTO", askBoardSearchDTO);
-        model.addAttribute("maxPage", 4);
+        model.addAttribute("maxPage", 5);
         return "askBoard/askBoardList";
     }
 
@@ -76,16 +78,18 @@ public class askBoardController {
     @PostMapping("/write")
     public String writeAskBoard(@Valid BoardWriteDTO boardWriteDTO, BindingResult bindingResult, Principal principal, Model model, @RequestParam("boardImgFile")List<MultipartFile> boardImgFileList){
         if(bindingResult.hasErrors()){
-            return "askBoard/askBoardWrite";
+            model.addAttribute("message", "제목 혹은 내용에 빈칸이 있습니다.");
+            model.addAttribute("url", "/ask/list");
+            return "/fragments/alert";
         }
         try{
             Member member = memberService.detailMember(principal.getName());
             boardWriteDTO.setMember(member);
             askBoardService.writeBoard(boardWriteDTO, boardImgFileList);
         } catch (Exception e) {
-            model.addAttribute("errorMessage", "게시글 등록중 에러가 발생");
-            model.addAttribute("moveUrl", "/askBoard/askBoardList");
-            return "errorMessage";
+            model.addAttribute("message", "게시글 등록중 에러가 발생");
+            model.addAttribute("url", "/ask/list");
+            return "/fragments/alert";
         }
         return "redirect:/ask/list";
     }
@@ -102,8 +106,9 @@ public class askBoardController {
             CommentWriteDTO commentWriteDTO = askBoardService.getCommentDetail(askBoardId);
             model.addAttribute("commentDetail", commentWriteDTO);
         } catch (Exception e) {
-            model.addAttribute("errorMessage", "게시글 상세보기중 에러가 발생");
-            return "redirect:/";
+            model.addAttribute("message", "게시글 상세보기중 에러가 발생");
+            model.addAttribute("url", "/");
+            return "/fragments/alert";
         }
         return "askBoard/askBoardDetail";
     }
@@ -112,15 +117,17 @@ public class askBoardController {
     public  String askBoardUpdate(@PathVariable("askboardId") Long id, Model model, Principal principal){
 
         if(!askBoardService.validateAskBoard(id, principal.getName())){
-            model.addAttribute("errorMessage", "같은 작성자만 수정할 수 있습니다");
-            return "redirect:/ask/list";
+            model.addAttribute("message", "같은 작성자만 수정할 수 있습니다");
+            model.addAttribute("url", "/ask/list");
+            return "/fragments/alert";
         }
-
         try{
             BoardWriteDTO boardWriteDTO = askBoardService.getAskBoardDetail(id);
             model.addAttribute("boardWriteDTO", boardWriteDTO);
         } catch (Exception e) {
-            model.addAttribute("errorMessage", "없는 게시판입니다");
+            model.addAttribute("message", "존재하지 않는 게시판입니다");
+            model.addAttribute("url", "/ask/list");
+            return "/fragments/alert";
         }
         return "askBoard/askBoardEdit";
     }
@@ -129,19 +136,21 @@ public class askBoardController {
     public String askBoardUpdate(@PathVariable("askboardId") Long id, @Valid BoardWriteDTO boardWriteDTO, Principal principal, @RequestParam("boardImgFile") List<MultipartFile> boardImgFileList, Model model) {
         try {
             Member member = memberService.detailMember(principal.getName());
+            if (member.getName().equals(askBoardService.getAskBoardDetail(id).getMember().getName())) {
             BoardWriteDTO boardWriteDTO1 = askBoardService.getAskBoardDetail(id);
             boardWriteDTO1.setTitle(boardWriteDTO.getTitle());
             boardWriteDTO1.setContent(boardWriteDTO.getContent());
 
             askBoardService.updateAskBoard(boardWriteDTO1, boardImgFileList);
-            model.addAttribute("Message", "수정되었습니다!");
-            if (member.getName().equals(askBoardService.getAskBoardDetail(id).getMember().getName())) {
+            model.addAttribute("message", "수정되었습니다!");
+            model.addAttribute("url", "/ask/list");
             }
         } catch (Exception e) {
-            model.addAttribute("errorMessage", "게시글 수정중 에러");
-            return "askBoard/askBoardEdit";
+            model.addAttribute("message", "게시글 수정중 에러");
+            model.addAttribute("url", "/ask/list");
+            return "/fragments/alert";
         }
-        return "redirect:/ask/list";
+        return "/fragments/alert";
     }
 
     @PostMapping("/delete/{id}")
@@ -149,17 +158,20 @@ public class askBoardController {
         Member member = memberService.detailMember(principal.getName());
         if ("ADMIN".equals(member.getRole().toString())) {
             askBoardService.deleteAskBoard(id);
-            model.addAttribute("Message", "삭제되었습니다!");
-            return "redirect:/ask/list";
+            model.addAttribute("message", "삭제되었습니다!");
+            model.addAttribute("url", "/ask/list");
+            return "/fragments/alert";
         }
 
         if(!askBoardService.validateAskBoard(id, principal.getName())){
-            model.addAttribute("errorMessage", "같은 작성자만 수정할 수 있습니다");
-            return "redirect:/ask/list";
+            model.addAttribute("message", "같은 작성자만 수정할 수 있습니다");
+            model.addAttribute("url", "/ask/list");
+            return "/fragments/alert";
         } else {
             askBoardService.deleteAskBoard(id);
-            model.addAttribute("Message", "삭제되었습니다!");
-            return "redirect:/ask/list";
+            model.addAttribute("message", "삭제되었습니다!");
+            model.addAttribute("url", "/ask/list");
+            return "/fragments/alert";
         }
     }
 
@@ -175,8 +187,9 @@ public class askBoardController {
                 askBoardService.writeComment(id, commentWriteDTO, boardImgFileList);
             }
         } catch (Exception e) {
-            model.addAttribute("errorMessage", "답변 등록중 에러가 발생");
-            return "askBoard/askBoardList";
+            model.addAttribute("message", "답변 등록중 에러가 발생");
+            model.addAttribute("url", "/ask/list");
+            return "/fragments/alert";
         }
         return "redirect:/ask/list";
     }
@@ -193,7 +206,9 @@ public class askBoardController {
             CommentWriteDTO commentWriteDTO = askBoardService.getCommentDetail(id);
             model.addAttribute("commentWriteDTO", commentWriteDTO);
         } catch (Exception e) {
-            model.addAttribute("errorMessage", "사이트 이동중 오류가 발생하였습니다.");
+            model.addAttribute("message", "사이트 이동중 오류가 발생하였습니다.");
+            model.addAttribute("url", "/ask/list");
+            return "/fragments/alert";
         }
         return "askBoard/askCommentEdit";
     }
@@ -206,15 +221,16 @@ public class askBoardController {
             commentWriteDTO1.setMember(member);
             commentWriteDTO1.setContent(commentWriteDTO.getContent());
             if ("ADMIN".equals(member.getRole().toString())) {
-                model.addAttribute("errorMessage", "관리자만 수정가능");
-                model.addAttribute("Message", "수정되었습니다!");
                 askBoardService.updateComment(commentWriteDTO1, boardImgFileList);
+                model.addAttribute("message", "수정되었습니다!");
+                model.addAttribute("url", "/ask/list");
             }
         } catch (Exception e) {
-            model.addAttribute("errorMessage", "답변 수정중 에러");
-            return "askBoard/askCommentEdit";
+            model.addAttribute("message", "답변 수정중 에러");
+            model.addAttribute("url", "/ask/list");
+            return "/fragments/alert";
         }
-        return "redirect:/ask/list";
+        return "/fragments/alert";
     }
 
     @PostMapping("/admin/delete/{id}")
@@ -223,11 +239,13 @@ public class askBoardController {
         if ("ADMIN".equals(member.getRole().toString())) {
             askBoardService.deleteComment(id);
         } else {
-            model.addAttribute("errorMessage", "관리자만 삭제가능");
-            return "redirect:/ask/list";
+            model.addAttribute("message", "관리자만 삭제가능");
+            model.addAttribute("url", "/ask/list");
+            return "/fragments/alert";
         }
-        model.addAttribute("Message", "삭제되었습니다!");
-        return "redirect:/ask/list";
+        model.addAttribute("message", "삭제되었습니다!");
+        model.addAttribute("url", "/ask/list");
+        return "/fragments/alert";
     }
 
 }

@@ -16,7 +16,7 @@
                         <li><a href="#">공지사항</a></li>
                         <li><a href="/menu">메뉴</a></li>
                         <li><a href="#">주문</a></li>
-                        <li sec:authorize="isAuthenticated()"><a href="#">장바구니</a></li>
+                        <li sec:authorize="isAuthenticated()"><a href="/cart">장바구니</a></li>
                         <li sec:authorize="isAuthenticated()"><a href="/ask/list">문의게시판</a></li>
                         <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')"><a href="/admin/item/new">상품등록</a></li>
                         <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')"><a href="/admin/items">상품관리</a></li>

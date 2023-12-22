@@ -1,5 +1,6 @@
 package com.ditto.service;
 
+import com.ditto.constant.ItemCategory;
 import com.ditto.dto.*;
 import com.ditto.entity.Item;
 import com.ditto.entity.ItemImg;
@@ -99,4 +100,21 @@ public class ItemService {
     public Page<MainItemDTO> getMainItemPage(ItemSearchDTO itemSearchDTO, Pageable pageable) {
         return itemRepository.getMainItemPage(itemSearchDTO, pageable);
     }
+
+    // 카테고리별 아이템 분류
+    @Transactional(readOnly = true)
+    public ItemCategory getCategory(String category){
+        ItemCategory itemCategory = null;
+        if(category.equals("COFFEE")){
+            itemCategory = ItemCategory.COFFEE;
+        } else if (category.equals("BEVERAGE")) {
+            itemCategory = ItemCategory.BEVERAGE;
+        } else if (category.equals("DESSERT")) {
+            itemCategory = ItemCategory.DESSERT;
+        } else if (category.equals("FRAPPE")) {
+            itemCategory = ItemCategory.FRAPPE;
+        }
+        return itemCategory;
+    }
+
 }
