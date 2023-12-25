@@ -29,7 +29,6 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 @Transactional
 @SpringBootTest
-//테스트 서버로 테스트 실행
 @TestPropertySource(locations ="classpath:application.properties")
 class BoardServiceTest {
     @Autowired
