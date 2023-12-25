@@ -56,6 +56,20 @@ function showRightPageMenu5() {
 	document.getElementById("rightPageMenu5").style.display = "block";
 };
 
+//탭 메뉴 기능
+function change_btn(e) {
+	var btns = document.querySelectorAll(".chgbtn");
+	btns.forEach(function(btn, i) {
+		if(e.currentTarget == btn) {
+			btn.classList.add("active");
+		}
+		else {
+			btn.classList.remove("active");
+		}
+	});
+	console.log( e.currentTarget );
+}
+
 // 비밀번호 유효성 검사
 function passwordChk() {
 	var pw1 = document.getElementById("newPassword")
