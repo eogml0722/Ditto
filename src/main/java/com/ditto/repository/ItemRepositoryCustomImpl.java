@@ -74,7 +74,6 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
 
     @Override
     public Page<Item> getAdminItemPage(ItemSearchDTO itemSearchDTO, Pageable pageable) {
-
         //쿼리를 실행해서 조회된 항목을 가져옴
         List<Item> content = queryFactory
                 .selectFrom(QItem.item)
@@ -112,6 +111,8 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
 
     @Override
     public Page<MainItemDTO> getMainItemPage(ItemSearchDTO itemSearchDTO, Pageable pageable) {
+
+        System.out.println("impl테스트 : " + itemSearchDTO.getSearchCategory());
         //Querydsl을 사용하기위해서 Q클래스 선언
         QItem item = QItem.item;
         QItemImg itemImg = QItemImg.itemImg;
@@ -128,6 +129,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
                 .from(itemImg)
                 .join(itemImg.item, item) //itemImg와 item을 조인
                 .where(itemImg.repImgYn.eq("Y")) //대표이미지만 불러옴
+                .where(searchCategoryEq(itemSearchDTO.getSearchCategory()))
                 .orderBy(item.id.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())

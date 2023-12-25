@@ -156,12 +156,18 @@ public class MemberController {
             Member oldmember = memberRepository.findByMemberId(principal.getName());
             memberFormDTO.setPassword(oldmember.getPassword());
             Member member = Member.createMember(memberFormDTO, passwordEncoder);
+            member.setPassword(oldmember.getPassword());
             memberService.updateMember(member);
+
+            model.addAttribute("message", "회원정보가 수정되었습니다.");
+            model.addAttribute("url", "/members/mypage");
+
+            return "/fragments/alert";
         } catch (Exception e) {
-            model.addAttribute("errorMessage", "정보변경중 오류가 발생하였습니다.");
-            return "member/MyPage";
+            model.addAttribute("message", "정보변경중 오류가 발생하였습니다.");
+            model.addAttribute("url", "/members/mypage");
+            return "/fragments/alert";
         }
-        return "redirect:/";
     }
 
     @PostMapping(value="/pwupdate")
@@ -176,31 +182,41 @@ public class MemberController {
             MemberFormDTO memberFormDTO1 = memberService.updatePassword(memberFormDTO, oldPassword);
             Member member = Member.createMember(memberFormDTO1, passwordEncoder);
             memberService.updateMember(member);
+            model.addAttribute("message", "비밀번호가 변경되었습니다 다시 로그인해주세요!");
+            model.addAttribute("url", "/");
+            SecurityContextHolder.clearContext();
         } catch (Exception e) {
-            model.addAttribute("errorMessage", "비밀번호를 다시 확인해주세요!");
-            return "member/MyPage";
+            model.addAttribute("message", "비밀번호 변경중 오류가 발생하였습니다.");
+            model.addAttribute("url", "/members/mypage");
+            return "/fragments/alert";
         }
-        return "redirect:/";
+        return "/fragments/alert";
     }
 
     @PostMapping(value="/delete")
     public String MemberDelete(@RequestParam String password, Model model, Principal principal){
         boolean chk = memberService.deleteMember(principal.getName(), password);
         if(chk){
-            model.addAttribute("Message", "삭제되었습니다");
+            model.addAttribute("message", "회원탈퇴가 완료되었습니다.");
+            model.addAttribute("url", "/");
             SecurityContextHolder.clearContext();
-            return "redirect:/";
+            return "/fragments/alert";
         } else  {
-            model.addAttribute("errorMessage", "비밀번호가 일치하지않습니다.");
-            return "redirect:/members/mypage";
+            model.addAttribute("message", "비밀번호가 일치하지않습니다.");
+            model.addAttribute("url", "/members/mypage");
+            return "/fragments/alert";
         }
     }
 
     @GetMapping(value="/test/test")
     public String CreateMember(){
-        Member member = Member.testMember(passwordEncoder);
-        memberRepository.save(member);
-        return "redirect:/";
+        Member membert = Member.testMember(passwordEncoder);
+        memberRepository.save(membert);
+        Member membert2 = Member.testMember2(passwordEncoder);
+        memberRepository.save(membert2);
+        Member memberm = Member.manageMember(passwordEncoder);
+        memberRepository.save(memberm);
+        return "member/memberLoginForm";
     }
 
 
