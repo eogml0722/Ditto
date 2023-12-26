@@ -102,21 +102,38 @@ function updateMember(){
     var regadd = /^[가-힣]+$/;
     var regmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+    if (name.value() == ""){
+        alert("이름을 입력해주세요")
+        name.focus();
+        return false;
+    }
+
     if (!regName.test(name.value)) {
         alert("이름은 한글 영어만 가능합니다")
         name.focus();
         return false;
     }
+
+    if (mobile.value == ""){
+        alert("휴대전화를 입력해주세요")
+        mobile.focus;
+        return false;
+    }
+
     if (!phExp.test(mobile.value)) {
         alert("올바른 휴대폰 번호를 입력해 주세요.")
         mobile.focus();
         return false;
     }
-    if (zipcode.value == "") {
+
+    if (zipcode.value == 0) {
     	alert("우편번호를 입력해 주세요.")
     	zipcode.focus();
     	return false;
-    } else if (detailAddress.value == 0) {
+    } else if (streetAddress.value= ""){
+        alert("주소를 입력해주세요")
+        return false;
+    } else if (detailAddress.value == "") {
     	alert("나머지 주소를 입력해 주세요.")
     	detailAddress.focus();
     	return false;
@@ -125,12 +142,21 @@ function updateMember(){
     	detailAddress.focus();
     	return false;
     }
+
+    if(chkMail.value == ""){
+        alert("이메일을 입력해주세요")
+        chkMail.focus();
+        return false;
+    }
     if (!regmail.test(chkMail.value)) {
 	    alert("입력하신 이메일은 사용할 수 없습니다.")
 	    chkMail.focus();
 	    return false;
 	}
-    return true;
+
+	alert("끝")
+
+	 document.updateForm.submit();
 }
 
 
