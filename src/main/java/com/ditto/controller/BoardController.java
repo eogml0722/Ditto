@@ -2,10 +2,14 @@ package com.ditto.controller;
 
 import com.ditto.dto.BoardDTO;
 import com.ditto.dto.BoardFormDTO;
+import com.ditto.dto.OrderDTO;
 import com.ditto.entity.Board;
 import com.ditto.repository.BoardRepository;
 import com.ditto.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,26 +35,35 @@ public class BoardController {
     private final BoardRepository boardRepository;
 
     @GetMapping(value = {"/{pageNum}", "/"})//Optional = null 체크알아서 해줌
-    public String goBoard(Model model, @PathVariable("pageNum") Optional<Integer> pageNum,
-                        BoardFormDTO boardFormDTO) {
-            List<Board> boardList = boardRepository.findAllByOrderByIdDesc();
-        if( boardFormDTO.getSearchField() != null){
-            boardList = boardRepository.findBySearch(boardFormDTO.getSearchField(),boardFormDTO.getSearchOption(),boardFormDTO.getBoardCategory());
-        }
+    public String goBoard(Model model, @PathVariable("pageNum") Optional<Integer> pageNum) {
+//        if( boardFormDTO.getSearchField() != null){
+//            boardList = boardRepository.findBySearch(boardFormDTO.getSearchField(),boardFormDTO.getSearchOption(),boardFormDTO.getBoardCategory());
+//        }
+
+        Pageable pageable = PageRequest.of((pageNum.isPresent() ? pageNum.get() -1 : 0 ), 5);
+
+        Page<Board> boardPage = boardService.findAllByOrderByIdDesc(pageable);
+
+
+        model.addAttribute("boardPage", boardPage);
+        model.addAttribute("maxPage", 10);
+
 
         //maxPage : 페이지 최대 갯수
-        final Integer maxPage = 10;
+//        final Integer maxPage = 10;
 
-        if (!pageNum.isEmpty()) {
-            model.addAttribute("pageNum", pageNum.get());
-        } else {
-            model.addAttribute("pageNum", new Integer(1));
-        }
-        model.addAttribute("boardList", boardList);
-        model.addAttribute("maxPage", maxPage);
-        model.addAttribute("totalPage", (int) (Math.ceil((double) boardList.size() / 10)));
+//        if (!pageNum.isEmpty()) {
+//            model.addAttribute("pageNum", pageNum.get());
+//        } else {
+//            model.addAttribute("pageNum", new Integer(1));
+//        }
+//        model.addAttribute("boardList", boardList);
+//        model.addAttribute("maxPage", maxPage);
+//        model.addAttribute("totalPage", (int) (Math.ceil((double) boardList.size() / 10)));
         return "/board/board";
     }
+
+
 
 
 
