@@ -8,6 +8,8 @@ import com.ditto.repository.BoardRepository;
 import com.ditto.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -102,6 +104,13 @@ try {
             board.setContent(boardDTO.getContent());
             board.setBoardCategory(boardDTO.getBoardCategory());
 
-
     }
+
+
+    public Page<Board> findAllByOrderByIdDesc(Pageable pageable){
+        return boardRepository.findAllByOrderByIdDesc(pageable);
+    }
+
+
+
 }
