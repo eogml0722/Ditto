@@ -3,6 +3,8 @@ package com.ditto.repository;
 import com.ditto.constant.BoardCategory;
 import com.ditto.entity.Board;
 import com.ditto.entity.Member;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -16,7 +18,7 @@ import java.util.Optional;
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
 
-    List<Board> findAllByOrderByIdDesc();
+    Page<Board> findAllByOrderByIdDesc(Pageable pageable);
 
     //작성자의 글 목록 보기
     @Query("SELECT b FROM Board b WHERE (:member IS NULL OR b.member = :member)" +
