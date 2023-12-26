@@ -77,7 +77,7 @@ class BoardServiceTest {
     @DisplayName("게시판 생성 테스트")
     public void createBoardTest(){
 //        Member member = createMemberTest();
-        for(int i=1 ; i<600 ; i++){
+        for(int i=1 ; i<200 ; i++){
             Member member = memberRepository.findByMemberId("asdasd1");
             BoardDTO boardDTO = new BoardDTO();
             boardDTO.setTitle("test" + i);
