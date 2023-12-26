@@ -54,9 +54,8 @@
                 </thead>
 
                 <tbody>
-                <!-- page = boardList.size()/10 else boardList.size()/10 +1 -->
-                    <th:block th:each="board, boardStat : ${boardList}">
-                        <tr th:if="${boardStat.count>10*(pageNum-1) && boardStat.count<=10*(pageNum)}">
+                    <th:block th:each="board : ${boardPage.content}">
+                        <tr>
                             <td>
                                 <span th:text="${board.id}" ></span>
                             </td>
@@ -77,15 +76,32 @@
                 </tbody>
             </table>
         </div><!-- 메인3 테이블 끝-->
-        <ul th:with="start=${((pageNum-1)/maxPage)*maxPage+1}, end=(${ start+maxPage-1 < totalPage ? start+maxPage-1 : totalPage}) ">
-
-            <li><a href="/board/1" > << </a></li>
-            <li><a th:href="'/board/'+${pageNum >10 ? pageNum-10 : 1}" > < </a></li>
-            <li th:each="page : ${#numbers.sequence(start, end)}" th:if="maxPage" th:classappend="${pageNum == page} ? 'pageNow' : ''">
+        <ul th:with="start=${((boardPage.number)/maxPage)*maxPage+1}, end=(${ start+maxPage-1 < boardPage.totalPages ? start+maxPage-1 : boardPage.totalPages}) ">
+<!--            <li><a href="/board/1" > << </a></li>-->
+            <li class="page-item" th:classappend="${start eq 1}?'disabled':''">
+                <a href="/board/1" aria-label='Previous' class="page-link">
+                    <span aria-hidden='true'> << </span>
+                </a>
+            </li>
+            <li class="page-item" th:classappend="${start eq 1}?'disabled':''">
+                <a th:href="@{'/board/' + ${start-1}}" aria-label='Previous' class="page-link">
+                    <span aria-hidden='true'> < </span>
+                </a>
+            </li>
+            <li th:each="page : ${#numbers.sequence(start, end)}" th:if="maxPage" th:classappend="${boardPage.number == page-1} ? 'pageNow' : ''">
                 <a th:href="'/board/'+${page}"><span th:text="${page}"></span></a>
             </li>
-            <li><a th:href="'/board/'+${pageNum == totalPage  ? totalPage : pageNum+10}" > > </a></li>
-            <li><a th:href="'/board/'+${totalPage}" > >> </a></li>
+            <li class="page-item" th:classappend="${end ge boardPage.totalPages}?'disabled':''">
+                <a th:href="@{'/board/' + ${end+1}}" aria-label='Next' class="page-link">
+                    <span aria-hidden='true'> > </span>
+                </a>
+            </li>
+            <li class="page-item" th:classappend="${end ge boardPage.totalPages}?'disabled':''">
+                <a th:href="@{'/board/' + ${boardPage.totalPages}}" aria-label='Next' class="page-link">
+                    <span aria-hidden='true'> >> </span>
+                </a>
+            </li>
+<!--            <li th:if="boardPage.number == boardPage.totalPages"  th:classappend="${}"><a th:href="'/board/'+${boardPage.totalPages}" > >> </a></li>-->
         </ul><!--페이지 리스트 끝-->
         <div id="searchBox">
             <form >
