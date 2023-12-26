@@ -15,15 +15,32 @@ h4 {
 }
 
 /*몸통*/
+
+.content {
+    height:600px;
+}
 #contents{
-	width:1280px;
-	margin:0 auto;
-	padding-bottom: 20px;
-	margin-top:70px;
+	width:1550px;
+	margin-top:180px;
+	margin-left:180px;
 }
 
 #MyPage{
 	display:flex;
+}
+
+#myPage-contents {
+    margin-top:150px;
+    margin-left:180px;
+    width:1550px;
+    height:600px;
+}
+
+#showRightPage {
+    font-size: 25px;
+    border-bottom: 1px solid #ebebeb;
+    padding-bottom: 10px;
+    margin-bottom: 60px;
 }
 
 #leftPage > h1{
@@ -36,31 +53,35 @@ h4 {
 }
 
 #leftPage{
+    display:flex;
 	margin-right:25px;
-	margin-left:25px;
 }
 
 #leftPageMenu{
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	margin: 0 auto;
+	margin: 13px auto;
 }
 
 .chgbtn{
-	border:2px solid black;
+	border:2px solid #333;
 	background-color: white;
-	width:140px;
-	height:30px;
+	width:200px;
+	height:40px;
 	margin-bottom:5px;
 	cursor:pointer;
+	border:none;
+}
+
+.chgbtn:hover, .chgbtn.active {
+    background: #333;
+    color:white;
 }
 
 #rightPage{
-    width:960px;
-	margin-top:35px;
-	margin:0 auto;
-	padding: 0 25px;
+    margin-top: 10px;
+    margin-left: 80px;
 }
 
 #rightPageMenu{
@@ -78,23 +99,67 @@ h4 {
 	display:flex;
 }
 
-#box3{
+#box2, #box3{
     margin-top:15px;
 }
 
 .box2-1{
-	width:100px;
-	height:75px;
-	border : 1px solid black;
-	text-align: center;
-	margin-left: 1px;
-	padding-top:25px;
+    width: 100px;
+    height: 50px;
+    border: 1px solid black;
+    text-align: center;
+    margin-left: 1px;
+    padding-top: 12px;
+}
+.board-h1 {
+    font-size:25px;
+    border-bottom:1px solid #ebebeb;
+    padding-bottom:10px;
+    margin-bottom: 50px;
 }
 
 table {
 	border-collapse: collapse;
-	text-align: center;
-	width:600px;
+    text-align: center;
+    margin-left: 170px;
+    width: 1200px;
+}
+
+.order-table {
+    margin:0;
+}
+
+.numberPage {
+    margin-left:50%;
+}
+
+.numberPage li {
+    float:left;
+}
+
+.search-Input{
+    margin-top: 100px;
+    margin-left: 33%;
+}
+
+.write-button{
+    width: 100px;
+    height: 30px;
+    color: white;
+    background-color: #222;
+}
+
+#searchBtn {
+    width: 80px;
+    background-color: #222;
+    color: white;
+}
+
+.write-table button{
+    width: 100px;
+    height: 30px;
+    color: white;
+    background-color: #222;
 }
 
 td, th {
@@ -138,6 +203,8 @@ td, th {
 	margin-right:10px;
 	width: 150px;
 	height: 50px;
+	background-color:#333;
+	color:white;
 }
 
 #rightPageMenu2{
@@ -150,8 +217,27 @@ td, th {
 
 #rightPageMenu4{
 	display: none;
+	margin-top:10px;
+}
+
+#rightPageMenu4 button {
+    width:80px;
+    height: 30px;
+    background-color:#333;
+    color: white;
+    border:none;
+}
+
+.order-table{
+    margin-top:30px;
 }
 
 #rightPageMenu5{
 	display: none;
 }
+
+#rightPageMenu5 table {
+    margin-top:20px;
+    margin-left:0;
+}
+

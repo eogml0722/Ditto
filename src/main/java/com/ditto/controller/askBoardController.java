@@ -44,7 +44,6 @@ public class askBoardController {
     @GetMapping("/list/{page}")
     public String AskBoardList(AskBoardSearchDTO askBoardSearchDTO, @PathVariable("page") Optional<Integer> page, Model model){
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
-        
         Page<AskBoard> askBoards = askBoardService.getAskBoardList(askBoardSearchDTO, pageable);
 
         int now= page.get();
@@ -122,6 +121,7 @@ public class askBoardController {
             model.addAttribute("url", "/ask/list");
             return "/fragments/alert";
         }
+
         try{
             BoardWriteDTO boardWriteDTO = askBoardService.getAskBoardDetail(id);
             model.addAttribute("boardWriteDTO", boardWriteDTO);
