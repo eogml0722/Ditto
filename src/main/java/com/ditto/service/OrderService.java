@@ -18,6 +18,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.util.StringUtils;
 
 import java.security.Principal;
 import java.util.*;
@@ -38,25 +39,25 @@ public class OrderService {
         }
         List<OrderDTO> orderDTOList = new ArrayList<>();
 
-        Page<Order> orderPage = orderRepository.findByMemberMemberId(memberId, pageable);
+        Page<Order> orderPage = orderRepository.findByMemberMemberIdOrderByRegTimeDesc(memberId, pageable);
 
         for (Order order : orderPage.getContent()) {
-            /*
+
             OrderDTO orderDTO = new OrderDTO();
             orderDTO.setId(order.getId());
             orderDTO.setRegTime(order.getRegTime());
             orderDTO.setOrderStatus(order.getOrderStatus());
             orderDTO.setOrderItemList(order.getOrderItemList());
             orderDTOList.add(orderDTO);
-             */
-            orderDTOList.add(order.createOrderDTO());
+
+//            orderDTOList.add(order.createOrderDTO());
         }
         return new PageImpl<>(orderDTOList, pageable, orderPage.getTotalElements());
     }
 
 
     //주문하기
-    public void saveOrder(Principal principal,OrderItemDTO orderItemDTO){
+    public Order saveOrder(Principal principal,OrderItemDTO orderItemDTO){
         //아이템아이디 , 수량, 사용자 정보
         Order order = new Order();
         order.setOrderStatus(OrderStatus.WAITDEPOSIT);
@@ -89,8 +90,19 @@ public class OrderService {
         order.setOrderItemList(orderItemList);
 
         orderRepository.save(order);
+        return order;
     }
 
+
+    //주문취소
+    public void cancelOrder(Principal principal, Long orderId){
+
+        Order order = orderRepository.findById(orderId).orElseThrow();
+
+        if(StringUtils.equals(principal.getName(), order.getMember().getMemberId())) {
+            order.cancelOrder();
+        }
+    }
 
 
 }
