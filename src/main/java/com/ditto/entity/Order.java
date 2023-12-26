@@ -26,6 +26,7 @@ public class Order extends BaseEntity{
     private List<OrderItem> orderItemList = new ArrayList<>();
 
     //구매상태. (입금대기, 주문완료, 배송준비중, 배송중, 배송완료(자동구매 카운트 시작), 구매확정)
+    @Enumerated(value = EnumType.STRING)
     private OrderStatus orderStatus;
 
     //지연로딩
@@ -45,5 +46,11 @@ public class Order extends BaseEntity{
     //매핑
     public OrderDTO createOrderDTO(){
         return modelMapper.map(this, OrderDTO.class);
+    }
+
+
+    //주문취소 메서드(주문상태 변경)
+    public void cancelOrder(){
+        this.orderStatus = OrderStatus.CANCEL;
     }
 }
