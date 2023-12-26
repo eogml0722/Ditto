@@ -5,6 +5,7 @@ import com.ditto.constant.Role;
 import com.ditto.dto.MemberFormDTO;
 import com.ditto.repository.MemberRepository;
 import lombok.*;
+import org.apache.ibatis.annotations.One;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.GenericGenerator;
@@ -72,7 +73,7 @@ public class Member extends AuditingEntity{
         member.setName(memberFormDTO.getName());
         member.setPhoneNum(memberFormDTO.getPhoneNum());
         member.setEmail(memberFormDTO.getEmail());
-        member.setRole(Role.ADMIN);
+        member.setRole(Role.USER);
 
         member.setZipcode(memberFormDTO.getZipcode());
         member.setStreetAddress(memberFormDTO.getStreetAddress());
@@ -91,12 +92,46 @@ public class Member extends AuditingEntity{
         member.setName("김그린");
         member.setPhoneNum("010-1234-5678");
         member.setEmail("test@mail.com");
-        member.setRole(Role.ADMIN);
+        member.setRole(Role.USER);
 
         member.setZipcode("12345");
         member.setStreetAddress("12345");
         member.setDetailAddress("주소");
         String password = passwordEncoder.encode("xptmxm12!");
+        member.setPassword(password);
+
+        return member;
+    }
+
+    public static Member testMember2(PasswordEncoder passwordEncoder){
+        Member member = new Member();
+        member.setMemberId("test123");
+        member.setName("김그린2");
+        member.setPhoneNum("010-1234-5678");
+        member.setEmail("test2@mail.com");
+        member.setRole(Role.USER);
+
+        member.setZipcode("12345");
+        member.setStreetAddress("12345");
+        member.setDetailAddress("주소");
+        String password = passwordEncoder.encode("xptmxm123!");
+        member.setPassword(password);
+
+        return member;
+    }
+
+    public static Member manageMember(PasswordEncoder passwordEncoder){
+        Member member = new Member();
+        member.setMemberId("aoslwj12");
+        member.setName("매니저");
+        member.setPhoneNum("010-1234-5678");
+        member.setEmail("manage@mail.com");
+        member.setRole(Role.ADMIN);
+
+        member.setZipcode("12345");
+        member.setStreetAddress("12345");
+        member.setDetailAddress("주소");
+        String password = passwordEncoder.encode("aoslwj12!");
         member.setPassword(password);
 
         return member;

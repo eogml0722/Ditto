@@ -10,13 +10,28 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 </th:block>
 
-<div layout:fragment="content">
+<!-- 사용자 스크립트 추가 -->
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
 
+    </script>
+</th:block>
+
+<div layout:fragment="content">
+    <form th:action="@{/menu}" role="form" method="get" th:object="${items}">
     <div>
         <img class="menuImg" src="/img/main/dessertCoffee.png">
-        <input type="hidden" name="searchQuery" th:value="${itemSearchDTO.searchQuery}">
-        <div th:if="${not #strings.isEmpty(itemSearchDTO.searchQuery)}" class="center">
-            <p class="h3 font-weight-bold" th:text="${itemSearchDTO.searchQuery} + '검색 결과'"></p>
+
+        <div class="statusMenu">
+            <table border="1" class="moveMenuStatus">
+                <tr>
+                    <td th:onclick="|location.href='@{/menu}'|">전체</td>
+                    <td th:onclick="|location.href='@{/menu/(category='COFFEE')}'|" th:name="category">커피</td>
+                    <td th:onclick="|location.href='@{/menu/(category='BEVERAGE')}'|"  th:name="category">음료</td>
+                    <td th:onclick="|location.href='@{/menu/(category='DESSERT')}'|"  th:name="category">디저트</td>
+                    <td th:onclick="|location.href='@{/menu/(category='FRAPPE')}'|"  th:name="category">프라페</td>
+                </tr>
+            </table>
         </div>
 
         <div class="row no-gutters">
@@ -46,7 +61,7 @@
                 </li>
 
                 <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${items.number eq page-1}?'active':''">
-                    <a th:href="@{'/' +'?searchQuery=' + ${itemSearchDTO.searchQuery} + '&page=' + ${page-1}}" th:inline="text" class="page-link">[[${page}]]</a>
+                    <a th:href="@{'/menu' +'?searchQuery=' + ${itemSearchDTO.searchQuery} + '&page=' + ${page-1}}" th:inline="text" class="page-link">[[${page}]]</a>
                 </li>
 
                 <li class="page-item" th:classappend="${items.number+1 ge items.totalPages}?'disabled':''">
@@ -58,5 +73,5 @@
             </ul>
         </div>
     </div>
-
+    </form>
 </div>

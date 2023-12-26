@@ -31,7 +31,7 @@ public class SecurityConfig {
                 //모든 사용자가 인증없이 접근 가능
                 .mvcMatchers("/", "/menu").permitAll()
                 .mvcMatchers("/css/**", "/js/**", "/members/**", "/img/**", "/extras/**",
-                                      "/check-email-token","/email-login", "/check-email-login", "/login-link", "/login-by-email", "/menu").permitAll()
+                                      "/check-email-token","/email-login", "/check-email-login", "/login-link", "/login-by-email", "/menu/**").permitAll()
                 //admin으로 시작하는 경로는 ADMIN만 가능
                 .mvcMatchers("/admin/**").hasRole("ADMIN")
                 //나머지는 모두 인증을 요청

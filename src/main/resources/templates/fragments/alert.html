@@ -107,6 +107,13 @@
 
         </script>
 
+        <!-- 게시판 알림창 -->
+        <script th:if="${message}" type="text/javascript">
+            var message = '[[${message}]]';
+            alert(message);
+            location.href='[[${url}]]';
+        </script>
+
     </section>
 </body>
 </html>

@@ -81,6 +81,22 @@ public class AskBoardService {
 
     @Transactional
     public void deleteAskBoard(Long id) {
+
+        if (askCommentRepository.findByAskBoardId(id) == null) {
+        } else if (askCommentRepository.findByAskBoardId(id) != null) {
+            AskComment askComment = askCommentRepository.findByAskBoardId(id);
+            Long commentid = askComment.getId();
+            AskBoardImageDTO askBoardImageDTO = boardImageRepository.findByAskCommentId(commentid);
+            Long imgid = askBoardImageDTO.getId();
+            String sname = askBoardImageDTO.getSname();
+            String url = "D:/ditto/board/" + sname;
+            try{
+                fileService.deleteFile(url);
+                boardImageRepository.deleteById(imgid);
+            } catch (Exception e) {
+            }
+        }
+
         AskBoard askBoard = askBoardRepository.findById(id).orElseThrow(() -> {
             return new IllegalArgumentException("Board Id를 찾을 수 없습니다!");
         });
@@ -88,8 +104,6 @@ public class AskBoardService {
         Long imgid = askBoardImageDTO.getId();
         String sname = askBoardImageDTO.getSname();
         String url = "D:/ditto/board/" + sname;
-        System.out.println("serv : " + url);
-
         askBoardRepository.deleteById(id);
         try{
             fileService.deleteFile(url);
@@ -162,9 +176,9 @@ public class AskBoardService {
         AskBoardImageDTO askBoardImageDTO = boardImageRepository.findByAskCommentId(commentid);
 
         try{
-        Long imgid = askBoardImageDTO.getId();
-        String sname = askBoardImageDTO.getSname();
-        String url = "D:/ditto/board/" + sname;
+            Long imgid = askBoardImageDTO.getId();
+            String sname = askBoardImageDTO.getSname();
+            String url = "D:/ditto/board/" + sname;
             fileService.deleteFile(url);
             boardImageRepository.deleteById(imgid);
         } catch (Exception e) {
@@ -179,7 +193,6 @@ public class AskBoardService {
         AskBoard askBoard = askBoardRepository.findById(askboardid).orElseThrow(EntityNotFoundException::new);
 
         Member savedMember = askBoard.getMember();
-
 
         if(!StringUtils.equals(curMember.getEmail(), savedMember.getEmail())){
             return false;

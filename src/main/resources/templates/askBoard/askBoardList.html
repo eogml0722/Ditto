@@ -50,7 +50,7 @@
                     <td th:text="${max-now-status.index}"></td>
                     <td><a th:text="${askBoards.title}" th:href="@{'/ask/detail/'+${askBoards.id}}"></a></td>
                     <td th:text="${askBoards.member.getName}"></td>
-                    <td th:text="${#temporals.format(askBoards.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td th:text="${#temporals.format(askBoards.regTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
                     <td th:text="${askBoards.askStatus == T(com.ditto.constant.AskStatus).NOT_ASK} ? '답변대기' : '답변완료'"></td>
                 </tr>
             </tbody>
@@ -76,7 +76,7 @@
                     <a th:href="@{'/ask/list/'+${page - 1}}" th:inline="text">[[${page}]]</a>
                 </li>
 
-                <li th:if="${askBoards.number != askBoards.totalPages - 1}">
+                <li th:if="${askBoards.number != askBoards.totalPages - 1 and max>4}">
                     <a th:href="@{'/ask/list/'+${askBoards.number + 1}}">
                         <span>다음</span>
                     </a>
@@ -99,7 +99,7 @@
             </select>
             <select th:field="*{searchBy}">
                 <option value="title">제목</option>
-                <option value="member.getName">작성자</option>
+                <option value="createdBy">작성자</option>
             </select>
             <input th:field="*{searchQuery}" type="text" placeholder="검색어를 입력해주세요">
             <button id="searchBtn" type="submit">검색</button>
