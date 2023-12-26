@@ -5,6 +5,7 @@ import com.ditto.constant.ItemSellStatus;
 import com.ditto.entity.Item;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.modelmapper.ModelMapper;
 
 import javax.validation.constraints.NotBlank;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@ToString
 public class ItemFormDTO {
 
     private Long id;

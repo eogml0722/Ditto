@@ -1,11 +1,13 @@
 package com.ditto.controller;
 
+import com.ditto.constant.ItemCategory;
 import com.ditto.dto.ItemFormDTO;
 import com.ditto.dto.ItemSearchDTO;
 import com.ditto.dto.MainItemDTO;
 import com.ditto.entity.Item;
 import com.ditto.service.ItemService;
 import lombok.RequiredArgsConstructor;
+import org.codehaus.groovy.transform.SourceURIASTTransformation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -136,11 +139,16 @@ public class ItemController {
     }
 
     @GetMapping(value="/menu")
-    public String main(ItemSearchDTO itemSearchDTO, Optional<Integer> page, Model model) {
+    public String main(@RequestParam(required = false, value="category") String category, ItemSearchDTO itemSearchDTO, Optional<Integer> page, Model model) {
         //페이지번호를 출력하기 위한 계산
         //페이지가 존재하면 해당 페이지를 사용하고 존재하지 않으면 0페이지
         //한 페이지당 6개씩 출력
         Pageable pageable = PageRequest.of(page.isPresent() ?page.get()  : 0, 8);
+
+        if(category != null) {
+            ItemCategory itemCategory = itemService.getCategory(category);
+            itemSearchDTO.setSearchCategory(itemCategory);
+        }
 
         //itemService를 사용하여 아이템을 가져옴
         Page<MainItemDTO> items = itemService.getMainItemPage(itemSearchDTO, pageable);
@@ -150,7 +158,6 @@ public class ItemController {
         model.addAttribute("itemSearchDTO", itemSearchDTO);
         model.addAttribute("maxPage", 5);
         return "item/menu";
-
     }
 
     @GetMapping(value="/item/{itemId}")

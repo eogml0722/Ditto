@@ -1,14 +1,10 @@
 @charset "UTF-8";
 
-.content {
-   height:800px;
-}
 .menuImg {
-    margin-bottom : 80px;
+    margin-bottom : 35px;
 }
 
 .row {
-
     width: 1150px;
     margin: 0 auto;
     margin-bottom:40px;
@@ -25,4 +21,29 @@
 .page-item.active .page-link {
     background-color:#343a40;
     border-color:#343a40;
+}
+
+.card-img-top{
+   width:285.5px;
+   height:285.5px;
+}
+
+.statusMenu{
+    padding-bottom:35px;
+}
+
+.moveMenuStatus{
+    margin:0 auto;
+    text-align:center;
+    height:40px;
+    width:650px;
+    table-layout: fixed;
+    border:1px sold black;
+}
+
+.moveMenuStatus tr td:hover{
+    background-color:black;
+    color:white;
+    transition: 1s;
+    cursor:pointer;
 }
