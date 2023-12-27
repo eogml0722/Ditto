@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.security.Principal;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -106,37 +107,33 @@ public class MemberService implements UserDetailsService {
         mailMessage.setText("/members/login-by-email?token=" + member.getEmailToken() + "&email=" + member.getEmail());
         mailSender.send(mailMessage);
     }
-    public Member updateMember(Member member){
-        String id = memberRepository.findByMemberId(member.getMemberId()).getMemberId();
-        member.setMemberId(id);
-        member.setName(member.getName());
-        member.setPhoneNum(member.getPhoneNum());
-        member.setZipcode(member.getZipcode());
-        member.setStreetAddress(member.getStreetAddress());
-        member.setDetailAddress(member.getDetailAddress());
-        member.setPassword(member.getPassword());
-        member.setEmail(member.getEmail());
+    @Transactional
+    public Member updateMember(MemberFormDTO memberFormDTO, Principal principal){
+        Member member = memberRepository.findByMemberId(principal.getName());
+
+        member.setName(memberFormDTO.getName());
+        member.setPhoneNum(memberFormDTO.getPhoneNum());
+        member.setZipcode(memberFormDTO.getZipcode());
+        member.setStreetAddress(memberFormDTO.getStreetAddress());
+        member.setDetailAddress(memberFormDTO.getDetailAddress());
+        member.setEmail(memberFormDTO.getEmail());
+
         return memberRepository.save(member);
     }
-
-    public MemberFormDTO updatePassword(MemberFormDTO member, String password){
-
-        Member memberx = memberRepository.findByMemberId(member.getMemberId());
+    @Transactional
+    public Member updatePassword(Principal principal, String password, String oldPassword){
+        Member member = memberRepository.findByMemberId(principal.getName());
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        if(encoder.matches(password, memberx.getPassword())) {
-            String id = memberRepository.findByMemberId(member.getMemberId()).getMemberId();
-
-            Member oldMember = memberRepository.findByMemberId(id);
-            member.setMemberId(id);
-            member.setPassword(member.getPassword());
-            member.setName(oldMember.getName());
-            member.setPhoneNum(oldMember.getPhoneNum());
-            member.setZipcode(oldMember.getZipcode());
-            member.setStreetAddress(oldMember.getStreetAddress());
-            member.setDetailAddress(oldMember.getDetailAddress());
-            member.setEmail(oldMember.getEmail());
-            return member;
+        if (encoder.matches(oldPassword, member.getPassword())) {
+            member.setPassword(passwordEncoder.encode(password));
+            member.setName(member.getName());
+            member.setPhoneNum(member.getPhoneNum());
+            member.setZipcode(member.getZipcode());
+            member.setStreetAddress(member.getStreetAddress());
+            member.setDetailAddress(member.getDetailAddress());
+            member.setEmail(member.getEmail());
+            return memberRepository.save(member);
         }
         return null;
     }

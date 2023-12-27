@@ -56,8 +56,7 @@ public class Member extends AuditingEntity{
 
     private LocalDateTime emailTokenGeneratedAt;
 
-    @OneToMany(mappedBy="member", cascade = CascadeType.ALL
-            ,orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="member", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<AskBoard> askboards = new ArrayList<>();
 
     @OneToMany(mappedBy="member", cascade = CascadeType.ALL
