@@ -196,16 +196,5 @@ public class MemberController {
         }
     }
 
-    @GetMapping(value="/test/test")
-    public String CreateMember(){
-        Member membert = Member.testMember(passwordEncoder);
-        memberRepository.save(membert);
-        Member membert2 = Member.testMember2(passwordEncoder);
-        memberRepository.save(membert2);
-        Member memberm = Member.manageMember(passwordEncoder);
-        memberRepository.save(memberm);
-        return "member/memberLoginForm";
-    }
-
 
 }
