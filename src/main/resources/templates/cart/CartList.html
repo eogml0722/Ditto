@@ -125,8 +125,9 @@
         .content-mg{
             margin-left:25%;
             margin-right:25%;
-            margin-top:2%;
+            margin-top:180px;
             margin-bottom:100px;
+            height: 500px;
         }
         .repImgDiv{
             margin-right:15px;
@@ -142,6 +143,10 @@
         }
         .fs24{
             font-size:24px
+        }
+
+        #order-btn{
+            width:150px;
         }
     </style>
 </th:block>
@@ -210,7 +215,7 @@
         </h2>
 
         <div class="text-center mt-3">
-            <button type="button" class="btn btn-primary btn-lg" onclick="cartOrder()">주문하기</button>
+            <button type="button" class="btn btn-dark btn-lg" id="order-btn" onclick="cartOrder()">주문하기</button>
         </div>
 
     </div>

@@ -241,3 +241,18 @@ td, th {
     margin-left:0;
 }
 
+.board-btn {
+    width: 100px;
+    height: 35px;
+    background-color: #333;
+    color: white;
+}
+
+#commentDetail {
+    margin-top:40px;
+}
+
+/*수정 게시판*/
+.editTitle, textarea{
+    width:500px;
+}

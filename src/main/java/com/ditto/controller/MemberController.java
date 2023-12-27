@@ -88,7 +88,8 @@ public class MemberController {
             Member resultId = memberService.findId(name, email);
             System.out.println(resultId);
             if (resultId == null) {
-                rttr.addFlashAttribute("forgotIdMessage", messageSource.getMessage("memberIdNotFound", null, locale));
+                rttr.addFlashAttribute("forgotIdMessage", "입력하신 정보와 일치하는 회원이 없습니다.");
+                return "redirect:/members/findLoginInfo";
             } else {
 
                 rttr.addFlashAttribute("forgotIdMessage", resultId.getMemberId());
@@ -143,7 +144,6 @@ public class MemberController {
             rttr.addFlashAttribute("error", "로그인 성공");
         }
         memberService.login(member);
-//        return "member/logged-in-by-email";
         return "redirect:/";
     }
 
@@ -208,16 +208,16 @@ public class MemberController {
         }
     }
 
-    @GetMapping(value="/test/test")
-    public String CreateMember(){
-        Member membert = Member.testMember(passwordEncoder);
-        memberRepository.save(membert);
-        Member membert2 = Member.testMember2(passwordEncoder);
-        memberRepository.save(membert2);
-        Member memberm = Member.manageMember(passwordEncoder);
-        memberRepository.save(memberm);
-        return "member/memberLoginForm";
-    }
+//    @GetMapping(value="/test/test")
+//    public String CreateMember(){
+//        Member membert = Member.testMember(passwordEncoder);
+//        memberRepository.save(membert);
+//        Member membert2 = Member.testMember2(passwordEncoder);
+//        memberRepository.save(membert2);
+//        Member memberm = Member.manageMember(passwordEncoder);
+//        memberRepository.save(memberm);
+//        return "member/memberLoginForm";
+//    }
 
 
 }

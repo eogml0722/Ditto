@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+.content-menu {
+    height:auto;
+}
 .menuImg {
     margin-bottom : 35px;
 }

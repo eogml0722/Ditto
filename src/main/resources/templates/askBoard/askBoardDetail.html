@@ -36,9 +36,9 @@
                     </tr>
                     <tr>
                         <td colspan="2" align="center">
-                            <button type="button" th:onclick="|location.href='@{'/ask/edit/' + ${boardWriteDTO.id}}'|">수정하기</button>
-                            <button type="submit">삭제하기</button>
-                            <button type="button" th:onclick="|location.href='@{/ask/list}'|">목록보기</button>
+                            <button class="board-btn" type="button" th:onclick="|location.href='@{'/ask/edit/' + ${boardWriteDTO.id}}'|">수정하기</button>
+                            <button class="board-btn" type="submit">삭제하기</button>
+                            <button class="board-btn" type="button" th:onclick="|location.href='@{/ask/list}'|">목록보기</button>
                         </td>
                     </tr>
                 </table>
@@ -93,8 +93,8 @@
                 </tr>
                 <tr sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
                     <td colspan="2" align="center" >
-                        <button type="button" th:onclick="|location.href='@{'/ask/admin/edit/' + ${boardWriteDTO.id}}'|">수정하기</button>
-                        <button type="submit">삭제하기</button>
+                        <button class="board-btn" type="button" th:onclick="|location.href='@{'/ask/admin/edit/' + ${boardWriteDTO.id}}'|">수정하기</button>
+                        <button class="board-btn" type="submit">삭제하기</button>
                     </td>
                 </tr>
             </table>
