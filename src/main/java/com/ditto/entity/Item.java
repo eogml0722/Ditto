@@ -10,6 +10,8 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "item")
@@ -44,6 +46,9 @@ public class Item extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private ItemCategory itemCategory;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
+    private List<ItemImg> itemImgList = new ArrayList<>();
+
     public void updateItem(ItemFormDTO itemFormDTO) {
         this.itemName = itemFormDTO.getItemName();
         this.price = itemFormDTO.getPrice();
@@ -53,5 +58,8 @@ public class Item extends BaseEntity{
         this.itemCategory = itemFormDTO.getItemCategory();
     }
 
-
+    //주문시 재고 변경
+    public void chagneStock(int count){
+        this.stockNumber += count;
+    }
 }

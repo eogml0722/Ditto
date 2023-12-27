@@ -38,6 +38,7 @@ public class CartService {
             cart = Cart.createCart(member);
             cartRepository.save(cart);
         }
+
         CartItem savedCartItem = cartItemRepository.findByCartIdAndItemId(cart.getId(), item.getId());
 
         if(savedCartItem != null){

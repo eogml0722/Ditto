@@ -1,5 +1,6 @@
 package com.ditto.entity;
 
+import com.ditto.constant.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -26,6 +27,10 @@ public class ItemImg extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "orderItem_id")
+    private OrderItem orderItem;
 
     public void updateItemImg(String oriImgName, String imgName, String imgUrl) {
         this.oriImgName = oriImgName;

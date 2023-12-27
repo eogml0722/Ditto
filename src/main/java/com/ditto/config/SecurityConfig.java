@@ -1,5 +1,8 @@
 package com.ditto.config;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.autoconfigure.security.ConditionalOnDefaultWebSecurity;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 
 import com.ditto.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -41,8 +45,8 @@ public class SecurityConfig {
         http.authorizeRequests()
                 //모든 사용자가 인증없이 접근 가능
                 .mvcMatchers("/", "/menu").permitAll()
-                .mvcMatchers("/css/**", "/js/**", "/members/**", "/img/**", "/extras/**",
-                                      "/check-email-token","/email-login", "/check-email-login", "/login-link", "/login-by-email", "/menu/**").permitAll()
+                .mvcMatchers("/css/**", "/js/**", "/members/**", "/img/**", "/extras/**", "/board/**",
+                                      "/check-email-token","/email-login", "/check-email-login", "/login-link", "/login-by-email", "/menu/**", "/order/**").permitAll()
                 //admin으로 시작하는 경로는 ADMIN만 가능
                 .mvcMatchers("/admin/**").hasRole("ADMIN")
                 //나머지는 모두 인증을 요청

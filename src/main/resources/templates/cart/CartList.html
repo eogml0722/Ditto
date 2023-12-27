@@ -144,9 +144,11 @@
         .fs24{
             font-size:24px
         }
-
-        #order-btn{
-            width:150px;
+        .orderBtn{
+            background-color:black;
+            color:white;
+            width:140px;
+            height:40px;
         }
     </style>
 </th:block>
@@ -216,6 +218,7 @@
 
         <div class="text-center mt-3">
             <button type="button" class="btn btn-dark btn-lg" id="order-btn" onclick="cartOrder()">주문하기</button>
+            <button type="button" class="orderBtn" onclick="cartOrder()">주문하기</button>
         </div>
 
     </div>

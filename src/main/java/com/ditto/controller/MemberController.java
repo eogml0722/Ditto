@@ -144,6 +144,7 @@ public class MemberController {
             rttr.addFlashAttribute("error", "로그인 성공");
         }
         memberService.login(member);
+//        return "member/logged-in-by-email";
         return "redirect:/";
     }
 
@@ -153,11 +154,7 @@ public class MemberController {
             return "member/MyPage";
         }
         try{
-            Member oldmember = memberRepository.findByMemberId(principal.getName());
-            memberFormDTO.setPassword(oldmember.getPassword());
-            Member member = Member.createMember(memberFormDTO, passwordEncoder);
-            member.setPassword(oldmember.getPassword());
-            memberService.updateMember(member);
+            memberService.updateMember(memberFormDTO, principal);
 
             model.addAttribute("message", "회원정보가 수정되었습니다.");
             model.addAttribute("url", "/members/mypage");
@@ -171,26 +168,19 @@ public class MemberController {
     }
 
     @PostMapping(value="/pwupdate")
-    public String passwordUpdate(@RequestParam String password,@RequestParam String oldPassword, @Valid MemberFormDTO memberFormDTO, BindingResult bindingResult, Principal principal, Model model){
-        if(bindingResult.hasErrors()){
-            return "member/MyPage";
-        }
-        try{
-            String email = principal.getName();
-            memberFormDTO.setMemberId(email);
-            memberFormDTO.setPassword(password);
-            MemberFormDTO memberFormDTO1 = memberService.updatePassword(memberFormDTO, oldPassword);
-            Member member = Member.createMember(memberFormDTO1, passwordEncoder);
-            memberService.updateMember(member);
+    public String passwordUpdate(@RequestParam String password, @RequestParam String oldPassword, Principal principal, Model model){
+
+        if(memberService.updatePassword(principal, password, oldPassword) != null) {
+            memberService.updatePassword(principal, password, oldPassword);
             model.addAttribute("message", "비밀번호가 변경되었습니다 다시 로그인해주세요!");
             model.addAttribute("url", "/");
             SecurityContextHolder.clearContext();
-        } catch (Exception e) {
-            model.addAttribute("message", "비밀번호 변경중 오류가 발생하였습니다.");
+        } else {
+            model.addAttribute("message", "현재 비밀번호를 다시 확인해주세요");
             model.addAttribute("url", "/members/mypage");
-            return "/fragments/alert";
         }
         return "/fragments/alert";
+
     }
 
     @PostMapping(value="/delete")
@@ -207,17 +197,4 @@ public class MemberController {
             return "/fragments/alert";
         }
     }
-
-//    @GetMapping(value="/test/test")
-//    public String CreateMember(){
-//        Member membert = Member.testMember(passwordEncoder);
-//        memberRepository.save(membert);
-//        Member membert2 = Member.testMember2(passwordEncoder);
-//        memberRepository.save(membert2);
-//        Member memberm = Member.manageMember(passwordEncoder);
-//        memberRepository.save(memberm);
-//        return "member/memberLoginForm";
-//    }
-
-
 }

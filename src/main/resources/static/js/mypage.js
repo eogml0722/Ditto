@@ -72,11 +72,11 @@ function change_btn(e) {
 
 // 비밀번호 유효성 검사
 function passwordChk() {
-	var pw1 = document.getElementById("newPassword")
+	var pw1 = document.getElementById("password")
 	var pw2 = document.getElementById("newPasswordChk")
 	var regpwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
 	if (!regpwd.test(pw1.value)) {
-    	alert("비밀번호는 대소문자,숫자,특수문자 중 2가지 이상 조합,10자~16자")
+    	alert("비밀번호는 대소문자,숫자,특수문자 중 2가지 이상 조합,8자~15자")
     	pw1.focus();
     	return false;
     }
@@ -90,8 +90,9 @@ function passwordChk() {
 
 // 회원 정보수정 유효성 검사
 function updateMember(){
+    var form = document.getElementById("updateForm")
 	var name = document.getElementById("name")
-	var mobile = document.getElementById("mobile")
+	var mobile = document.getElementById("phoneNum")
 	var zipcode = document.getElementById("zipcode")
 	var streetAddress = document.getElementById("streetAddress")
 	var detailAddress = document.getElementById("detailAddress")
@@ -102,21 +103,38 @@ function updateMember(){
     var regadd = /^[가-힣]+$/;
     var regmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+    if (name.value == ""){
+        alert("이름을 입력해주세요")
+        name.focus();
+        return false;
+    }
+
     if (!regName.test(name.value)) {
         alert("이름은 한글 영어만 가능합니다")
         name.focus();
         return false;
     }
+
+    if (mobile.value == ""){
+        alert("전화번호를 입력해주세요")
+        mobile.focus;
+        return false;
+    }
+
     if (!phExp.test(mobile.value)) {
-        alert("올바른 휴대폰 번호를 입력해 주세요.")
+        alert("올바른 전화 번호를 입력해 주세요.")
         mobile.focus();
         return false;
     }
-    if (zipcode.value == "") {
+
+    if (zipcode.value == 0) {
     	alert("우편번호를 입력해 주세요.")
     	zipcode.focus();
     	return false;
-    } else if (detailAddress.value == 0) {
+    } else if (streetAddress.value == ""){
+        alert("주소를 입력해주세요")
+        return false;
+    } else if (detailAddress.value == "") {
     	alert("나머지 주소를 입력해 주세요.")
     	detailAddress.focus();
     	return false;
@@ -125,12 +143,18 @@ function updateMember(){
     	detailAddress.focus();
     	return false;
     }
-    if (!regmail.test(chkMail.value)) {
+
+    if(email.value == ""){
+        alert("이메일을 입력해주세요")
+        chkMail.focus();
+        return false;
+    }
+    if (!regmail.test(email.value)) {
 	    alert("입력하신 이메일은 사용할 수 없습니다.")
 	    chkMail.focus();
 	    return false;
 	}
-    return true;
+    form.submit();
 }
 
 
