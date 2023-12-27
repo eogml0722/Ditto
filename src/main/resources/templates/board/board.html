@@ -76,7 +76,7 @@
                 </tbody>
             </table>
         </div><!-- 메인3 테이블 끝-->
-        <ul th:with="start=${((boardPage.number)/maxPage)*maxPage+1}, end=(${ start+maxPage-1 < boardPage.totalPages ? start+maxPage-1 : boardPage.totalPages}) ">
+        <ul th:with="start=${((boardPage.number)/maxPage)*maxPage+1}, end=(${ start+maxPage-1 < boardPage.totalPages ? start+maxPage-1 : boardPage.totalPages == 0 ? 1 : boardPage.totalPages}) ">
 <!--            <li><a href="/board/1" > << </a></li>-->
             <li class="page-item" th:classappend="${start eq 1}?'disabled':''">
                 <a href="/board/1" aria-label='Previous' class="page-link">
