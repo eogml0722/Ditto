@@ -119,9 +119,9 @@
         </div>
         <div class="card d-flex">
             <div th:each="orderItem : ${orderDTO.orderItemList}" class="d-flex mb-3">
-<!--                <div class="repImgDiv">-->
-<!--                    <img th:src="${orderItem.imgUrl}" class = "rounded repImg" th:alt="${orderItem.itemName}">-->
-<!--                </div>-->
+                <div class="repImgDiv">
+                    <img th:src="${orderItem.item.itemImgList[0].imgUrl}" class = "rounded repImg" th:alt="${orderItem.item.itemName}">
+                </div>
                 <div class="align-self-center w-75">
                     <span th:text="${orderItem.item.itemName}" class="fs24 font-weight-bold"></span>
                     <div class="fs18 font-weight-light">
@@ -139,7 +139,7 @@
         <ul class="pagination justify-content-center">
 
             <li class="page-item" th:classappend="${orderDTOPage.number eq 0}?'disabled':''">
-                <a th:href="@{'/order/' + ${orderDTOPage.number-1}}" aria-label='Previous' class="page-link">
+                <a th:href="@{'/order/' + ${orderDTOPage.number}}" aria-label='Previous' class="page-link">
                     <span aria-hidden='true'>Previous</span>
                 </a>
             </li>
@@ -148,8 +148,8 @@
                 <a th:href="@{'/order/' + ${page}}" th:inline="text" class="page-link">[[${page}]]</a>
             </li>
 
-            <li class="page-item" th:classappend="${orderDTOPage.number+1 ge orderDTOPage.totalPages}?'disabled':''">
-                <a th:href="@{'/order/' + ${orderDTOPage.number+1}}" aria-label='Next' class="page-link">
+            <li class="page-item" th:classappend="${orderDTOPage.number ge orderDTOPage.totalPages-1}?'disabled':''">
+                <a th:href="@{'/order/' + ${orderDTOPage.number+2}}" aria-label='Next' class="page-link">
                     <span aria-hidden='true'>Next</span>
                 </a>
             </li>
