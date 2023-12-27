@@ -6,13 +6,16 @@
 <head>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link th:href="@{/css/ditto2.css}" rel="stylesheet">
+    <link th:href="@{https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css}" rel="stylesheet"/>
+    <script th:src="@{https://code.jquery.com/jquery-3.7.0.min.js}" rel="stylesheet"></script>
+    <script th:href="@{ditto2.js}" rel="stylesheet"></script>
 </head>
 
 <!-- 사용자 스크립트 추가 -->
 <th:block layout:fragment="script">
     <script th:inline="javascript">
         $(document).ready(function(){
-
             calculateTotalPrice();
 
             $("#count").change( function(){
@@ -20,59 +23,82 @@
             });
         });
 
-        function calculateTotalPrice(){
-            var count = $("#count").val();
-            var price = $("#price").val();
-            var totalPrice = price*count;
-            $("#totalPrice").html(totalPrice + '원');
-        }
 
-        function addCart(){
-            var token = $("meta[name='_csrf']").attr("content")
-            var header = $("meta[name='_csrf_header']").attr("content")
-
-            var url = "/cart";
-
-            var paramData = {
-                itemId : $("#itemId").val(),
-                count : $("#count").val()
+            function calculateTotalPrice(){
+                var count = $("#count").val();
+                var price = $("#price").val();
+                var totalPrice = price*count;
+                $("#totalPrice").html(totalPrice + '원');
             };
-            var param = JSON.stringify(paramData);
-            $.ajax({
-                url : url,
-                type : "POST",
-                contentType : "application/json",
-                data : param,
-                beforeSend : function(xhr){
-                xhr.setRequestHeader(header, token);
-            },
-            dataType : "json",
-            cache : false,
-            success : function(result, status){
-                alert("상품을 장바구니에 담았습니다");
-                location.href='/menu';
-            }, error : function(jqXHR, status, error) {
-                if(jqXHR.status == '401'){
-                    alert('로그인 후 이용해주세요');
-                    location.href = '/members/login';
-                } else {
-                    alert(jqXHR.responseText);
-                }
-                }
-            });
-        }
 
-    document.addEventListener('DOMContentLoaded', function () {
-        let bigPic = document.querySelector('#bigPic');
-        let smallPics = document.querySelectorAll('.small');
+            function addCart(){
+                var token = $("meta[name='_csrf']").attr("content")
+                var header = $("meta[name='_csrf_header']").attr("content")
 
-        smallPics.forEach(function (smallPic) {
-            smallPic.addEventListener('click', function () {
-                let newPic = this.src;
-                bigPic.setAttribute('src', newPic);
-            });
-        });
-    });
+                var url = "/cart";
+
+                var paramData = {
+                    itemId : $("#itemId").val(),
+                    count : $("#count").val()
+                };
+                var param = JSON.stringify(paramData);
+                $.ajax({
+                    url : url,
+                    type : "POST",
+                    contentType : "application/json",
+                    data : param,
+                    beforeSend : function(xhr){
+                    xhr.setRequestHeader(header, token);
+                    },
+                    dataType : "json",
+                    cache : false,
+                    success : function(result, status){
+                        alert("상품을 장바구니에 담았습니다");
+                        location.href='/';
+                    }, error : function(jqXHR, status, error) {
+                        if(jqXHR.status == '401'){
+                            alert('로그인 후 이용해주세요');
+                            location.href = '/members/login';
+                        } else {
+                            alert(jqXHR.responseText);
+                        }
+                    }
+                });
+            };
+
+            function order(){
+                var token = $("meta[name='_csrf']").attr("content")
+                var header = $("meta[name='_csrf_header']").attr("content")
+
+                var url = "/order";
+
+                var paramData = {
+                    itemId : $("#itemId").val(),
+                    count : $("#count").val()
+                };
+                var param = JSON.stringify(paramData);
+                $.ajax({
+                    url : url,
+                    type : "POST",
+                    contentType : "application/json",
+                    data : param,
+                    beforeSend : function(xhr){
+                    xhr.setRequestHeader(header, token);
+                    },
+                    cache : false,
+                    success : function(result, status){
+                        alert("주문에 성공하였습니다.");
+                        location.href='/order';
+                    }, error : function(jqXHR, status, error) {
+                        if(jqXHR.status == '401'){
+                            alert('로그인 후 이용해주세요');
+                            location.href = '/members/login';
+                        } else {
+                            alert(jqXHR.responseText);
+                        }
+                    }
+                });
+            };
 
     </script>
 </th:block>
@@ -138,14 +164,6 @@
             </div>
         </div>
     </div>
-
-<!--    <div class="jumbotron jumbotron-fluid mgt-30">-->
-<!--        <div class="container">-->
-<!--            <h4 class="display-5">영양소 정보</h4>-->
-<!--            <hr class="my-4">-->
-<!--            <p class="lead" th:text="${item.itemDetail}"></p>-->
-<!--        </div>-->
-<!--    </div>-->
 
 </div>
 

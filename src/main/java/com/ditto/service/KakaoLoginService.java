@@ -28,8 +28,8 @@ public class KakaoLoginService {
 
     private final PasswordEncoder passwordEncoder;
 
-    @Value("${kakao.default.password}")
-    private String kakaoPassword;
+//    @Value("${kakao.default.password}")
+//    private String kakaoPassword;
 
 
     public String getAccessToken(String code) {

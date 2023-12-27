@@ -56,6 +56,10 @@ public class Member extends AuditingEntity{
 
     private LocalDateTime emailTokenGeneratedAt;
 
+    @OneToMany(mappedBy = "member" , fetch = FetchType.LAZY ,
+            cascade = CascadeType.ALL, orphanRemoval = true )
+    private List<Order> orderList = new ArrayList<>();
+
     @OneToMany(mappedBy="member", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<AskBoard> askboards = new ArrayList<>();
 
@@ -80,57 +84,6 @@ public class Member extends AuditingEntity{
 
         //비밀번호를 암호화 한다.
         String password = passwordEncoder.encode(memberFormDTO.getPassword());
-        member.setPassword(password);
-
-        return member;
-    }
-
-    public static Member testMember(PasswordEncoder passwordEncoder){
-        Member member = new Member();
-        member.setMemberId("test12");
-        member.setName("김그린");
-        member.setPhoneNum("010-1234-5678");
-        member.setEmail("test@mail.com");
-        member.setRole(Role.USER);
-
-        member.setZipcode("12345");
-        member.setStreetAddress("12345");
-        member.setDetailAddress("주소");
-        String password = passwordEncoder.encode("xptmxm12!");
-        member.setPassword(password);
-
-        return member;
-    }
-
-    public static Member testMember2(PasswordEncoder passwordEncoder){
-        Member member = new Member();
-        member.setMemberId("test123");
-        member.setName("김그린2");
-        member.setPhoneNum("010-1234-5678");
-        member.setEmail("test2@mail.com");
-        member.setRole(Role.USER);
-
-        member.setZipcode("12345");
-        member.setStreetAddress("12345");
-        member.setDetailAddress("주소");
-        String password = passwordEncoder.encode("xptmxm123!");
-        member.setPassword(password);
-
-        return member;
-    }
-
-    public static Member manageMember(PasswordEncoder passwordEncoder){
-        Member member = new Member();
-        member.setMemberId("aoslwj12");
-        member.setName("매니저");
-        member.setPhoneNum("010-1234-5678");
-        member.setEmail("manage@mail.com");
-        member.setRole(Role.ADMIN);
-
-        member.setZipcode("12345");
-        member.setStreetAddress("12345");
-        member.setDetailAddress("주소");
-        String password = passwordEncoder.encode("aoslwj12!");
         member.setPassword(password);
 
         return member;

@@ -85,6 +85,25 @@
 #main_main3_table table tr td a:link, a:visited, a:hover, a:active{
 	color:#626262;
 }
+#main_main3 > ul{
+     /*white-space: nowrap;*/
+      display: flex;  /* 가로로 나란히 표시하기 위해 flex 사용 */
+      justify-content: center;
+}
+#main_main3 li{
+    display:inline-block;
+    padding : 10px;
+}
+
+#searchBox{
+    display:flex;
+    justify-content:center;
+}
+
+.pageNow{
+    background-color : #ebff82;
+}
+
 #navLink_div{
 	margin-top:50px;
 	text-align:center;
