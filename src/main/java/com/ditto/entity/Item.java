@@ -58,5 +58,8 @@ public class Item extends BaseEntity{
         this.itemCategory = itemFormDTO.getItemCategory();
     }
 
-
+    //주문시 재고 변경
+    public void chagneStock(int count){
+        this.stockNumber += count;
+    }
 }

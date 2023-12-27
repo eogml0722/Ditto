@@ -72,6 +72,8 @@ public class OrderService {
 
 
         Item item = itemRepository.findById(itemId).orElseThrow();
+        item.chagneStock(-1*count);
+
 
         //전달받은 아이템과 수량으로 주문상품 생성
         OrderItem orderItem = OrderItem.createOrderItem(item, count, order);
@@ -99,9 +101,15 @@ public class OrderService {
 
         Order order = orderRepository.findById(orderId).orElseThrow();
 
+        for (OrderItem orderItem : order.getOrderItemList()){
+            orderItem.getItem().chagneStock(orderItem.getCount());
+        }
+
         if(StringUtils.equals(principal.getName(), order.getMember().getMemberId())) {
             order.cancelOrder();
         }
+
+
     }
 
 
