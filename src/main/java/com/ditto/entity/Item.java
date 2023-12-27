@@ -10,6 +10,8 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "item")
@@ -43,6 +45,9 @@ public class Item extends BaseEntity{
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ItemCategory itemCategory;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
+    private List<ItemImg> itemImgList = new ArrayList<>();
 
     public void updateItem(ItemFormDTO itemFormDTO) {
         this.itemName = itemFormDTO.getItemName();
