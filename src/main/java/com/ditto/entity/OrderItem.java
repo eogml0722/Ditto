@@ -32,8 +32,9 @@ public class OrderItem extends BaseEntity{
     private Order order;
 
     //주문 가격과 아이템 이미지는 item 에서 가져올 수 있나?
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "orderItem")
-    private List<ItemImg> itemImgList = new ArrayList<>();
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "orderItem")
+//    private List<ItemImg> itemImgList = new ArrayList<>();
+
 
 
     //구매일(regDate 로 되나?)
