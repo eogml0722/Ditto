@@ -76,5 +76,10 @@ public class CartController {
         return new ResponseEntity<Long>(cartItemId, HttpStatus.OK);
     }
 
+    @GetMapping(value="/cartItem/{cartItemId}")
+    public String moveItemDtl(@PathVariable("cartItemId") Long cartItemId){
+        Long itemId = cartService.findItemId(cartItemId);
+        return "redirect:/item/" +itemId;
+    }
 
 }

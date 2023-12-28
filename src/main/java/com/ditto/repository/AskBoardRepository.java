@@ -16,4 +16,5 @@ import java.util.List;
 
 public interface AskBoardRepository extends JpaRepository<AskBoard, Long>, QuerydslPredicateExecutor<AskBoard>, AskBoardRepositoryCustom{
     ArrayList<AskBoard> findByMemberOrderByIdDesc(Member member);
+
 }

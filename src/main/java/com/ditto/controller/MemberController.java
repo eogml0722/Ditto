@@ -1,15 +1,23 @@
 package com.ditto.controller;
 
+import com.ditto.constant.Role;
 import com.ditto.dto.MemberFormDTO;
+import com.ditto.dto.OrderDTO;
 import com.ditto.entity.AskBoard;
 import com.ditto.entity.Member;
 import com.ditto.repository.AskBoardRepository;
 import com.ditto.repository.MemberRepository;
 import com.ditto.service.MemberService;
+import com.ditto.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
 import org.codehaus.groovy.transform.SourceURIASTTransformation;
 import org.springframework.context.MessageSource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -34,6 +42,7 @@ public class MemberController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
     private final MessageSource messageSource;
+    private final OrderService orderService;
 
     //로그인
     @GetMapping(value = "/login")
@@ -98,7 +107,7 @@ public class MemberController {
     }
 
     @GetMapping(value="/mypage")
-    public String myPage(Model model, Principal principal){
+    public String myPage(Model model, Principal principal, Optional<Integer> page){
         // 회원정보를 불러옴
         Member member = memberService.detailMember(principal.getName());
         String name = member.getName();model.addAttribute("name", name);
@@ -107,6 +116,9 @@ public class MemberController {
         ArrayList<AskBoard> askBoards = askBoardRepository.findByMemberOrderByIdDesc(member);
         model.addAttribute("askBoards", askBoards);
         // 주문했던 내역을 불러옴
+        Pageable pageable = PageRequest.of(page.map(integer -> integer - 1).orElse(0), 5);
+        Page<OrderDTO> orderDTOPage = orderService.findByMemberId(principal.getName(), pageable);
+        model.addAttribute("orderDTOPage", orderDTOPage);
 
         return "member/MyPage";
     }
@@ -194,6 +206,51 @@ public class MemberController {
             model.addAttribute("url", "/members/mypage");
             return "/fragments/alert";
         }
+    }
+
+    @GetMapping(value="/manage")
+    public String memberManage(@PageableDefault(size = 10, sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable, Model model, Principal principal){
+        Member member = memberService.detailMember(principal.getName());
+        boolean admin = member.getRole() == Role.ADMIN;
+        if(!admin){
+            model.addAttribute("message", "관리자만 이용할 수 있습니다.");
+            model.addAttribute("url", "/");
+            return "/fragments/alert";
+        }
+//        model.addAttribute("memberFormDTO", new MemberFormDTO());
+        model.addAttribute("members", memberRepository.findAll(pageable));
+        return "member/memberMng";
+    }
+
+    @PostMapping(value="/delete2")
+    public String memberManageDelete(@RequestParam String memberId, Model model, Principal principal){
+        Member member = memberService.detailMember(principal.getName());
+        boolean admin = member.getRole() == Role.ADMIN;
+        if(!admin){
+            model.addAttribute("message", "관리자만 이용할 수 있습니다.");
+            model.addAttribute("url", "/");
+            return "/fragments/alert";
+        }
+        memberService.deleteMemberManage(memberId);
+        SecurityContextHolder.clearContext();
+        model.addAttribute("message", "삭제되었습니다.");
+        model.addAttribute("url", "/");
+        return "/fragments/alert";
+    }
+
+    @PostMapping(value="/update2")
+    public String memberRoleUpdate(@RequestParam String memberId, Model model, Principal principal){
+        Member member = memberService.detailMember(principal.getName());
+        boolean admin = member.getRole() == Role.ADMIN;
+        if(!admin){
+            model.addAttribute("message", "관리자만 이용할 수 있습니다.");
+            model.addAttribute("url", "/");
+            return "/fragments/alert";
+        }
+        memberService.roleChange(memberId);
+        model.addAttribute("message", "변경되었습니다.");
+        model.addAttribute("url", "/members/manage");
+        return "/fragments/alert";
     }
 
 

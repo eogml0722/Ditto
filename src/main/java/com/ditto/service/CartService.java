@@ -19,6 +19,7 @@ import org.thymeleaf.util.StringUtils;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -85,6 +86,14 @@ public class CartService {
         CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow(EntityNotFoundException::new);
         cartItemRepository.delete(cartItem);
     }
+
+    // 장바구니에서 아이템 페이지 이동
+    public Long findItemId(Long cartItemId){
+        Optional<CartItem> cartItem = cartItemRepository.findById(cartItemId);
+        Long itemId = cartItem.get().getItem().getId();
+        return itemId;
+    }
+
 
     // 주문처리 후 장바구니 상품 제거
 

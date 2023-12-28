@@ -34,13 +34,14 @@ public class askBoardController {
 
     private final AskBoardService askBoardService;
     private final MemberService memberService;
-    private final BoardImageService boardImageService;
 
+    // 문의 게시판 목록으로 이동
     @GetMapping(value="/list")
     public String page0(){
         return "redirect:/ask/list/0";
     }
 
+    // 문의 게시판 페이지 이동
     @GetMapping("/list/{page}")
     public String AskBoardList(AskBoardSearchDTO askBoardSearchDTO, @PathVariable("page") Optional<Integer> page, Model model){
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);

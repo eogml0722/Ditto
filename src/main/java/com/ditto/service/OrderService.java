@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.StringUtils;
 
+import javax.persistence.EntityNotFoundException;
 import java.security.Principal;
 import java.util.*;
 
@@ -111,6 +112,8 @@ public class OrderService {
 
 
     }
+
+    // 장바구니 주문
 
 
 }

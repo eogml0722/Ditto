@@ -47,10 +47,10 @@ public class SecurityConfig {
                 .mvcMatchers("/", "/menu").permitAll()
                 .mvcMatchers("/css/**", "/js/**", "/members/**", "/img/**", "/extras/**", "/board/**",
                                       "/check-email-token","/email-login", "/check-email-login", "/login-link", "/login-by-email", "/menu/**", "/order/**").permitAll()
+                .mvcMatchers("/ask/**", "/cart/**", "/images/**").permitAll()
                 //admin으로 시작하는 경로는 ADMIN만 가능
                 .mvcMatchers("/admin/**").hasRole("ADMIN")
                 //나머지는 모두 인증을 요청
-                .mvcMatchers("/ask/**", "/cart/**", "/images/**").permitAll()
                 .anyRequest().authenticated();
 
         //자동로그인

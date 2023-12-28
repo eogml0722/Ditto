@@ -10,6 +10,10 @@ h4 {
 	padding-top:10px;
 }
 
+h3 {
+    margin-top:8px;
+}
+
 .brText{
     white-space: pre-line
 }
@@ -17,7 +21,7 @@ h4 {
 /*몸통*/
 
 .content {
-    height:600px;
+    height:auto;
 }
 #contents{
 	width:1550px;
@@ -125,10 +129,6 @@ table {
     width: 1200px;
 }
 
-.order-table {
-    margin:0;
-}
-
 .numberPage {
     margin-left:50%;
 }
@@ -229,7 +229,8 @@ td, th {
 }
 
 .order-table{
-    margin-top:30px;
+    margin:0;
+    margin-top:8px;
 }
 
 #rightPageMenu5{

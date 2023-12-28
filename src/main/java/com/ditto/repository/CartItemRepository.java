@@ -2,6 +2,7 @@ package com.ditto.repository;
 
 import com.ditto.dto.CartDetailDTO;
 import com.ditto.entity.CartItem;
+import com.ditto.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

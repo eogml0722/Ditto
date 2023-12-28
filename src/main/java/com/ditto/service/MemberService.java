@@ -1,6 +1,7 @@
 package com.ditto.service;
 
 import com.ditto.constant.OAuthType;
+import com.ditto.constant.Role;
 import com.ditto.dto.MemberFormDTO;
 import com.ditto.entity.Member;
 import com.ditto.entity.UserAccount;
@@ -87,6 +88,11 @@ public class MemberService implements UserDetailsService {
         return false;
     }
 
+    public void deleteMemberManage(String id) {
+        Member member = memberRepository.findByMemberId(id);
+        memberRepository.deleteById(member.getMemberId());
+    }
+
     //아이디찾기
     public Member findId(String name, String email){
         return memberRepository.findByNameAndEmail(name, email);
@@ -136,6 +142,18 @@ public class MemberService implements UserDetailsService {
             return memberRepository.save(member);
         }
         return null;
+    }
+
+    @Transactional
+    public Member roleChange(String id){
+        Member member = memberRepository.findByMemberId(id);
+
+        if(member.getRole()==Role.ADMIN){
+            member.setRole(Role.USER);
+        } else if (member.getRole()==Role.USER){
+            member.setRole(Role.ADMIN);
+        }
+        return memberRepository.save(member);
     }
 
     public void login(Member member) {

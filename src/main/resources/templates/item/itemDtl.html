@@ -100,6 +100,18 @@
                 });
             };
 
+    document.addEventListener('DOMContentLoaded', function () {
+        let bigPic = document.querySelector('#bigPic');
+        let smallPics = document.querySelectorAll('.small');
+
+        smallPics.forEach(function (smallPic) {
+            smallPic.addEventListener('click', function () {
+                let newPic = this.src;
+                bigPic.setAttribute('src', newPic);
+            });
+        });
+    });
+
     </script>
 </th:block>
 
