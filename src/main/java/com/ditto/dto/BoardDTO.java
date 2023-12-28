@@ -2,6 +2,7 @@ package com.ditto.dto;
 
 import com.ditto.constant.BoardCategory;
 import com.ditto.entity.Board;
+import com.ditto.entity.Img;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,6 +20,9 @@ public class BoardDTO {
     private String content;
     private String viewCount;
     private BoardCategory boardCategory;
+
+    private List<Img> imgList;
+
 
     //Auditing
     private List<Board> boardList;

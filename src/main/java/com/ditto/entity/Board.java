@@ -42,16 +42,12 @@ public class Board extends BaseEntity {
     @JoinColumn(name = "member_id")
     //사용자 정보
     private Member member;
+
     
-    /*
-    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
-    //이미지 업로드 시 사용
+    //이미지 업로드
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Img> imgList = new ArrayList<>();
-    */
-
-
-
-    //static 아니면 생성자로 엔티티인스턴스를 생성해서 메서드를 써야한다.
 
 
     public static Board createBoard(BoardDTO boardDTO, Member member) {
