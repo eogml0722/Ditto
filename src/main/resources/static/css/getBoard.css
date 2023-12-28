@@ -17,9 +17,14 @@
 
 .content > table{
 	width:100%;
-	border-top:1px solid #6799FF;
+	border-top:1px solid #333;
 	border-collapse: collapse;
 	color:#626262;
+}
+
+.page-link {
+    background-color:#333;
+    color:white;
 }
 
 .content table thead{

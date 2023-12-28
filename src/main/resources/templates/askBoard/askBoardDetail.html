@@ -6,11 +6,6 @@
 
 <th:block layout:fragment="css">
     <link th:href="@{/css/mypage.css}" rel="stylesheet">
-    <style>
-        .content{
-            height:800px;
-        }
-    </style>
 </th:block>
 
 
@@ -21,7 +16,7 @@
         <form name="Form" method="post" th:action="@{'/ask/delete/' + ${boardWriteDTO.id}}"
               th:object="${boardWriteDTO}">
             <div id="board">
-                <h1>문의 글보기</h1>
+                <h1 class="border-font">문의 글보기</h1>
                 <table border="1" width="70%">
                     <tr>
                         <td>글쓴이</td>

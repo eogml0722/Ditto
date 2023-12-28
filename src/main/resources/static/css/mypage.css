@@ -17,12 +17,20 @@ h4 {
 /*몸통*/
 
 .content {
-    height:600px;
+    height:auto;
+    min-height:100%;
+    padding-bottom:150px;
 }
 #contents{
 	width:1550px;
 	margin-top:180px;
 	margin-left:180px;
+}
+
+.border-font{
+    font-size: 28px;
+    border-bottom: 1px solid #ebebeb;
+    padding-bottom: 10px;
 }
 
 #MyPage{
