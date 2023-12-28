@@ -183,7 +183,7 @@
                 </td>
                 <td class="d-flex">
                     <div class="repImgDiv align-self-center">
-                        <img th:src="${cartItem.imgUrl}" class = "rounded repImg" th:alt="${cartItem.itemName}">
+                        <a th:href="'/item/'+${itemFormDTO.itemId}"><img th:src="${cartItem.imgUrl}" class = "rounded repImg" th:alt="${cartItem.itemName}"></a>
                     </div>
                     <div class="align-self-center">
                         <span th:text="${cartItem.itemName}" class="fs24 font-weight-bold"></span>

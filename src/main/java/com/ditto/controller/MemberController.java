@@ -173,7 +173,7 @@ public class MemberController {
         if(memberService.updatePassword(principal, password, oldPassword) != null) {
             memberService.updatePassword(principal, password, oldPassword);
             model.addAttribute("message", "비밀번호가 변경되었습니다 다시 로그인해주세요!");
-            model.addAttribute("url", "/");
+            model.addAttribute("url", "/members/login");
             SecurityContextHolder.clearContext();
         } else {
             model.addAttribute("message", "현재 비밀번호를 다시 확인해주세요");

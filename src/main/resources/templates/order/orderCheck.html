@@ -69,10 +69,40 @@
 <th:block layout:fragment="css">
     <style>
         .content-mg{
-            margin-left:30%;
             margin-right:30%;
             margin-top:2%;
             margin-bottom:100px;
+        }
+
+        .order-div{
+            margin-top:50px;
+            margin-left:40%;
+        }
+
+        .mb-4{
+            width:1550px;
+            margin-top: 180px;
+            margin-left: 180px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ebebeb;
+        }
+
+        #order-date{
+            width:650px;
+        }
+
+        #cancelBTN{
+            width:100px;
+        }
+
+        .order-bar{
+            margin-top:80px;
+            margin-left:40%;
+        }
+
+        .page-item.active .page-link{
+            background-color: #333;
+            border-color: #333;
         }
         .repImgDiv{
             margin-right:15px;
@@ -104,9 +134,9 @@
         구매 이력
     </h2>
 
-    <div th:each="orderDTO : ${orderDTOPage.content}">
+    <div class="order-div" th:each="orderDTO : ${orderDTOPage.content}">
 
-        <div class="d-flex mb-3 align-self-center">
+        <div class="d-flex mb-3 align-self-center" id="order-date">
             <h4 th:text="${orderDTO.regTime} + ' 주문'"></h4>
             <div class="ml-3">
                 <th:block th:if="${orderDTO.orderStatus == T(com.ditto.constant.OrderStatus).WAITDEPOSIT}">
@@ -135,7 +165,7 @@
     </div>
 
 
-    <div th:with="start=${((orderDTOPage.number)/maxPage)*maxPage+1}, end=(${(orderDTOPage.totalPages == 0) ? 1 : (start + (maxPage - 1) < orderDTOPage.totalPages ? start + (maxPage - 1) : orderDTOPage.totalPages)}) " >
+    <div class="order-bar" th:with="start=${((orderDTOPage.number)/maxPage)*maxPage+1}, end=(${(orderDTOPage.totalPages == 0) ? 1 : (start + (maxPage - 1) < orderDTOPage.totalPages ? start + (maxPage - 1) : orderDTOPage.totalPages)}) " >
         <ul class="pagination justify-content-center">
 
             <li class="page-item" th:classappend="${orderDTOPage.number eq 0}?'disabled':''">

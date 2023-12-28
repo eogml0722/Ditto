@@ -198,6 +198,17 @@ td, th {
 	border:1px solid #d5d5d5;
 }
 
+#post{
+    width: 80px;
+    height: 35px;
+    background-color: #333;
+    color: white;
+}
+
+.myBoard-table{
+    margin-left:0;
+}
+
 .rightbtn{
 	margin-top:20px;
 	margin-right:10px;
