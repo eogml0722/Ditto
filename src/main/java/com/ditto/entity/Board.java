@@ -55,14 +55,7 @@ public class Board extends BaseEntity {
 
 
     public static Board createBoard(BoardDTO boardDTO, Member member) {
-//        Board board = new Board();
-//
-//        board.setId(boardDTO.getId());
-//        board.setTitle(boardDTO.getTitle());
-//        board.setContent(board.getContent());
-//        board.setBoardCategory(boardDTO.getBoardCategory());
-        //멤버와 보드 연결
-        //modelMapper 사용
+        //멤버와 보드 연결 (modelMapper 사용)
         Board board = boardDTO.createBoard();
         board.setMember(member);
 
