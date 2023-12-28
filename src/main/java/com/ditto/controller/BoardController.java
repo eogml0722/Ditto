@@ -1,5 +1,6 @@
 package com.ditto.controller;
 
+import com.ditto.constant.BoardCategory;
 import com.ditto.dto.BoardDTO;
 import com.ditto.dto.BoardFormDTO;
 import com.ditto.dto.OrderDTO;
@@ -34,32 +35,26 @@ public class BoardController {
     private final BoardService boardService;
     private final BoardRepository boardRepository;
 
-    @GetMapping(value = {"/{pageNum}", "/"})//Optional = null 체크알아서 해줌
-    public String goBoard(Model model, @PathVariable("pageNum") Optional<Integer> pageNum) {
+    @GetMapping({"/{pageNum}", "/", ""})//Optional = null 체크알아서 해줌
+    public String goBoard(Model model, @PathVariable("pageNum") Optional<Integer> pageNum,
+                          @RequestParam(value = "category")Optional<BoardCategory> boardCategory) {
 //        if( boardFormDTO.getSearchField() != null){
 //            boardList = boardRepository.findBySearch(boardFormDTO.getSearchField(),boardFormDTO.getSearchOption(),boardFormDTO.getBoardCategory());
 //        }
 
         Pageable pageable = PageRequest.of((pageNum.isPresent() ? pageNum.get() -1 : 0 ), 5);
+        Page<Board> boardPage;
 
-        Page<Board> boardPage = boardService.findAllByOrderByIdDesc(pageable);
+        if(boardCategory.isPresent()){
+            boardPage = boardService.findByBoardCategory(pageable, boardCategory.get());
+        } else {
+           boardPage = boardService.findAllByOrderByIdDesc(pageable);
+        }
 
 
         model.addAttribute("boardPage", boardPage);
         model.addAttribute("maxPage", 10);
 
-
-        //maxPage : 페이지 최대 갯수
-//        final Integer maxPage = 10;
-
-//        if (!pageNum.isEmpty()) {
-//            model.addAttribute("pageNum", pageNum.get());
-//        } else {
-//            model.addAttribute("pageNum", new Integer(1));
-//        }
-//        model.addAttribute("boardList", boardList);
-//        model.addAttribute("maxPage", maxPage);
-//        model.addAttribute("totalPage", (int) (Math.ceil((double) boardList.size() / 10)));
         return "/board/board";
     }
 
@@ -126,4 +121,8 @@ public class BoardController {
         }
         return "redirect:/board/";
     }
+
+
+
+
 }

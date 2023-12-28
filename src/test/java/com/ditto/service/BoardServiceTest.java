@@ -4,6 +4,7 @@ import com.ditto.constant.BoardCategory;
 import com.ditto.constant.OAuthType;
 import com.ditto.constant.Role;
 import com.ditto.dto.BoardDTO;
+import com.ditto.dto.BoardFormDTO;
 import com.ditto.dto.MemberFormDTO;
 import com.ditto.entity.Board;
 import com.ditto.entity.Member;
