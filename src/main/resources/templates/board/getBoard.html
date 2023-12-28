@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <title>Insert title here</title>
 
-    <link th:href="@{/css/ditto2.css}" rel="stylesheet">
+    <link th:href="@{/css/getBoard.css}" rel="stylesheet">
     <link th:href="@{https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css}" rel="stylesheet"/>
     <script th:src="@{https://code.jquery.com/jquery-3.7.0.min.js}" rel="stylesheet"></script>
     <script th:href="@{ditto2.js}" rel="stylesheet"></script>
@@ -17,48 +17,39 @@
 
 <body>
 <div layout:fragment="content">
+    <h1 class="main_head">공지사항</h1>
 
-    <br><br><br><br><br><br>
-    <div id="main_main3">
-        <div id="main_main3_table">
+    <div class="content">
             <table>
                 <thead>
-                <tr>
-                    <th>
-                        [<span th:text="${boardDTO.boardCategory}" ></span>]
-                        <span th:text="${boardDTO.title}" ></span>
-                        <span th:text="${boardDTO.regTime}" ></span>
-                        <span th:text="${boardDTO.viewCount}" ></span>
-                    </th>
-                </tr>
+                    <tr>
+                        <th  width=10%>
+                            [<span th:text="${boardDTO.boardCategory.getLabel()}" ></span>]
+                        </th>
+                        <th width=65%>
+                            <span th:text="${boardDTO.title}" ></span>
+                        </th>
+                        <th width=15%>
+                            <span th:text="${#temporals.format(boardDTO.regTime, 'yyyy-MM-dd')}"></span>
+                        </th>
+                        <th width=10%>
+                            <span th:text="${boardDTO.viewCount}" ></span>
+                        </th>
+                    </tr>
                 </thead>
                 <tbody>
-
-                </tr>
-                <tr>
-                    <td>
-                        <span th:text="${boardDTO.title}" ></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <span th:text="${boardDTO.boardPrev}" ></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-<!--                        <span th:text="${boardDTO.boardAfter}" ></span>-->
-                    </td>
-                </tr>
-
+                    <tr>
+                        <td colspan="4"><div th:text="${boardDTO.content}"></div></td>
+                    </tr>
                 </tbody>
             </table>
-            <form th:action="'/board/getBoard/' + ${boardDTO.id}" method="post">
-                <input type="submit" value="게시글 삭제">
-            </form>
-            <button type="submit"  onclick="location.href='/board/'">목록으로</button>
-                <button type="submit"   th:onclick="|location.href='@{/board/create/{id}(id=${boardDTO.id})}'|" >수정하기</button>
+            <div class="boardBTN page-item">
+                <form th:action="'/board/getBoard/' + ${boardDTO.id}" method="post">
+                    <input type="submit" value="게시글 삭제" class="page-link">
+                </form>
+                <button type="submit"  onclick="location.href='/board/'" class="page-link">목록으로</button>
+                <button type="submit"   th:onclick="|location.href='@{/board/create/{id}(id=${boardDTO.id})}'|" class="page-link">수정하기</button>
+            </div>
         </div>
     </div>
 </div>

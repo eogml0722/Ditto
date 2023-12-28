@@ -30,12 +30,12 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
     //검색어로 리스트 반환. 없으면 전체 반환
 
-    @Query("SELECT b FROM Board b WHERE " +
-            "(:searchOption = 'title' AND b.title LIKE CONCAT('%', :searchField, '%') AND b.boardCategory = :boardCategory) OR " +
-            "(:searchOption = 'content' AND b.content LIKE CONCAT('%', :searchField, '%') AND b.boardCategory = :boardCategory)")
-    List<Board> findBySearch(@Param("searchField") String searchField,
-                             @Param("searchOption") String searchOption,
-                             @Param("boardCategory") BoardCategory boardCategory);
+//    @Query("SELECT b FROM Board b WHERE " +
+////            "(:searchOption = 'b.title' AND b.title LIKE CONCAT('%', :searchField, '%') AND b.boardCategory = :boardCategory) OR " +
+////            "(:searchOption = 'content' AND b.content LIKE CONCAT('%', :searchField, '%') AND b.boardCategory = :boardCategory)")
+//            " b.title LIKE CONCAT('%', :searchField, '%')" +
+//            " b.content LIKE CONCAT('%', :searchField, '%')")
+//    Page<Board> findBySearch(Pageable pageable, @Param("searchField") String searchField);
 
 
 
@@ -50,6 +50,9 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
                     @Param("content")String content,
                     @Param("boardCategory")BoardCategory boardCategory,
                     @Param("id")Long id);
+
+
+    Page<Board> findByBoardCategory(Pageable pageable, BoardCategory boardCategory);
 
 
 //    @Query(value = "SELECT * FROM Board b WHERE b.id < ?1 order by b.id DESC limit 1", nativeQuery = true)
