@@ -29,14 +29,15 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
                           @Param("content")String content);
 
     //검색어로 리스트 반환. 없으면 전체 반환
+    @Query("SELECT b FROM Board b WHERE b.title LIKE CONCAT('%', :searchField, '%')")
+    Page<Board> findByTitle(Pageable pageable, @Param("searchField") String searchField);
 
-//    @Query("SELECT b FROM Board b WHERE " +
-////            "(:searchOption = 'b.title' AND b.title LIKE CONCAT('%', :searchField, '%') AND b.boardCategory = :boardCategory) OR " +
-////            "(:searchOption = 'content' AND b.content LIKE CONCAT('%', :searchField, '%') AND b.boardCategory = :boardCategory)")
-//            " b.title LIKE CONCAT('%', :searchField, '%')" +
-//            " b.content LIKE CONCAT('%', :searchField, '%')")
-//    Page<Board> findBySearch(Pageable pageable, @Param("searchField") String searchField);
+    @Query("SELECT b FROM Board b WHERE b.content LIKE CONCAT('%', :searchField, '%')")
+    Page<Board> findByContent(Pageable pageable, @Param("searchField") String searchField);
 
+    @Query("SELECT b FROM Board b WHERE b.title LIKE CONCAT('%', :searchField, '%')" +
+            " OR b.content LIKE CONCAT('%', :searchField, '%')")
+    Page<Board> findBySearch(Pageable pageable, @Param("searchField") String searchField);
 
 
     //업데이트
@@ -51,15 +52,6 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
                     @Param("boardCategory")BoardCategory boardCategory,
                     @Param("id")Long id);
 
-
     Page<Board> findByBoardCategory(Pageable pageable, BoardCategory boardCategory);
 
-
-//    @Query(value = "SELECT * FROM Board b WHERE b.id < ?1 order by b.id DESC limit 1", nativeQuery = true)
-//    @Query(value = "SELECT c FROM (SELECT b FROM Board b WHERE b.board_id < 1 ORDER BY b.board_id DESC) c WHERE c.ROWNUM <= 1")
-//    @Query(value = "SELECT b FROM Board b WHERE b.board_id < ?1 ORDER BY b.board_id DESC")
-//    Optional<Board> findLatestBoard(Long id);
-
-//    @Query("SELECT b FROM Board b WHERE b.id > :id")
-//    Optional<Board> getNext(@Param("id") Long id);
 }

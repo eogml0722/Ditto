@@ -58,7 +58,7 @@ public class OrderService {
 
 
     //주문하기
-    public Order saveOrder(Principal principal,OrderItemDTO orderItemDTO){
+    public Order saveOrder(Principal principal,OrderItemDTO orderItemDTO) throws Exception{
         //아이템아이디 , 수량, 사용자 정보
         Order order = new Order();
         order.setOrderStatus(OrderStatus.WAITDEPOSIT);
@@ -98,7 +98,7 @@ public class OrderService {
 
 
     //주문취소
-    public void cancelOrder(Principal principal, Long orderId){
+    public void cancelOrder(Principal principal, Long orderId) throws Exception{
 
         Order order = orderRepository.findById(orderId).orElseThrow();
 

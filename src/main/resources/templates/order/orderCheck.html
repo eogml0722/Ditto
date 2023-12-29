@@ -140,7 +140,7 @@
     <div class="order-div" th:each="orderDTO : ${orderDTOPage.content}">
 
         <div class="d-flex mb-3 align-self-center" id="order-date">
-            <h4 th:text="${orderDTO.regTime} + ' 주문'"></h4>
+            <h4 th:text="${#temporals.format(orderDTO.regTime, 'yyyy-MM-dd HH:mm:ss')} + ' 주문'"></h4>
             <div class="ml-3">
                 <th:block th:if="${orderDTO.orderStatus == T(com.ditto.constant.OrderStatus).WAITDEPOSIT}">
                     <button type="button" class="btn btn-outline-secondary" th:value="${orderDTO.id}" id="cancelBTN" onclick="cancelOrder(this.value)">주문취소</button>

@@ -81,11 +81,11 @@ class BoardServiceTest {
         for(int i=1 ; i<200 ; i++){
             Member member = memberRepository.findByMemberId("asdasd1");
             BoardDTO boardDTO = new BoardDTO();
-            boardDTO.setTitle("test" + i);
+            boardDTO.setTitle("제목" + i);
             boardDTO.setContent("내용" + i);
             boardDTO.setBoardCategory(BoardCategory.NEWS);
             Board board = Board.createBoard(boardDTO, member);
-            boardService.insertBoard(board);
+//            boardService.insertBoard(board);
         }
 
         /*
@@ -141,7 +141,7 @@ class BoardServiceTest {
         boardDTO.setContent("내용11");
         boardDTO.setBoardCategory(BoardCategory.ANSWER);
         boardDTO.setId(1L);
-        boardService.updateBoard(boardDTO);
+//        boardService.updateBoard(boardDTO);
         System.out.println(boardService.getBoard(1L) );
     }
 
