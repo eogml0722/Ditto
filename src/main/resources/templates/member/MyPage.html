@@ -21,17 +21,17 @@
                     <button class="chgbtn" onclick="showRightPageMenu4();change_btn(event)">주문내역</button>
                     <button class="chgbtn" onclick="showRightPageMenu5();change_btn(event)">문의내역</button>
                 </div>
-            <div id="rightPage"><!--기본페이지-->
-                <div id="rightPageMenu">
-                    <div id = "pageMenuBox1">
-                        <div id = "box1">
-                            <img src="/img/free-icon-member-2754372 (1).png" class="profileimg">
-                            <div>
-                                <span sec:authorize="hasAnyAuthority('ROLE_ADMIN')" th:text="${name + '관리자 계정입니다.'}"></span>
-                                <span sec:authorize="hasAnyAuthority('ROLE_USER')" th:text="${name + '님 안녕하세요!'}"></span>
-                                <p>왼쪽에서 필요한 메뉴를 눌러주세요</p>
+                <div id="rightPage"><!--기본페이지-->
+                    <div id="rightPageMenu">
+                        <div id = "pageMenuBox1">
+                            <div id = "box1">
+                                <img src="/img/free-icon-member-2754372 (1).png" class="profileimg">
+                                <div>
+                                    <span sec:authorize="hasAnyAuthority('ROLE_ADMIN')" th:text="${name + '관리자 계정입니다.'}"></span>
+                                    <span sec:authorize="hasAnyAuthority('ROLE_USER')" th:text="${name + '님 안녕하세요!'}"></span>
+                                    <p>왼쪽에서 필요한 메뉴를 눌러주세요</p>
+                                </div>
                             </div>
-                        </div>
 
                         </div>
                     </div>
