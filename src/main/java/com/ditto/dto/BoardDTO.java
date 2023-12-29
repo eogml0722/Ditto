@@ -3,11 +3,14 @@ package com.ditto.dto;
 import com.ditto.constant.BoardCategory;
 import com.ditto.entity.Board;
 import com.ditto.entity.ItemImg;
+import com.ditto.entity.Member;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.modelmapper.ModelMapper;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +18,7 @@ import java.util.Optional;
 @Getter @Setter @ToString
 public class BoardDTO {
     private Long id;
+    @NotBlank(message = "제목을 입력하세요.")
     private String title;
     private String content;
     private String viewCount;

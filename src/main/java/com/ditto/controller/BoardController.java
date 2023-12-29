@@ -13,10 +13,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -98,41 +100,6 @@ public class BoardController {
     }
 
 
-    @GetMapping(value = "/create")
-    public String goCreateBoard(Model model) {
-        model.addAttribute("boardDTO", new BoardDTO());
-        return "/board/createBoardForm";
-    }
 
-    @GetMapping(value = "/create/{boardId}")
-    public String updateBoard(Model model, @PathVariable("boardId") Long boardId) {
-        //게시글 수정하기
-        //아이디로 해당글 정보를 뷰로 전달 
-        Board board = boardRepository.findById(boardId).orElseThrow(EntityNotFoundException::new);
-        BoardDTO boardDTO = BoardDTO.of(board);
-        model.addAttribute("boardDTO", boardDTO);
-        return "/board/createBoardForm";
-    }
-
-    @PostMapping(value = "/create")
-    public String createBoard(BoardDTO boardDTO,
-                              @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList,
-                              Model model) {
-        try {
-            if (boardDTO.getId() == null) {
-
-                System.out.println("aaaaaaaaaaaaaa");
-                Board board = boardDTO.createBoard();
-                boardService.insertBoard(board, itemImgFileList);
-            } else {
-                boardService.updateBoard(boardDTO, itemImgFileList);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("글 등록 중 예외 발생");
-            return "redirect:/board/createBoardForm";
-        }
-        return "redirect:/board/";
-    }
 
 }

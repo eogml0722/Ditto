@@ -53,7 +53,7 @@
                 <div id="text_notice">
                     <h1 id="text_headNotice">공지사항 글쓰기</h1>
                 </div>
-            <form action="/board/create" enctype="multipart/form-data" method="post" th:object="${boardDTO}">
+            <form action="/admin/board/create" enctype="multipart/form-data" method="post" th:object="${boardDTO}">
                 <div id="text_main">
                     <div id="text_title">
                         <span>제목
@@ -64,7 +64,9 @@
                             <option value="ANSWER">답변</option>
                         </select>
 
-                            <input th:field="*{title}" type="text" placeholder="제목 입력">
+                            <input type="text" th:placeholder="${#fields.hasErrors('title')} ? ${#fields.errors('title')} : '제목'" th:field="*{title}" >
+<!--                            <input type="text" placeholder="제목 입력" th:field="*{title}">-->
+<!--                            <p  th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="fieldError"></p>-->
                         </span>
                     </div>
                     <div id="text_article"><textarea th:field="*{content}" placeholder="내용 입력"></textarea></div>
