@@ -1,6 +1,7 @@
 package com.ditto.service;
 
 
+import com.ditto.constant.BoardCategory;
 import com.ditto.dto.BoardDTO;
 import com.ditto.entity.Board;
 import com.ditto.entity.Member;
@@ -111,6 +112,8 @@ try {
         return boardRepository.findAllByOrderByIdDesc(pageable);
     }
 
-
+    public Page<Board> findByBoardCategory(Pageable pageable,BoardCategory boardCategory){
+        return boardRepository.findByBoardCategory(pageable ,boardCategory);
+    }
 
 }

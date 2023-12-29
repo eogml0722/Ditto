@@ -59,7 +59,7 @@ public class Item extends BaseEntity{
     }
 
     //주문시 재고 변경
-    public void chagneStock(int count){
+    public void changeStock(int count){
         this.stockNumber += count;
     }
 }

@@ -73,7 +73,7 @@ public class OrderService {
 
 
         Item item = itemRepository.findById(itemId).orElseThrow();
-        item.chagneStock(-1*count);
+        item.changeStock(-1*count);
 
 
         //전달받은 아이템과 수량으로 주문상품 생성
@@ -103,7 +103,7 @@ public class OrderService {
         Order order = orderRepository.findById(orderId).orElseThrow();
 
         for (OrderItem orderItem : order.getOrderItemList()){
-            orderItem.getItem().chagneStock(orderItem.getCount());
+            orderItem.getItem().changeStock(orderItem.getCount());
         }
 
         if(StringUtils.equals(principal.getName(), order.getMember().getMemberId())) {

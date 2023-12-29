@@ -22,11 +22,19 @@ h3 {
 
 .content {
     height:auto;
+    min-height:100%;
+    padding-bottom:150px;
 }
 #contents{
 	width:1550px;
 	margin-top:180px;
 	margin-left:180px;
+}
+
+.border-font{
+    font-size: 28px;
+    border-bottom: 1px solid #ebebeb;
+    padding-bottom: 10px;
 }
 
 #MyPage{
@@ -198,6 +206,17 @@ td, th {
 	border:1px solid #d5d5d5;
 }
 
+#post{
+    width: 80px;
+    height: 35px;
+    background-color: #333;
+    color: white;
+}
+
+.myBoard-table{
+    margin-left:0;
+}
+
 .rightbtn{
 	margin-top:20px;
 	margin-right:10px;
@@ -230,7 +249,7 @@ td, th {
 
 .order-table{
     margin:0;
-    margin-top:8px;
+    margin-top:30px;
 }
 
 #rightPageMenu5{
@@ -242,4 +261,18 @@ td, th {
     margin-left:0;
 }
 
+.board-btn {
+    width: 100px;
+    height: 35px;
+    background-color: #333;
+    color: white;
+}
 
+#commentDetail {
+    margin-top:40px;
+}
+
+/*수정 게시판*/
+.editTitle, textarea{
+    width:500px;
+}

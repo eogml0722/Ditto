@@ -76,7 +76,7 @@ public class Member extends AuditingEntity{
         member.setName(memberFormDTO.getName());
         member.setPhoneNum(memberFormDTO.getPhoneNum());
         member.setEmail(memberFormDTO.getEmail());
-        member.setRole(Role.ADMIN);
+        member.setRole(Role.USER);
 
         member.setZipcode(memberFormDTO.getZipcode());
         member.setStreetAddress(memberFormDTO.getStreetAddress());

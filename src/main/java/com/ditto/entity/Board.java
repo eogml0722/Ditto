@@ -3,6 +3,7 @@ package com.ditto.entity;
 
 import com.ditto.constant.BoardCategory;
 import com.ditto.dto.BoardDTO;
+import com.ditto.dto.BoardFormDTO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

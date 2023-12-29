@@ -97,7 +97,8 @@ public class MemberController {
             Member resultId = memberService.findId(name, email);
             System.out.println(resultId);
             if (resultId == null) {
-                rttr.addFlashAttribute("forgotIdMessage", messageSource.getMessage("memberIdNotFound", null, locale));
+                rttr.addFlashAttribute("forgotIdMessage", "입력하신 정보와 일치하는 회원이 없습니다.");
+                return "redirect:/members/findLoginInfo";
             } else {
 
                 rttr.addFlashAttribute("forgotIdMessage", resultId.getMemberId());
@@ -109,6 +110,7 @@ public class MemberController {
     @GetMapping(value="/mypage")
     public String myPage(Model model, Principal principal, Optional<Integer> page){
         // 회원정보를 불러옴
+        String email = principal.getName();
         Member member = memberService.detailMember(principal.getName());
         String name = member.getName();model.addAttribute("name", name);
         model.addAttribute("memberFormDTO", member);
@@ -183,7 +185,7 @@ public class MemberController {
         if(memberService.updatePassword(principal, password, oldPassword) != null) {
             memberService.updatePassword(principal, password, oldPassword);
             model.addAttribute("message", "비밀번호가 변경되었습니다 다시 로그인해주세요!");
-            model.addAttribute("url", "/");
+            model.addAttribute("url", "/members/login");
             SecurityContextHolder.clearContext();
         } else {
             model.addAttribute("message", "현재 비밀번호를 다시 확인해주세요");

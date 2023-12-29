@@ -1,47 +1,34 @@
 @charset "UTF-8";
-#header{
-	width:1000px;
-	height:100px;
-	background-color:yellow;
-	text-align:center;
-	margin-left:auto;
-	margin-right:auto;
-}
-#main{
-	width:1000px;
-	height:2500px;
-	margin-left:auto;
-	margin-right:auto;
-	position: relative;
-}
-#main_main1{
-	position:relative;
-	width:1000px;
-	height:500px;
-	margin-left:auto;
-	margin-right:auto;
-}
-#main_main1_img1{
-	width:100%;
+
+.main_head{
+    font-size:25px;
+    border-bottom:1px solid #ebebeb;
+    padding-bottom:10px;
+    margin-bottom: 50px;
+    margin-top : 170px;
 }
 
-#main_main1_text{
-	position:relative;
-	text-align:center;
-	bottom:300px;
-
+.content{
+    height:auto;
+    min-height:100%;
+    padding-bottom:108px;
+    margin-top : 10px;
+    margin-left : auto;
+    margin-right : auto;
+    width:75%;
 }
+
 #main_main2 >ul{
 	list-style-type : none;
 	display:flex;
 	margin-top : 0px;
 	padding:0px;
 	justify-content:center;
-	
 }
+
 #main_main2 > ul > li{
-	border:1px solid silver;
-	margin: 0px;
+	border:1px solid black;
+	margin-left: 3px;
 	padding: 0px;
 	width:200px;
 	text-align:center;
@@ -49,27 +36,31 @@
 	font-size:18px;
 	font-weight:700;
 	line-height:30px;
-	color:silver;
-	
-}
-#main_main2 > ul > li:hover{
-	background-color:yellow;
 	color:black;
+	background-color:white;
+}
+
+#main_main2 > ul > li:hover{
+	background-color:#333;;
+	color:white;
 	transition: 1s;
 }
+
 #main_main3_table > table{
 	width:100%;
-	border-top:1px solid #6799FF;
+	border-top:1px solid black;
 	border-collapse: collapse;
 	color:#626262;
 }
+
 #main_main3_table table thead{
 	height:50px;
-	border-bottom:1px solid silver;
+	border-bottom:1px solid border;
 }
+
 #main_main3_table table tr{
 	height:70px;
-	border-bottom:1px solid silver;
+	border-bottom:1px solid border;
 	text-align:center;
 }
 #main_main3_table table tr td{
@@ -101,7 +92,12 @@
 }
 
 .pageNow{
-    background-color : #ebff82;
+    margin-top:5px;
+}
+
+.page-link{
+    color:white;
+    background-color:#333;
 }
 
 #navLink_div{
@@ -110,12 +106,12 @@
 	color:silver;
 	display:inline-block;
 	font-size:18px;
-	
+
 }
 #navLink_div > span:hover{
 	color:black;
 	cursor:pointer;
-	
+
 }
 #navLink_div>input{
 	padding:5px;
@@ -131,4 +127,8 @@
 #main_main3_table_textBtn{
 	padding:15px;
 	width: 100px;
+}
+
+.pageNumber:hover{
+    background:#BDBDBD;
 }

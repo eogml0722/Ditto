@@ -1,11 +1,9 @@
 @charset "UTF-8";
 
 .container {
-    margin: 0 auto;
-    margin-top: 250px;
-    margin-bottom: 300px;
-    width: 380px;
-    position: relative;
+    margin-top: 150px;
+    margin-left:300px;
+    margin-bottom: 220px;
 }
 
 .py-5 text-center {
@@ -26,10 +24,15 @@
     color: dimgray;
 }
 
+#email-form {
+    margin-left:350px;
+}
+
 .loginBtn {
+    display:block;
     margin-top: 10px;
     margin-bottom: 10px;
-    width: 95%;
+    width: 80%;
     height: 45px;
     background-color: rgb(45, 45, 45);
     color: white;
