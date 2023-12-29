@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class Item extends BaseEntity{
     private int price; //가격
 
     @Column(nullable = false)
+    @Min(0)
     private int stockNumber; //재고수량
 
     //아이템 상태
@@ -59,7 +61,10 @@ public class Item extends BaseEntity{
     }
 
     //주문시 재고 변경
-    public void changeStock(int count){
+    public void changeStock(int count) throws Exception{
+        if(stockNumber + count < 0) {
+            throw new Exception("재고가 부족합니다.");
+        }
         this.stockNumber += count;
     }
 }

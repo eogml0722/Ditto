@@ -43,9 +43,9 @@ height : 30px;
 	box-sizing:border-box;
 }
 #text_bottom{
+    width : 200px;
     display:flex;
-	margin-left:400px;
-	margin-top:20px;
+    margin: 20px auto 20px auto;
 }
 #text_bottom>input{
     background-color:#333;

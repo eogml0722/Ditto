@@ -32,6 +32,11 @@ public class ItemImg extends BaseEntity {
     @JoinColumn(name = "orderItem_id")
     private OrderItem orderItem;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_id")
+    private Board board;
+
+
     public void updateItemImg(String oriImgName, String imgName, String imgUrl) {
         this.oriImgName = oriImgName;
         this.imgName= imgName;

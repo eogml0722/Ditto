@@ -2,8 +2,10 @@ package com.ditto.service;
 
 import com.ditto.constant.ItemCategory;
 import com.ditto.dto.*;
+import com.ditto.entity.Board;
 import com.ditto.entity.Item;
 import com.ditto.entity.ItemImg;
+import com.ditto.repository.BoardRepository;
 import com.ditto.repository.ItemImgRepository;
 import com.ditto.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -45,6 +47,7 @@ public class ItemService {
 
         return item.getId();
     }
+
     //상품 수정
     @Transactional(readOnly = true) //읽기전용
     public ItemFormDTO getItemDtl(Long itemId) {
