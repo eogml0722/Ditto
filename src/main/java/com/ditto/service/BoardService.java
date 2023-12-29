@@ -74,6 +74,7 @@ public class BoardService {
         Board board = null;
         try {
             board = boardRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+            board.plusViewCount();
         }catch (EntityNotFoundException e){
             System.out.println("해당하는 게시글이 없습니다.");
         }

@@ -57,4 +57,11 @@ public class Board extends BaseEntity {
 
         return board;
     }
+
+
+    //조회수 증가
+    public void plusViewCount(){
+        this.viewCount ++;
+    }
+
 }
