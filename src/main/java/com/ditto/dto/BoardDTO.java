@@ -2,13 +2,12 @@ package com.ditto.dto;
 
 import com.ditto.constant.BoardCategory;
 import com.ditto.entity.Board;
-import com.ditto.entity.Img;
+import com.ditto.entity.ItemImg;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.modelmapper.ModelMapper;
 
-import javax.persistence.Column;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -21,14 +20,17 @@ public class BoardDTO {
     private String viewCount;
     private BoardCategory boardCategory;
 
-    private List<Img> imgList;
+    private List<ItemImg> imgList;
 
 
     //Auditing
     private List<Board> boardList;
     private LocalDateTime regTime;
 
-    //BoardFormDTO 로 분리
+    //검색필드
+    private String searchField;
+    private String searchOption;
+
     //이전행
     private Optional<Board> boardPrev;
     //다음행

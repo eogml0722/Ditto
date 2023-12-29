@@ -39,7 +39,12 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="4"><div th:text="${boardDTO.content}"></div></td>
+                        <td colspan="4">
+                            <th:block th:each="img, status: ${boardDTO.imgList}">
+                                <div><img th:src="${img.imgUrl}"th:alt="${img.imgName}"></div>
+                            </th:block>
+                            <div th:text="${boardDTO.content}"></div>
+                        </td>
                     </tr>
                 </tbody>
             </table>

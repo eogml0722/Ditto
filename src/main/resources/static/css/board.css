@@ -82,7 +82,7 @@
     padding : 10px;
 }
 
-#searchBox{
+.searchBox{
     display:flex;
     justify-content:center;
 }

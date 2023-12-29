@@ -47,7 +47,7 @@ public class Board extends BaseEntity {
     //이미지 업로드
     @OneToMany(mappedBy = "board", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Img> imgList = new ArrayList<>();
+    private List<ItemImg> imgList = new ArrayList<>();
 
 
     public static Board createBoard(BoardDTO boardDTO, Member member) {
