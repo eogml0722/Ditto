@@ -222,7 +222,7 @@ public class MemberController {
         return "member/memberMng";
     }
 
-    @PostMapping(value="/delete2")
+    @PostMapping(value="/deleteMng")
     public String memberManageDelete(@RequestParam String memberId, Model model, Principal principal){
         Member member = memberService.detailMember(principal.getName());
         boolean admin = member.getRole() == Role.ADMIN;
@@ -230,15 +230,18 @@ public class MemberController {
             model.addAttribute("message", "관리자만 이용할 수 있습니다.");
             model.addAttribute("url", "/");
             return "/fragments/alert";
+        } else if (memberId.equals(principal.getName())) {
+            model.addAttribute("message", "현재 로그인된 매니저 계정은 삭제할 수 없습니다.");
+            model.addAttribute("url", "/");
+            return "/fragments/alert";
         }
         memberService.deleteMemberManage(memberId);
-        SecurityContextHolder.clearContext();
         model.addAttribute("message", "삭제되었습니다.");
-        model.addAttribute("url", "/");
+        model.addAttribute("url", "/members/manage");
         return "/fragments/alert";
     }
 
-    @PostMapping(value="/update2")
+    @PostMapping(value="/updateMng")
     public String memberRoleUpdate(@RequestParam String memberId, Model model, Principal principal){
         Member member = memberService.detailMember(principal.getName());
         boolean admin = member.getRole() == Role.ADMIN;
