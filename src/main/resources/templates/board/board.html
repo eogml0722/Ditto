@@ -93,6 +93,11 @@
     <!--            <li th:if="boardPage.number == boardPage.totalPages"  th:classappend="${}"><a th:href="'/board/'+${boardPage.totalPages}" > >> </a></li>-->
             </ul><!--페이지 리스트 끝-->
             <form method="get" action="/board/" class="searchBox">
+                <select name="option" class="page-link">
+                    <option value="title">제목</option>
+                    <option value="content">내용</option>
+                    <option value="all">제목+내용</option>
+                </select>
                 <input type="text" placeholder="검색 할 내용" name="keyword" class="page-link">
                 <input type="submit" value="검색" class="page-link">
             </form>

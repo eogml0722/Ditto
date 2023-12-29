@@ -29,9 +29,16 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
                           @Param("content")String content);
 
     //검색어로 리스트 반환. 없으면 전체 반환
+    @Query("SELECT b FROM Board b WHERE b.title LIKE CONCAT('%', :searchField, '%')")
+    Page<Board> findByTitle(Pageable pageable, @Param("searchField") String searchField);
+
+    @Query("SELECT b FROM Board b WHERE b.content LIKE CONCAT('%', :searchField, '%')")
+    Page<Board> findByContent(Pageable pageable, @Param("searchField") String searchField);
+
     @Query("SELECT b FROM Board b WHERE b.title LIKE CONCAT('%', :searchField, '%')" +
-            "OR b.content LIKE CONCAT('%', :searchField, '%')")
+            " OR b.content LIKE CONCAT('%', :searchField, '%')")
     Page<Board> findBySearch(Pageable pageable, @Param("searchField") String searchField);
+
 
     //업데이트
     @Query("UPDATE Board b " +

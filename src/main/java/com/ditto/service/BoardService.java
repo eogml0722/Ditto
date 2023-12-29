@@ -128,10 +128,17 @@ public class BoardService {
     }
 
 
-    public Page<Board> findBySearch(Pageable pageable, String keyword){
-        return boardRepository.findBySearch(pageable, keyword);
+    public Page<Board> findByTitle(Pageable pageable, String keyword){
+        return boardRepository.findByTitle(pageable, keyword);
     }
 
 
+    public Page<Board> findByContent(Pageable pageable, String keyword){
+        return boardRepository.findByContent(pageable, keyword);
+    }
+
+    public Page<Board> findBySearch(Pageable pageable, String keyword){
+        return boardRepository.findBySearch(pageable, keyword);
+    }
 
 }

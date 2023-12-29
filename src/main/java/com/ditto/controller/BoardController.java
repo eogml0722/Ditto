@@ -7,6 +7,7 @@ import com.ditto.repository.BoardRepository;
 import com.ditto.service.BoardService;
 import com.ditto.service.ItemService;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Case;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -31,12 +32,23 @@ public class BoardController {
     @GetMapping({"/{pageNum}", "/", ""})//Optional = null 체크알아서 해줌
     public String goBoard(Model model, @PathVariable("pageNum") Optional<Integer> pageNum,
                           @RequestParam(value = "category")Optional<BoardCategory> boardCategory,
-    @RequestParam("keyword") Optional<String> keyword) {
+                          @RequestParam("keyword") Optional<String> keyword,
+                          @RequestParam("option") Optional<String> option) {
 
         Pageable pageable = PageRequest.of((pageNum.isPresent() ? pageNum.get() -1 : 0 ), 5);
-        Page<Board> boardPage;
+        Page<Board> boardPage = null;
         if(keyword.isPresent()) {
-            boardPage = boardService.findBySearch(pageable, keyword.get());
+            switch (option.get()){
+                case "title":
+                    boardPage = boardService.findByTitle(pageable, keyword.get());
+                    break;
+                case "content":
+                    boardPage = boardService.findByContent(pageable, keyword.get());
+                    break;
+                case "all":
+                    boardPage = boardService.findBySearch(pageable, keyword.get());
+                    break;
+            }
         } else {
             if(boardCategory.isPresent()){
                 boardPage = boardService.findByBoardCategory(pageable, boardCategory.get());
