@@ -234,7 +234,7 @@ public class MemberController {
             return "/fragments/alert";
         } else if (memberId.equals(principal.getName())) {
             model.addAttribute("message", "현재 로그인된 매니저 계정은 삭제할 수 없습니다.");
-            model.addAttribute("url", "/");
+            model.addAttribute("url", "/members/manage");
             return "/fragments/alert";
         }
         memberService.deleteMemberManage(memberId);

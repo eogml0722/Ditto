@@ -212,8 +212,13 @@ function memberJoinAction() {
 
 	}
 
-        //비밀번호 확인
-    if (!cpw.value == upw.value) {
+        //비밀번호 재확인
+
+    if(cpw.value == "") {
+        alert("비밀번호를 재입력 해주세요.")
+        cpw.focus();
+        return false;
+    }else if (cpw.value != upw.value) {
         alert("비밀번호와 동일하지 않습니다.")
         cpw.focus();
         return false;
