@@ -50,10 +50,10 @@
             </table>
             <div class="boardBTN page-item">
                 <form th:action="'/board/getBoard/' + ${boardDTO.id}" method="post">
-                    <input type="submit" value="게시글 삭제" class="page-link">
+                    <input type="submit" sec:authorize="hasAnyAuthority('ROLE_ADMIN')" value="게시글 삭제" class="page-link">
                 </form>
                 <button type="submit"  onclick="location.href='/board/'" class="page-link">목록으로</button>
-                <button type="submit"   th:onclick="|location.href='@{/board/create/{id}(id=${boardDTO.id})}'|" class="page-link">수정하기</button>
+                <button type="submit" sec:authorize="hasAnyAuthority('ROLE_ADMIN')"  th:onclick="|location.href='@{/board/create/{id}(id=${boardDTO.id})}'|" class="page-link">수정하기</button>
             </div>
         </div>
     </div>
